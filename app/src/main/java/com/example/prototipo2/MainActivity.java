@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario(getApplicationContext(), this);
 
         Button btn01 = this.findViewById(R.id.main_btn_01);
 

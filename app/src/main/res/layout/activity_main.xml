@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".MainActivity">
     <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nombre de la aplicación"
-        android:layout_weight="1"
-        android:gravity="center"/>
-        <!--app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"-->
-
-    <Button
-        android:id="@+id/main_btn_01"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selección de aplicación de Video Streaming"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/main_btn_02"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver el comportamiento de la batería"
-        android:layout_weight="1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre de la aplicación"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginTop="0dp"/>
+            <!--app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"-->
 
-    <Button
-        android:id="@+id/main_btn_03"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver huella de carbono generada"
-        android:layout_weight="1"/>
+        <Button
+            android:id="@+id/main_btn_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selección de aplicación de Video Streaming"
+            android:layout_weight="1"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Acuerdp de Privacidad"
-        android:layout_weight="1"
-        android:gravity="center"/>
+        <Button
+            android:id="@+id/main_btn_02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver el comportamiento de la batería"
+            android:layout_weight="1"/>
 
-</LinearLayout>
+        <Button
+            android:id="@+id/main_btn_03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver huella de carbono generada"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acuerdp de Privacidad"
+            android:layout_weight="1"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
