@@ -13,8 +13,6 @@ public class BateriaContract {
         public static final String COLUMN_BATTERY_CAPACITY = "BATTERY_CAPACITY";
         public static final String COLUMN_BATTERY_STATUS = "BATTERY_STATUS";
         public static final String COLUMN_BATTERY_VOLTAGE = "BATTERY_VOLTAGE";
-        public static final String COLUMN_CURRENT_AVERAGE = "CURRENT_AVERAGE";
-        public static final String COLUMN_ENERGY_COUNTER = "ENERGY_COUNTER";
         public static final String COLUMN_TIMESTAMP = "TIMESTAMP";
     }
 

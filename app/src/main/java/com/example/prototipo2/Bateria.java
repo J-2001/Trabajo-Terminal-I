@@ -1,33 +1,41 @@
 package com.example.prototipo2;
 
+import android.content.Context;
+import android.os.BatteryManager;
+
 public class Bateria {
 
-    private long chargeCounter;
-    private long currentNow;
-    private long batteryCapacity;
-    private long batteryStatus;
-    private float batteryVoltage;
-    private long currentAverage;
-    private long energyCounter;
+    private int chargeCounter;
+    private int currentNow;
+    private int capacity;
+    private int status;
+    private float voltage;
     private long timeStamp;
+    private BatteryManager batteryManager;
 
-    public Bateria() {
+    public Bateria(Context context) {
         this.chargeCounter = 0;
         this.currentNow = 0;
-        this.batteryCapacity = 0;
-        this.batteryStatus = 0;
-        this.batteryVoltage = 0;
-        this.currentAverage = 0;
-        this.energyCounter = 0;
+        this.capacity = 0;
+        this.status = 0;
+        this.voltage = 0;
         this.timeStamp = 0;
+        this.batteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
     }
 
-    public void checkValues() {
-        // Metodo no void (boolean) que nos indica si un valor de interes (chargeCounter) ha cambiado
+    public boolean checkValues() {
+        // Metodo que nos indica si un valor de interes (chargeCounter) ha cambiado
+        return batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER) != this.chargeCounter;
     }
 
     public void updateValues() {
         // Metodo que actualiza los valores variables (o inicializa los que estan en cero)
+        this.chargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER);
+        this.currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
+        this.capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        this.status = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
+        this.voltage = batteryManager.getIntProperty(BatteryManager.BATTERY_HEALTH_COLD);
+
         // Luego llama a insertIntoDB()
         // Puede ser tipo int, que devuelva lo que devolvio la funcion anterior
     }
@@ -42,32 +50,24 @@ public class Bateria {
         // Regresa los datos en la base de datos
     }
 
-    public long getChargeCounter() {
+    public int getChargeCounter() {
         return chargeCounter;
     }
 
-    public long getCurrentNow() {
+    public int getCurrentNow() {
         return currentNow;
     }
 
-    public long getBatteryCapacity() {
-        return batteryCapacity;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public long getBatteryStatus() {
-        return batteryStatus;
+    public int getStatus() {
+        return status;
     }
 
-    public float getBatteryVoltage() {
-        return batteryVoltage;
-    }
-
-    public long getCurrentAverage() {
-        return currentAverage;
-    }
-
-    public long getEnergyCounter() {
-        return energyCounter;
+    public float getVoltage() {
+        return voltage;
     }
 
     public long getTimeStamp() {

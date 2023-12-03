@@ -16,8 +16,6 @@ public class BateriaDBHelper extends SQLiteOpenHelper {
             BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + " REAL NOT NULL," +
-            BateriaContract.BateriaEntry.COLUMN_CURRENT_AVERAGE + " INTEGER NOT NULL," +
-            BateriaContract.BateriaEntry.COLUMN_ENERGY_COUNTER + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + " INTEGER NOT NULL)";
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + BateriaContract.BateriaEntry.TABLE_NAME;
 
