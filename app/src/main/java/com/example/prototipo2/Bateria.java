@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
 
@@ -57,8 +58,18 @@ public class Bateria {
         return (int) db.insert(BateriaContract.BateriaEntry.TABLE_NAME, null, toContentValues());
     }
 
+    public void getLastScan() {
+        // Metodo no void que toma los IDs del ultimo registro de "Escaneo" para retornar todos los valores almacenados
+    }
+
     public void getAllRows() {
         // Regresa los datos en la base de datos
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            // La base de datos la interpretamos o enviamos
+        }
     }
 
     public ContentValues toContentValues() {

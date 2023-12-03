@@ -8,7 +8,6 @@ public class BateriaDBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Bateria.db";
-
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + BateriaContract.BateriaEntry.TABLE_NAME + " (" +
             BateriaContract.BateriaEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + " INTEGER NOT NULL," +

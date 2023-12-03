@@ -8,7 +8,6 @@ public class UsuarioDBHelper  extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Usuario.db";
-
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + UsuarioContract.UsuarioEntry.TABLE_NAME + " (" +
             UsuarioContract.UsuarioEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
             UsuarioContract.UsuarioEntry.COLUMN_OS_VERSION + " TEXT NOT NULL," +

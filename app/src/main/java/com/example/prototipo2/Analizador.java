@@ -10,15 +10,33 @@ public class Analizador extends Service {
     // Cuando se cargue el dispositivo, terminaria manualmente un escaneo para iniciar otro
     // El constructor sería el onCreate() y el iniciarAnalizador() sería el onStartCommand()
 
+    private int previousRowId;
+    private int previousRowChargeCounter;
+    private long previousRowTimeStamp;
+    private int currentRowId;
+    private int currentRowChargeCounter;
+    private long currentRowTimeStamp;
+    // Propiedades para la distribucion normal estandar
+    // Crear una clase con una propiedad que almacene los valores de la tabla de propiedades de una dne
+    private int status;
+    private float ccpm; // x
+    private float media;
+    private float desvest;
+    private Bateria bateria;
 
     @Override
     public void onCreate() {
-        super.onCreate();
+        bateria = new Bateria(getApplicationContext());
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        bateria.updateValues();
+        return START_REDELIVER_INTENT;
     }
 
     public void iniciarAnalizador() {
         // Como este método sera el onStartCommand(), el iniciarModelo() sería la función que se ejecuta en segundo plano, como un TimerTask
-        // Bateria bateria = new Bateria();
         // bateria.updateValues();
         // bateria.getTimeStamp();
         // Escaneo escaneo = new Escaneo();

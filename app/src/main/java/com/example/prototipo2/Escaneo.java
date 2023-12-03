@@ -1,29 +1,41 @@
 package com.example.prototipo2;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 public class Escaneo {
 
     private int startId;
     private long startTimeStamp;
     private int endId;
     private long endTimeStamp;
-    private long duration;
-    private long datosConsumo;
+    private long duracion;
+    private int datosConsumo;
+    private Context applicationContext;
 
-    public Escaneo() {
+    public Escaneo(Context context) {
         this.startId = 0;
         this.startTimeStamp = 0;
         this.endId = 0;
         this.endTimeStamp = 0;
-        this.duration = 0;
+        this.duracion = 0;
         this.datosConsumo = 0;
+        this.applicationContext = context;
     }
 
     public void insertIntoDB() {
         // Insertamos los datos en la base de datos
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales());
     }
 
-    public void getLastScan() {
+    public int[] getLastScanIDs() {
         // Metodo no void (ContentValues o String) que regresa los datos relativos al ultimo escaneo
+        int[] ids = {0, 0};
+
+        return ids;
     }
 
     public void getAllScans() {
@@ -32,6 +44,16 @@ public class Escaneo {
 
     public void updateDatosConsumo(long datos) {
         this.datosConsumo += datos;
+    }
+
+    public ContentValues toContentVales() {
+        ContentValues values = new ContentValues();
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID, getStartId());
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID, getEndId());
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO, getDuracion());
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO, getDatosConsumo());
+
+        return values;
     }
 
     public int getStartId() {
@@ -50,11 +72,11 @@ public class Escaneo {
         return endTimeStamp;
     }
 
-    public long getDuration() {
-        return duration;
+    public long getDuracion() {
+        return duracion;
     }
 
-    public long getDatosConsumo() {
+    public int getDatosConsumo() {
         return datosConsumo;
     }
 

@@ -22,16 +22,15 @@ public class Usuario {
         UsuarioDBHelper dbHelper = new UsuarioDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(UsuarioContract.UsuarioEntry.TABLE_NAME, null, null, null, null, null, null);
-        if (cursor.getCount() == 0) {
-            // Si no lo tiene, lo registramos llamando a registerUser()
-            registerUser(dbHelper.getWritableDatabase(), layoutContext);
-        } else {
+        if (cursor.moveToNext()) {
             // Si lo tiene, el usuario ya esta registrado
-            cursor.moveToNext();
             Log.d("Usuario", cursor.getInt(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_ID)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_OS_VERSION)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_DEVICE_NAME)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_DEVICE_MODEL)));
+        } else {
+            // Si no, lo registramos llamando a registerUser()
+            registerUser(dbHelper.getWritableDatabase(), layoutContext);
         }
         cursor.close();
     }
