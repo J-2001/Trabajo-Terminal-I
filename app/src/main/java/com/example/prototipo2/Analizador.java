@@ -23,22 +23,25 @@ public class Analizador extends Service {
     private float media;
     private float desvest;
     private Bateria bateria;
+    private Escaneo escaneo;
 
     @Override
     public void onCreate() {
         bateria = new Bateria(getApplicationContext());
+        escaneo = new Escaneo(getApplicationContext());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        bateria.updateValues();
+        currentRowId = bateria.updateValues();
+        currentRowChargeCounter = bateria.getChargeCounter();
+        currentRowTimeStamp = bateria.getTimeStamp();
+
         return START_REDELIVER_INTENT;
     }
 
     public void iniciarAnalizador() {
         // Como este método sera el onStartCommand(), el iniciarModelo() sería la función que se ejecuta en segundo plano, como un TimerTask
-        // bateria.updateValues();
-        // bateria.getTimeStamp();
         // Escaneo escaneo = new Escaneo();
         // escaneo.setStartId();
         // escaneo.setStartTimeStamp();

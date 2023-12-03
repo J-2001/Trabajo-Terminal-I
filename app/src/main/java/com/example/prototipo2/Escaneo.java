@@ -2,6 +2,7 @@ package com.example.prototipo2;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class Escaneo {
@@ -40,9 +41,15 @@ public class Escaneo {
 
     public void getAllScans() {
         // Metodo no void (String quiza) que regrese todos los datos de la base de datos
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, null, null, null, null, null);
+        while (cursor.moveToNext()) {
+            // Algo
+        }
     }
 
-    public void updateDatosConsumo(long datos) {
+    public void updateDatosConsumo(int datos) {
         this.datosConsumo += datos;
     }
 
@@ -73,6 +80,7 @@ public class Escaneo {
     }
 
     public long getDuracion() {
+        duracion = getStartTimeStamp() - getEndTimeStamp();
         return duracion;
     }
 

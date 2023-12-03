@@ -32,6 +32,7 @@ public class Usuario {
             // Si no, lo registramos llamando a registerUser()
             registerUser(dbHelper.getWritableDatabase(), layoutContext);
         }
+
         cursor.close();
     }
 
