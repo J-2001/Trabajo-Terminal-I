@@ -38,6 +38,10 @@ public class Bateria {
         // Puede ser private
     }
 
+    public void getAllRows() {
+        // Regresa los datos en la base de datos
+    }
+
     public long getChargeCounter() {
         return chargeCounter;
     }

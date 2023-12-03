@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -57,18 +58,22 @@ public class Usuario {
     }
 
     public int getId() {
+        id = 1;
         return id;
     }
 
     public String getOsVersion() {
+        osVersion = System.getProperty("os.version") + "-" + Build.VERSION.INCREMENTAL;
         return osVersion;
     }
 
     public String getDeviceName() {
+        deviceName = Build.DEVICE;
         return deviceName;
     }
 
     public String getDeviceModel() {
+        deviceModel = Build.MODEL + "-" + Build.PRODUCT;
         return deviceModel;
     }
 }
