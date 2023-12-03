@@ -34,7 +34,6 @@ public class Bateria {
         this.currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
         this.capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         this.status = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
-        this.voltage = batteryManager.getIntProperty(BatteryManager.BATTERY_HEALTH_COLD);
 
         // Luego llama a insertIntoDB()
         // Puede ser tipo int, que devuelva lo que devolvio la funcion anterior
