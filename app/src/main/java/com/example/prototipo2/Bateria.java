@@ -1,7 +1,13 @@
 package com.example.prototipo2;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
+
+import java.util.Date;
 
 public class Bateria {
 
@@ -11,7 +17,8 @@ public class Bateria {
     private int status;
     private float voltage;
     private long timeStamp;
-    private BatteryManager batteryManager;
+    private final Context applicationContext;
+    private final BatteryManager batteryManager;
 
     public Bateria(Context context) {
         this.chargeCounter = 0;
@@ -20,7 +27,8 @@ public class Bateria {
         this.status = 0;
         this.voltage = 0;
         this.timeStamp = 0;
-        this.batteryManager = (BatteryManager) context.getSystemService(Context.BATTERY_SERVICE);
+        this.applicationContext = context;
+        this.batteryManager = (BatteryManager) applicationContext.getSystemService(Context.BATTERY_SERVICE);
     }
 
     public boolean checkValues() {
@@ -28,25 +36,41 @@ public class Bateria {
         return batteryManager.getLongProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER) != this.chargeCounter;
     }
 
-    public void updateValues() {
+    public int updateValues() {
         // Metodo que actualiza los valores variables (o inicializa los que estan en cero)
         this.chargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER);
         this.currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
         this.capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
         this.status = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
-
+        Intent intent = applicationContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        this.voltage = (float) (intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) / 1000.0);
+        Date date = new Date();
+        this.timeStamp = date.getTime();
         // Luego llama a insertIntoDB()
-        // Puede ser tipo int, que devuelva lo que devolvio la funcion anterior
+        return insertIntoDB();
     }
 
-    public void insertIntoDB() {
+    private int insertIntoDB() {
         // Insertamos los datos en la base de datos "Bateria"
-        // Puede ser tipo int, que devuelva el id de la insercion
-        // Puede ser private
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return (int) db.insert(BateriaContract.BateriaEntry.TABLE_NAME, null, toContentValues());
     }
 
     public void getAllRows() {
         // Regresa los datos en la base de datos
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, getChargeCounter());
+        values.put(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW, getCurrentNow());
+        values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY, getCapacity());
+        values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS, getStatus());
+        values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE, getVoltage());
+        values.put(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP, getTimeStamp());
+
+        return values;
     }
 
     public int getChargeCounter() {
@@ -73,7 +97,4 @@ public class Bateria {
         return timeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
-        this.timeStamp = timeStamp;
-    }
 }

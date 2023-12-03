@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Intent intent = getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        Log.d("voltaje", String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)));
+        Log.d("voltaje", String.valueOf(intent.getFloatExtra(BatteryManager.EXTRA_VOLTAGE, 0)));
         Log.d("voltaje", String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)/1000.0));
 
     }

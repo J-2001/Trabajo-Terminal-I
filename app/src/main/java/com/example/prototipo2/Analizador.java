@@ -7,6 +7,7 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 public class Analizador extends Service {
+    // Cuando se cargue el dispositivo, terminaria manualmente un escaneo para iniciar otro
     // El constructor sería el onCreate() y el iniciarAnalizador() sería el onStartCommand()
 
 
