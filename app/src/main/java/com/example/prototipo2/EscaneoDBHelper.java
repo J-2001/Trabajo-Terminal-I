@@ -13,7 +13,7 @@ public class EscaneoDBHelper extends SQLiteOpenHelper {
             EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + " INTEGER NOT NULL," +
             EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + " INTEGER NOT NULL," +
             EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + " INTEGER NOT NULL," +
-            EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + " REAL NOT NULL," +
+            EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + " INTEGER NOT NULL," +
             EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + " REAL NOT NULL)";
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + EscaneoContract.EscaneoEntry.TABLE_NAME;
 

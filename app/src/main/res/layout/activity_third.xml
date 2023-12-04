@@ -33,19 +33,31 @@
                 android:id="@+id/third_tablay_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/third_btn_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Escaneos"/>
+
+            <TableLayout
+                android:id="@+id/third_tablay_02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
             
             <Button
                 android:id="@+id/third_btn_03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Datos del Analizador"/>
+
+            <TableLayout
+                android:id="@+id/third_tablay_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

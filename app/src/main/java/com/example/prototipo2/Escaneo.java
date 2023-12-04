@@ -42,14 +42,24 @@ public class Escaneo {
         return ids;
     }
 
-    public void getAllScans() {
-        // Metodo no void (String quiza) que regrese todos los datos de la base de datos
+    public String getAllScans() {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, null, null, null, null, null);
+        String escaneo = EscaneoContract.EscaneoEntry._ID + "_" + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "_" +
+                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + "_" +
+                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";";
         while (cursor.moveToNext()) {
-            // Algo
+            escaneo += cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)) + "_" +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE)) + ";";
         }
+        cursor.close();
+
+        return escaneo;
     }
 
     public void updateDatosConsumo(int datos) {
@@ -84,7 +94,7 @@ public class Escaneo {
     }
 
     public long getDuracion() {
-        duracion = getStartTimeStamp() - getEndTimeStamp();
+        duracion = getEndTimeStamp() - getStartTimeStamp();
         return duracion;
     }
 

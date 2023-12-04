@@ -3,6 +3,7 @@ package com.example.prototipo2;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.util.Log;
@@ -129,6 +130,28 @@ public class Analizador extends Service {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.insert(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, toContentValues());
         Log.d("Analizador", "CCpm:" + getCcpm());
+    }
+
+    public String getAllData() {
+        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, null, null, null, null, null);
+        String analizador = AnalizadorContract.AnalizadorEntry._ID + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "_" +
+                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + "_" +
+                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + "_" +
+                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + ";";
+        while (cursor.moveToNext()) {
+            analizador += cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)) + "_" +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)) + "_" +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)) + "_" +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)) + "_" +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST)) + ";";
+        }
+        cursor.close();
+
+        return analizador;
     }
 
     public ContentValues toContentValues() {

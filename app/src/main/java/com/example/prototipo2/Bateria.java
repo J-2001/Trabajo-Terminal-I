@@ -67,14 +67,10 @@ public class Bateria {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, null, null, null, null, null);
-        String bateria = "";
-        bateria += cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE)) + "_" +
-        cursor.getColumnName(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)) + ";";
+        String bateria = BateriaContract.BateriaEntry._ID + "_" + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "_" +
+                BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + "_" + BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "_" +
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "_" + BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "_" +
+                BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";";
         while (cursor.moveToNext()) {
             bateria += cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)) + "_" +
             cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)) + "_" +
