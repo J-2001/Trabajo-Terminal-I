@@ -47,7 +47,7 @@ public class Bateria {
         this.voltage = (float) (intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) / 1000.0);
         Date date = new Date();
         this.timeStamp = date.getTime();
-        // Luego llama a insertIntoDB()
+
         return insertIntoDB();
     }
 
@@ -70,6 +70,7 @@ public class Bateria {
         while (cursor.moveToNext()) {
             // La base de datos la interpretamos o enviamos
         }
+        cursor.close();
     }
 
     public ContentValues toContentValues() {
