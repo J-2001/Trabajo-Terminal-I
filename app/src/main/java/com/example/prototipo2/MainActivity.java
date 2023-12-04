@@ -3,10 +3,7 @@ package com.example.prototipo2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(secondActivity);
             }
         });
-
-        Intent intent = getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        Log.d("voltaje", String.valueOf(intent.getFloatExtra(BatteryManager.EXTRA_VOLTAGE, 0)));
-        Log.d("voltaje", String.valueOf(intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)/1000.0));
 
     }
 }

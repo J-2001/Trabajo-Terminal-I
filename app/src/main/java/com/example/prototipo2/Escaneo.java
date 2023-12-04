@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class Escaneo {
 
@@ -31,6 +32,7 @@ public class Escaneo {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales());
+        Log.d("Escaneo", "Escaneo Completado!");
     }
 
     public int[] getLastScanIDs() {

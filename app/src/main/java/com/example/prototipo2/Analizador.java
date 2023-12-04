@@ -71,8 +71,8 @@ public class Analizador extends Service {
                     previousRowChargeCounter = currentRowChargeCounter;
                     previousRowTimeStamp = currentRowTimeStamp;
                     currentRowId = bateria.updateValues();
-                    currentRowChargeCounter = bateria.getChargeCounter();
                     Log.d("Bateria", "Nuevo registro!");
+                    currentRowChargeCounter = bateria.getChargeCounter();
                     currentRowTimeStamp = bateria.getTimeStamp();
                     averageVoltage = (float) ((averageVoltage + bateria.getVoltage()) / 2.0);
                     status = bateria.getStatus();
@@ -95,6 +95,7 @@ public class Analizador extends Service {
                     // Almacenamos en la base de datos "Analizador"
                     insertIntoDB();
                 }
+                Log.i("Analizador", "Nada...");
             }
         };
         timer.scheduleAtFixedRate(timerTask, 0, 10000);
