@@ -33,6 +33,8 @@ public class Escaneo {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales());
         Log.d("Escaneo", "Escaneo Completado!");
+        // Cálculo de la huella de carbono para este escaneo
+
     }
 
     public int[] getLastScanIDs() {
