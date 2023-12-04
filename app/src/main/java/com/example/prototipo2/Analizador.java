@@ -8,7 +8,6 @@ import androidx.annotation.Nullable;
 
 public class Analizador extends Service {
     // Cuando se cargue el dispositivo, terminaria manualmente un escaneo para iniciar otro
-    // El constructor sería el onCreate() y el iniciarAnalizador() sería el onStartCommand()
 
     private int previousRowId;
     private int previousRowChargeCounter;
@@ -27,34 +26,53 @@ public class Analizador extends Service {
 
     @Override
     public void onCreate() {
+        previousRowId = 0;
+        previousRowChargeCounter = 0;
+        previousRowTimeStamp = 0;
+        currentRowId = 0;
+        currentRowChargeCounter = 0;
+        currentRowTimeStamp = 0;
+        status = 0;
+        ccpm = 0;
+        media = 0;
+        desvest = 0;
         bateria = new Bateria(getApplicationContext());
         escaneo = new Escaneo(getApplicationContext());
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // iniciarModelo() sería la función que se ejecuta en segundo plano, como un TimerTask
         currentRowId = bateria.updateValues();
         currentRowChargeCounter = bateria.getChargeCounter();
         currentRowTimeStamp = bateria.getTimeStamp();
 
+        escaneo.setStartId(currentRowId);
+        escaneo.setStartTimeStamp(currentRowTimeStamp);
+
+        // Comenzar modelo
+        // modelo()
+
         return START_REDELIVER_INTENT;
     }
 
-    public void iniciarAnalizador() {
-        // Como este método sera el onStartCommand(), el iniciarModelo() sería la función que se ejecuta en segundo plano, como un TimerTask
-        // Escaneo escaneo = new Escaneo();
-        // escaneo.setStartId();
-        // escaneo.setStartTimeStamp();
-        // Comenzar modelo
-        // modelo()
-        // Nuestra referencia a Batería y Escaneo deberia ser global, para que la funcion anterior la use tambien
-    }
-
     public void modelo() {
-        // Esta funcion es ciclica
-        // bateria.checkValues()
-        // Si la funcion anterior regresa true, comenzamos el modelo
-        // bateria.updateValues()
+        // Esta funcion sería el TimerTask()
+        if (bateria.checkValues()) {
+            previousRowId = currentRowId;
+            previousRowChargeCounter = currentRowChargeCounter;
+            previousRowTimeStamp = currentRowTimeStamp;
+            currentRowId = bateria.updateValues();
+            currentRowChargeCounter = bateria.getChargeCounter();
+            currentRowTimeStamp = bateria.getTimeStamp();
+
+            int cc = currentRowChargeCounter - previousRowChargeCounter;
+            escaneo.updateDatosConsumo(cc);
+
+            ccpm = (float) (cc * 60 / ((currentRowTimeStamp-previousRowTimeStamp)/1000.0));
+
+            // Calculo de la media y la desviacion estandar
+        }
         // escaneo.updateDatosConsumo()
         // Calculo del CCpm comparando este y el ultimo registro de Bateria
         // Almacenamos en la base de datos "Analizador"
