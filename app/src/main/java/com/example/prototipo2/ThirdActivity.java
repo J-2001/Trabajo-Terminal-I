@@ -34,7 +34,7 @@ public class ThirdActivity extends AppCompatActivity {
             tabLay01_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             tabLay01_Rows_TextViews.add(new ArrayList<>());
             int y = 0;
-            for (String r : row.split("_")) {
+            for (String r : row.split(",")) {
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -56,7 +56,7 @@ public class ThirdActivity extends AppCompatActivity {
             tabLay02_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             tabLay02_Rows_TextViews.add(new ArrayList<>());
             int y = 0;
-            for (String r : row.split("_")) {
+            for (String r : row.split(",")) {
                 tabLay02_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay02_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay02_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -73,12 +73,12 @@ public class ThirdActivity extends AppCompatActivity {
         Analizador analizador = new Analizador();
         x = 0;
         first = true; // Hacer el texto en negrita para la primer columna
-        for (String row : analizador.getAllData().split(";")) {
+        for (String row : analizador.getAllData(getApplicationContext()).split(";")) {
             tabLay03_Rows.add(new TableRow(this));
             tabLay03_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
             tabLay03_Rows_TextViews.add(new ArrayList<>());
             int y = 0;
-            for (String r : row.split("_")) {
+            for (String r : row.split(",")) {
                 tabLay03_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay03_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay03_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));

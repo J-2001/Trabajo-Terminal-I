@@ -46,15 +46,15 @@ public class Escaneo {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, null, null, null, null, null);
-        String escaneo = EscaneoContract.EscaneoEntry._ID + "_" + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "_" +
-                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + "_" +
-                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";";
+        String escaneo = EscaneoContract.EscaneoEntry._ID + "," + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "," +
+                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + "," + EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + "," +
+                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + "," + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";";
         while (cursor.moveToNext()) {
-            escaneo += cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)) + "_" +
+            escaneo += cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)) + "," +
             cursor.getFloat(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE)) + ";";
         }
         cursor.close();

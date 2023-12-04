@@ -67,17 +67,17 @@ public class Bateria {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, null, null, null, null, null);
-        String bateria = BateriaContract.BateriaEntry._ID + "_" + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "_" +
-                BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + "_" + BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "_" +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "_" + BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "_" +
+        String bateria = BateriaContract.BateriaEntry._ID + "," + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "," +
+                BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," +
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," +
                 BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";";
         while (cursor.moveToNext()) {
-            bateria += cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS)) + "_" +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE)) + "_" +
+            bateria += cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS)) + "," +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE)) + "," +
             cursor.getLong(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)) + ";";
         }
         cursor.close();

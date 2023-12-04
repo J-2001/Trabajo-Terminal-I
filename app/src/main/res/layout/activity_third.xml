@@ -29,11 +29,17 @@
                 android:layout_height="wrap_content"
                 android:text="Ver Datos de la Batería"/>
 
-            <TableLayout
-                android:id="@+id/third_tablay_01"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:id="@+id/third_tablay_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </HorizontalScrollView>
 
             <Button
                 android:id="@+id/third_btn_02"
@@ -41,11 +47,17 @@
                 android:layout_height="wrap_content"
                 android:text="Ver Escaneos"/>
 
-            <TableLayout
-                android:id="@+id/third_tablay_02"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:id="@+id/third_tablay_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </HorizontalScrollView>
             
             <Button
                 android:id="@+id/third_btn_03"
@@ -53,11 +65,17 @@
                 android:layout_height="wrap_content"
                 android:text="Ver Datos del Analizador"/>
 
-            <TableLayout
-                android:id="@+id/third_tablay_03"
+            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:id="@+id/third_tablay_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </HorizontalScrollView>
 
         </LinearLayout>
 

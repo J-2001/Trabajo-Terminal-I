@@ -2,6 +2,7 @@ package com.example.prototipo2;
 
 import android.app.Service;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -132,21 +133,21 @@ public class Analizador extends Service {
         Log.d("Analizador", "CCpm:" + getCcpm());
     }
 
-    public String getAllData() {
-        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
+    public String getAllData(Context context) {
+        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, null, null, null, null, null);
-        String analizador = AnalizadorContract.AnalizadorEntry._ID + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "_" +
-                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + "_" +
-                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + "_" + AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + "_" +
+        String analizador = AnalizadorContract.AnalizadorEntry._ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "," +
+                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + "," +
+                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + "," + AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + "," +
                 AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + ";";
         while (cursor.moveToNext()) {
-            analizador += cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)) + "_" +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)) + "_" +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)) + "_" +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)) + "_" +
+            analizador += cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)) + "," +
+            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)) + "," +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)) + "," +
+            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)) + "," +
             cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST)) + ";";
         }
         cursor.close();
