@@ -12,6 +12,7 @@ public class EscaneoContract {
         public static final String COLUMN_END_BATERIA_ID = "END_BATERIA_ID";
         public static final String COLUMN_DURACION_ESCANEO = "DURACION_ESCANEO";
         public static final String COLUMN_DATOS_CONSUMO = "DATOS_CONSUMO";
+        public static final String COLUMN_AVERAGE_VOLTAGE = "AVERAGE_VOLTAGE";
     }
 
 }

@@ -21,6 +21,7 @@ public class Analizador extends Service {
     private int currentRowId;
     private int currentRowChargeCounter;
     private long currentRowTimeStamp;
+    private float averageVoltage;
     private int status;
     private float ccpm; // x
     private float media;
@@ -40,6 +41,7 @@ public class Analizador extends Service {
         currentRowId = 0;
         currentRowChargeCounter = 0;
         currentRowTimeStamp = 0;
+        averageVoltage = 0;
         status = 0;
         ccpm = 0;
         media = 0;
@@ -55,6 +57,7 @@ public class Analizador extends Service {
         currentRowId = bateria.updateValues();
         currentRowChargeCounter = bateria.getChargeCounter();
         currentRowTimeStamp = bateria.getTimeStamp();
+        averageVoltage = bateria.getVoltage();
 
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);
@@ -71,6 +74,7 @@ public class Analizador extends Service {
                     currentRowChargeCounter = bateria.getChargeCounter();
                     Log.d("Bateria", "Nuevo registro!");
                     currentRowTimeStamp = bateria.getTimeStamp();
+                    averageVoltage = (float) ((averageVoltage + bateria.getVoltage()) / 2.0);
                     status = bateria.getStatus();
 
                     int cc = Math.abs(currentRowChargeCounter - previousRowChargeCounter);
@@ -103,6 +107,7 @@ public class Analizador extends Service {
         timerTask.cancel();
         escaneo.setEndId(currentRowId);
         escaneo.setEndTimeStamp(currentRowTimeStamp);
+        escaneo.setAverageVoltage(averageVoltage);
         escaneo.insertIntoDB();
     }
 

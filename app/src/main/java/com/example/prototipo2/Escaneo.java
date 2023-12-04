@@ -13,6 +13,7 @@ public class Escaneo {
     private long endTimeStamp;
     private long duracion;
     private int datosConsumo;
+    private float averageVoltage;
     private Context applicationContext;
 
     public Escaneo(Context context) {
@@ -59,6 +60,7 @@ public class Escaneo {
         values.put(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID, getEndId());
         values.put(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO, getDuracion());
         values.put(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO, getDatosConsumo());
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE, getAverageVoltage());
 
         return values;
     }
@@ -88,6 +90,10 @@ public class Escaneo {
         return datosConsumo;
     }
 
+    public float getAverageVoltage() {
+        return averageVoltage;
+    }
+
     public void setStartId(int startId) {
         this.startId = startId;
     }
@@ -102,5 +108,9 @@ public class Escaneo {
 
     public void setEndTimeStamp(long endTimeStamp) {
         this.endTimeStamp = endTimeStamp;
+    }
+
+    public void setAverageVoltage(float averageVoltage) {
+        this.averageVoltage = averageVoltage;
     }
 }
