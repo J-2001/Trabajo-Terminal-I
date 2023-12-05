@@ -21,7 +21,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver el Comportamiento de la Batería"
-                android:gravity="center"/>
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"/>
             
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/third_chart_01"

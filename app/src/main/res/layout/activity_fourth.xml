@@ -21,15 +21,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver huella de carbono generada"
-                android:gravity="center"/>
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="60dp"/>
 
             <TextView
                 android:id="@+id/fourth_tv_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0.0 gCO2e"
-                android:gravity="center"
-                android:textStyle="bold"/>
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
             <Button
                 android:id="@+id/fourth_btn_01"

@@ -18,9 +18,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nombre de la aplicación"
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginTop="0dp"/>
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="70dp"/>
             <!--app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,28 +34,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Selección de aplicación de Video Streaming"
-            android:layout_weight="1"/>
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginBottom="50dp"/>
 
         <Button
             android:id="@+id/main_btn_02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ver el comportamiento de la batería"
-            android:layout_weight="1"/>
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginBottom="50dp"/>
 
         <Button
             android:id="@+id/main_btn_03"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ver huella de carbono generada"
-            android:layout_weight="1"/>
+            android:textSize="17sp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="70dp"
+            android:layout_marginBottom="60dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Acuerdo de Privacidad"
+            android:textSize="16sp"
             android:layout_weight="1"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:layout_marginBottom="50dp"/>
 
     </LinearLayout>
 
