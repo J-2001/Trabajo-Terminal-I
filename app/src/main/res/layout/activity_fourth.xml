@@ -23,6 +23,32 @@
                 android:text="Ver huella de carbono generada"
                 android:gravity="center"/>
 
+            <TextView
+                android:id="@+id/fourth_tv_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0.0 gCO2e"
+                android:gravity="center"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/fourth_btn_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Huella por Escaneo"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:id="@+id/fourth_tablay_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </HorizontalScrollView>
+
         </LinearLayout>
 
     </ScrollView>

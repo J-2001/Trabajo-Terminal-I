@@ -31,10 +31,13 @@ public class Escaneo {
         // Insertamos los datos en la base de datos
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales());
+        Huella huella = new Huella();
+        huella.setEscaneoId((int) db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales()));
         Log.d("Escaneo", "Escaneo Completado!");
         // Cálculo de la huella de carbono para este escaneo
-
+        huella.setDatosConsumo(getDatosConsumo());
+        huella.setVoltage(getAverageVoltage());
+        huella.calcularHuellaCarbono(applicationContext);
     }
 
     public int[] getLastScanIDs() {
