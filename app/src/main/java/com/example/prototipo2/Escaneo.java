@@ -41,8 +41,13 @@ public class Escaneo {
     }
 
     public int[] getLastScanIDs() {
-        // Metodo no void (ContentValues o String) que regresa los datos relativos al ultimo escaneo
-        int[] ids = {0, 0};
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String selection = EscaneoContract.EscaneoEntry._ID + " = (SELECT MAX(" + EscaneoContract.EscaneoEntry._ID + ") FROM " + EscaneoContract.EscaneoEntry.TABLE_NAME + ")";
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, selection, null, null, null, null);
+        cursor.moveToNext();
+        int[] ids = {cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)), cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID))};
+        cursor.close();
 
         return ids;
     }

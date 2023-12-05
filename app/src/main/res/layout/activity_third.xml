@@ -36,7 +36,7 @@
                 android:id="@+id/third_btn_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Datos de la Batería"/>
+                android:text="Ver Datos de la Batería (Último Escaneo)"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                 android:id="@+id/third_btn_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Escaneos"/>
+                android:text="Ver Datos de la Batería"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -67,9 +67,27 @@
                     android:visibility="gone"/>
 
             </HorizontalScrollView>
-            
+
             <Button
                 android:id="@+id/third_btn_03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Escaneos"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:id="@+id/third_tablay_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+
+            </HorizontalScrollView>
+            
+            <Button
+                android:id="@+id/third_btn_04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ver Datos del Analizador"/>
@@ -79,7 +97,7 @@
                 android:layout_height="wrap_content">
 
                 <TableLayout
-                    android:id="@+id/third_tablay_03"
+                    android:id="@+id/third_tablay_04"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
