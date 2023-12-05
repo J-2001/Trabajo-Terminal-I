@@ -9,7 +9,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ThirdActivity extends AppCompatActivity {
 
@@ -21,6 +27,20 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+
+        // Charts
+        LineChart chart01 = this.findViewById(R.id.third_chart_01);
+        int[][] data = {{1,1}, {2,2}, {3,3}};
+        List<Entry> entries = new ArrayList<Entry>();
+        for (int[] d : data) {
+            entries.add(new Entry(d[0], d[1]));
+        }
+        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        // dataSet.setColor();
+        // dataSet.setValueTextColor();
+        LineData lineData = new LineData(dataSet);
+        chart01.setData(lineData);
+        chart01.invalidate();
 
         // Llenado de las TableLayout
         TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
