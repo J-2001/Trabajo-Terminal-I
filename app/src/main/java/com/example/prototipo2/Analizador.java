@@ -1,5 +1,6 @@
 package com.example.prototipo2;
 
+import android.app.Notification;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,6 +19,7 @@ import java.util.TimerTask;
 public class Analizador extends Service {
     // Cuando se cargue el dispositivo, terminaria manualmente un escaneo para iniciar otro
 
+    private final String CHANNEL_ID = "AnalizadorConsumoDeEnergia";
     private int previousRowId;
     private int previousRowChargeCounter;
     private long previousRowTimeStamp;
@@ -101,8 +104,15 @@ public class Analizador extends Service {
             }
         };
         timer.scheduleAtFixedRate(timerTask, 0, 10000);
+        foregroundNotification();
+        Log.w("Analizador", "Analizador iniciado");
 
         return START_REDELIVER_INTENT;
+    }
+
+    public void foregroundNotification() {
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle("Analizador").setContentText("Test").setSmallIcon(R.drawable.ic_launcher_foreground).build();
+        startForeground(1, notification);
     }
 
     @Override
@@ -112,6 +122,7 @@ public class Analizador extends Service {
         escaneo.setEndTimeStamp(currentRowTimeStamp);
         escaneo.setAverageVoltage(averageVoltage);
         escaneo.insertIntoDB();
+        Log.w("Analizador", "Analizador destruido");
     }
 
     @Nullable

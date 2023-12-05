@@ -30,7 +30,7 @@ public class SecondActivity extends AppCompatActivity {
                     btnTest.setText("Iniciar Escaneo (Test)");
                     btnTest_status = false;
                 } else {
-                    startService(intent);
+                    startForegroundService(intent);
                     btnTest.setText("Detener Escaneo (Test)");
                     btnTest_status = true;
                 }
