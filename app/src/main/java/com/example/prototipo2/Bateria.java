@@ -7,9 +7,10 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.BatteryManager;
-import android.util.Log;
 
 import java.util.Date;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Bateria {
 
@@ -57,6 +58,24 @@ public class Bateria {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         return (int) db.insert(BateriaContract.BateriaEntry.TABLE_NAME, null, toContentValues());
+    }
+
+    public Map<Long, Integer> getLastScanData() {
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Escaneo escaneo = new Escaneo(applicationContext);
+        int[] ids = escaneo.getLastScanIDs();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String selection = BateriaContract.BateriaEntry._ID + " >= ? AND " + BateriaContract.BateriaEntry._ID + " <= ?";
+        String[] selectionArgs = {"" + ids[0], "" + ids[1]};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        Map<Long, Integer> data = new TreeMap<Long, Integer>();
+        while (cursor.moveToNext()) {
+            data.put(cursor.getLong(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)), cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
+        }
+        cursor.close();
+
+        return data;
     }
 
     public String getLastScan() {

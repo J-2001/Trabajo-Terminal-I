@@ -16,6 +16,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ThirdActivity extends AppCompatActivity {
 
@@ -31,14 +32,12 @@ public class ThirdActivity extends AppCompatActivity {
 
         // Charts
         LineChart chart01 = this.findViewById(R.id.third_chart_01);
-        Bateria bateria = new Bateria(getApplicationContext());
-        bateria.getLastScan();
-        int[][] data = {{1,1}, {2,2}, {3,3}};
         List<Entry> entries = new ArrayList<Entry>();
-        for (int[] d : data) {
-            entries.add(new Entry(d[0], d[1]));
+        Bateria bateria = new Bateria(getApplicationContext());
+        for (Map.Entry<Long, Integer> d : bateria.getLastScanData().entrySet()) {
+            entries.add(new Entry(d.getKey(), d.getValue()));
         }
-        LineDataSet dataSet = new LineDataSet(entries, "Label");
+        LineDataSet dataSet = new LineDataSet(entries, "Charge Counter");
         // dataSet.setColor();
         // dataSet.setValueTextColor();
         LineData lineData = new LineData(dataSet);
