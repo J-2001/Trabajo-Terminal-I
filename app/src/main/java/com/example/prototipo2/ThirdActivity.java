@@ -13,7 +13,6 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,7 @@ public class ThirdActivity extends AppCompatActivity {
         // Charts
         LineChart chart01 = this.findViewById(R.id.third_chart_01);
         chart01.setBackgroundColor(getResources().getColor(R.color.white, null));
-        List<Entry> entries = new ArrayList<Entry>();
+        List<Entry> entries = new ArrayList<>();
         Bateria bateria = new Bateria(getApplicationContext());
         for (Map.Entry<Long, Integer> d : bateria.getLastScanData().entrySet()) {
             entries.add(new Entry(d.getKey(), d.getValue()));
