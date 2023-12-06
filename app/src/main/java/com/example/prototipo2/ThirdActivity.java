@@ -13,6 +13,7 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +33,14 @@ public class ThirdActivity extends AppCompatActivity {
 
         // Charts
         LineChart chart01 = this.findViewById(R.id.third_chart_01);
+        chart01.setBackgroundColor(getResources().getColor(R.color.white, null));
         List<Entry> entries = new ArrayList<Entry>();
         Bateria bateria = new Bateria(getApplicationContext());
         for (Map.Entry<Long, Integer> d : bateria.getLastScanData().entrySet()) {
             entries.add(new Entry(d.getKey(), d.getValue()));
         }
         LineDataSet dataSet = new LineDataSet(entries, "Charge Counter");
-        // dataSet.setColor();
-        // dataSet.setValueTextColor();
+        dataSet.setColor(getResources().getColor(R.color.red_a700, null));
         LineData lineData = new LineData(dataSet);
         chart01.setData(lineData);
         chart01.invalidate();

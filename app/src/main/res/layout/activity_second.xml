@@ -23,11 +23,20 @@
                 android:text="Selección de aplicación de Video Streaming"
                 android:gravity="center"/>
 
+            <ImageButton
+                android:id="@+id/second_ibtn_netflix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/netflix"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"/>
+
             <Button
                 android:id="@+id/second_btn_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Iniciar Escaneo (Test)"/>
+                android:text="Iniciar Escaneo (Test)"
+                android:visibility="gone"/>
 
         </LinearLayout>
 
