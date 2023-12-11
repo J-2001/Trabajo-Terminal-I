@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
 
     <queries>
         <package android:name="com.netflix.mediaclient"/>
@@ -37,7 +38,9 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".Analizador"/>
+        <service
+            android:name=".Analizador"
+            android:foregroundServiceType="dataSync"/>
     </application>
 
 </manifest>

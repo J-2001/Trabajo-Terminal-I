@@ -17,9 +17,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Analizador extends Service {
-    // Cuando se cargue el dispositivo, terminaria manualmente un escaneo para iniciar otro
 
-    private final String CHANNEL_ID = "AnalizadorConsumoDeEnergia";
+    private static final String CHANNEL_ID = "AnalizadorConsumoDeEnergia";
     private int previousRowId;
     private int previousRowChargeCounter;
     private long previousRowTimeStamp;
@@ -30,8 +29,7 @@ public class Analizador extends Service {
     private int status;
     private float ccpm; // x
     private float media;
-    private float desvEst;
-    // Propiedades para la distribucion normal estandar
+    private float desvEst;//
     // Crear una clase con una propiedad que almacene los valores de la tabla de propiedades de una dne
     private Bateria bateria;
     private Escaneo escaneo;
@@ -97,6 +95,8 @@ public class Analizador extends Service {
                     // Dependiendo del rango de P, podremos decir que hay un consumo excesivo de energía
                     // Si si lo hay, llamamos a mostrarNotificacion()
 
+                    mostrarNotificacion();
+
                     // Almacenamos en la base de datos "Analizador"
                     insertIntoDB();
                 }
@@ -138,32 +138,43 @@ public class Analizador extends Service {
     }
 
     public void insertIntoDB() {
-        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.insert(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, toContentValues());
-        Log.d("Analizador", "CCpm:" + getCcpm());
+        try (AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext())) {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            db.insert(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, toContentValues());
+            Log.d("Analizador", "CCpm:" + getCcpm());
+        } catch (Exception e) {
+            Log.e("Analizador.insertIntoDB()", e.toString());
+        }
     }
 
     public String getAllData(Context context) {
         AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, null, null, null, null, null);
-        String analizador = AnalizadorContract.AnalizadorEntry._ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "," +
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(AnalizadorContract.AnalizadorEntry._ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "," +
                 AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + "," +
                 AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + "," + AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + "," +
-                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + ";";
+                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + ";");
         while (cursor.moveToNext()) {
-            analizador += cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)) + "," +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)) + "," +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)) + "," +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST)) + ";";
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST)));
+            stringBuilder.append(";");
         }
         cursor.close();
 
-        return analizador;
+        return stringBuilder.toString();
     }
 
     public ContentValues toContentValues() {
