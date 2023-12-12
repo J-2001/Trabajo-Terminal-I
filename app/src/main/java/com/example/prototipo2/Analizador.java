@@ -55,7 +55,6 @@ public class Analizador extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // iniciarModelo() sería la función que se ejecuta en segundo plano, como un TimerTask
         currentRowId = bateria.updateValues();
         currentRowChargeCounter = bateria.getChargeCounter();
         currentRowTimeStamp = bateria.getTimeStamp();
@@ -64,7 +63,6 @@ public class Analizador extends Service {
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);
 
-        // Comenzar modelo
         timerTask = new TimerTask() {
             @Override
             public void run() {
@@ -80,25 +78,22 @@ public class Analizador extends Service {
                     status = bateria.getStatus();
 
                     int cc = Math.abs(currentRowChargeCounter - previousRowChargeCounter);
-                    // Si el dispositivo esta cargandose, no aumentar los datos de consumo
-                    if (status == 3) { // No cargandose
+                    if (status == 3) {
                         escaneo.updateDatosConsumo(cc);
                     }
 
                     ccpm = (float) (cc * 60 / ((currentRowTimeStamp-previousRowTimeStamp)/1000.0));
 
-                    // Calculo de la media y la desviacion estandar
+                    media = 0;
+                    desvEst = 0;
 
-                    // Calculamos P(Z<=ccpm)
                     DistribucionNormalEstandar dne = new DistribucionNormalEstandar();
-
-                    // Dependiendo del rango de P, podremos decir que hay un consumo excesivo de energía
                     float f = dne.getP(0);
-                    // Si si lo hay, llamamos a mostrarNotificacion()
 
-                    mostrarNotificacion();
+                    if (f != -1) {
+                        showNotification();
+                    }
 
-                    // Almacenamos en la base de datos "Analizador"
                     insertIntoDB();
                 }
                 Log.i("Analizador", "Nada...");
@@ -132,10 +127,8 @@ public class Analizador extends Service {
         return null;
     }
 
-    public void mostrarNotificacion() {
-        // Se despliega una notificacion sobre el alto consumo de energía
-        // Es aqui donde se podria analizar los componentes e intentar estimar cual genera el alto consumo
-        // Para esto tambien se podria considerar ampliar la base de datos "Analizador" con otros datos (red, bufer, etc.)
+    public void showNotification() {
+        //
     }
 
     public void insertIntoDB() {
