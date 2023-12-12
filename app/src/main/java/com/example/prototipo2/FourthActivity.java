@@ -2,6 +2,7 @@ package com.example.prototipo2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +24,7 @@ public class FourthActivity extends AppCompatActivity {
         // Huella de Carbono Total
         Huella huella = new Huella();
         TextView tv01 = this.findViewById(R.id.fourth_tv_01);
-        tv01.setText(huella.getTotalHuellaCarbono(getApplicationContext()) + " gCO2e");
+        tv01.setText(getString(R.string.fourth_tv_01, huella.getTotalHuellaCarbono(getApplicationContext())));
 
         // Llenado de las TableLayout
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
@@ -40,6 +41,10 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                if (first) {
+                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    first = false;
+                }
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
@@ -51,18 +56,15 @@ public class FourthActivity extends AppCompatActivity {
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
         btn01_status = false;
 
-        btn01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn01_status) {
-                    tabLay01.setVisibility(View.GONE);
-                    btn01.setText("Ver Huella por Escaneo");
-                    btn01_status = false;
-                } else {
-                    tabLay01.setVisibility(View.VISIBLE);
-                    btn01.setText("Ocultar Huella por Escaneo");
-                    btn01_status = true;
-                }
+        btn01.setOnClickListener(v -> {
+            if (btn01_status) {
+                tabLay01.setVisibility(View.GONE);
+                btn01.setText(getString(R.string.fourth_btn_01_1));
+                btn01_status = false;
+            } else {
+                tabLay01.setVisibility(View.VISIBLE);
+                btn01.setText(getString(R.string.fourth_btn_01_0));
+                btn01_status = true;
             }
         });
     }

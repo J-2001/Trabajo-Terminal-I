@@ -180,7 +180,7 @@ public class ThirdActivity extends AppCompatActivity {
                     btn03_status = false;
                 } else {
                     tabLay03.setVisibility(View.VISIBLE);
-                    btn03.setText("Ocultar EscaneosOcultar Datos del Analizador");
+                    btn03.setText("Ocultar Escaneos");
                     btn03_status = true;
                 }
             }
