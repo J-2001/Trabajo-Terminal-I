@@ -15,7 +15,7 @@ public class Escaneo {
     private long duracion;
     private int datosConsumo;
     private float averageVoltage;
-    private Context applicationContext;
+    private final Context applicationContext;
 
     public Escaneo(Context context) {
         this.startId = 0;
@@ -28,16 +28,17 @@ public class Escaneo {
     }
 
     public void insertIntoDB() {
-        // Insertamos los datos en la base de datos
-        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Huella huella = new Huella();
-        huella.setEscaneoId((int) db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales()));
-        Log.d("Escaneo", "Escaneo Completado!");
-        // Cálculo de la huella de carbono para este escaneo
-        huella.setDatosConsumo(getDatosConsumo());
-        huella.setVoltage(getAverageVoltage());
-        huella.calcularHuellaCarbono(applicationContext);
+        try (EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext)) {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            Huella huella = new Huella();
+            huella.setEscaneoId((int) db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales()));
+            Log.d("Escaneo", "Escaneo Completado!");
+            huella.setDatosConsumo(getDatosConsumo());
+            huella.setVoltage(getAverageVoltage());
+            huella.calcularHuellaCarbono(applicationContext);
+        } catch (Exception e) {
+            Log.e("Escaneo.insertIntoDB()", e.toString());
+        }
     }
 
     public int[] getLastScanIDs() {
@@ -56,20 +57,27 @@ public class Escaneo {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, null, null, null, null, null);
-        String escaneo = EscaneoContract.EscaneoEntry._ID + "," + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "," +
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(EscaneoContract.EscaneoEntry._ID + "," + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "," +
                 EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + "," + EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + "," +
-                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + "," + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";";
+                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + "," + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";");
         while (cursor.moveToNext()) {
-            escaneo += cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)) + "," +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE)) + ";";
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE)));
+            stringBuilder.append(";");
         }
         cursor.close();
 
-        return escaneo;
+        return stringBuilder.toString();
     }
 
     public void updateDatosConsumo(int datos) {
