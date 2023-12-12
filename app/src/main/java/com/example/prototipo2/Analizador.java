@@ -30,7 +30,6 @@ public class Analizador extends Service {
     private float ccpm; // x
     private float media;
     private float desvEst;//
-    // Crear una clase con una propiedad que almacene los valores de la tabla de propiedades de una dne
     private Bateria bateria;
     private Escaneo escaneo;
     private Timer timer;
@@ -91,8 +90,10 @@ public class Analizador extends Service {
                     // Calculo de la media y la desviacion estandar
 
                     // Calculamos P(Z<=ccpm)
+                    DistribucionNormalEstandar dne = new DistribucionNormalEstandar();
 
                     // Dependiendo del rango de P, podremos decir que hay un consumo excesivo de energía
+                    float f = dne.getP(0);
                     // Si si lo hay, llamamos a mostrarNotificacion()
 
                     mostrarNotificacion();
