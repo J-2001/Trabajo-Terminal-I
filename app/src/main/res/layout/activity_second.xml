@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Selección de aplicación de Video Streaming"
+                android:text="@string/second_tv_01"
                 android:gravity="center"/>
 
             <ImageButton
@@ -29,13 +29,14 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/netflix"
                 android:adjustViewBounds="true"
-                android:scaleType="centerInside"/>
+                android:scaleType="centerInside"
+                android:contentDescription="@string/second_ibtn_netflix"/>
 
             <Button
                 android:id="@+id/second_btn_test"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Detener Escaneo (Test)"
+                android:text="@string/second_btn_test"
                 android:visibility="gone"/>
 
         </LinearLayout>

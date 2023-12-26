@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver el Comportamiento de la Batería"
+                android:text="@string/third_tv_01"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -36,7 +36,7 @@
                 android:id="@+id/third_btn_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Datos de la Batería (Último Escaneo)"/>
+                android:text="@string/third_btn_01_1"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -54,7 +54,7 @@
                 android:id="@+id/third_btn_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Datos de la Batería"/>
+                android:text="@string/third_btn_02_1"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -72,7 +72,7 @@
                 android:id="@+id/third_btn_03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Escaneos"/>
+                android:text="@string/third_btn_03_1"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -90,7 +90,7 @@
                 android:id="@+id/third_btn_04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Datos del Analizador"/>
+                android:text="@string/third_btn_04_1"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"

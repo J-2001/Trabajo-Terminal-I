@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver huella de carbono generada"
+                android:text="@string/fourth_tv_00"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:gravity="center"
@@ -31,7 +31,7 @@
                 android:id="@+id/fourth_tv_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0.0 gCO2e"
+                android:text="@string/fourth_tv_01"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
@@ -40,7 +40,7 @@
                 android:id="@+id/fourth_btn_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ver Huella por Escaneo"/>
+                android:text="@string/fourth_btn_01_1"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
