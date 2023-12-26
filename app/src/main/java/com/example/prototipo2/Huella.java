@@ -8,7 +8,7 @@ import android.util.Log;
 
 public class Huella {
 
-    private final float factorEmision = 0.435F; // gCO2e/Wh
+    private static final float factorEmision = 0.435F; // gCO2e/Wh
     private int escaneoId;
     private float huellaCarbono;
     private int datosConsumo;
@@ -26,39 +26,51 @@ public class Huella {
     }
 
     public void insertIntoDB(Context context) {
-        HuellaDBHelper dbHelper = new HuellaDBHelper(context);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.insert(HuellaContract.HuellaEntry.TABLE_NAME, null, toContentValues());
-        Log.d("Huella", getHuellaCarbono() + " gCO2e");
+        try (HuellaDBHelper dbHelper = new HuellaDBHelper(context)) {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            db.insert(HuellaContract.HuellaEntry.TABLE_NAME, null, toContentValues());
+            Log.d("Huella", getHuellaCarbono() + " gCO2e");
+        } catch (Exception e) {
+            Log.e("Huella.insertIntoDB()", e.toString());
+        }
     }
 
     public String getAllRows(Context context) {
         HuellaDBHelper dbHelper = new HuellaDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(HuellaContract.HuellaEntry.TABLE_NAME, null, null, null, null, null, null);
-        String huella = HuellaContract.HuellaEntry._ID + "," + HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID + "," +
-                HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO + ";";
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(HuellaContract.HuellaEntry._ID + "," + HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID + "," +
+                HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO + ";");
         while (cursor.moveToNext()) {
-            huella += cursor.getInt(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry._ID)) + "," +
-            cursor.getInt(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID)) + "," +
-            cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO)) + ";";
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry._ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID)));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO)));
+            stringBuilder.append(";");
         }
         cursor.close();
 
-        return huella;
+        return stringBuilder.toString();
     }
 
     public float getTotalHuellaCarbono(Context context) {
-        HuellaDBHelper dbHelper = new HuellaDBHelper(context);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] columns = {HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO};
-        Cursor cursor = db.query(HuellaContract.HuellaEntry.TABLE_NAME, columns, null, null, null, null, null);
-        float totalHuellaCarbono = 0;
-        while (cursor.moveToNext()) {
-            totalHuellaCarbono += cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO));
-        }
+        try (HuellaDBHelper dbHelper = new HuellaDBHelper(context)) {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            String[] columns = {HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO};
+            Cursor cursor = db.query(HuellaContract.HuellaEntry.TABLE_NAME, columns, null, null, null, null, null);
+            float totalHuellaCarbono = 0;
+            while (cursor.moveToNext()) {
+                totalHuellaCarbono += cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO));
+            }
+            cursor.close();
 
-        return totalHuellaCarbono;
+            return totalHuellaCarbono;
+        } catch (Exception e) {
+            Log.e("Huella.getTotalHuellaCarbono()", e.toString());
+            return 0;
+        }
     }
 
     public ContentValues toContentValues() {
@@ -75,10 +87,6 @@ public class Huella {
 
     public float getHuellaCarbono() {
         return huellaCarbono;
-    }
-
-    public float getVoltage() {
-        return voltage;
     }
 
     public void setEscaneoId(int escaneoId) {

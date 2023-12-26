@@ -2,6 +2,7 @@ package com.example.prototipo2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,12 +45,12 @@ public class ThirdActivity extends AppCompatActivity {
         chart01.setData(lineData);
         chart01.invalidate();
 
-        // Llenado de las TableLayout
+        // TableLayouts
         TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
         int x = 0;
-        boolean first = true; // Hacer el texto en negrita para la primer columna
+        boolean first = true;
         for (String row : bateria.getLastScan().split(";")) {
             tabLay01_Rows.add(new TableRow(this));
             tabLay01_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -59,6 +60,10 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                if (first) {
+                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    first = false;
+                }
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
@@ -70,7 +75,7 @@ public class ThirdActivity extends AppCompatActivity {
         ArrayList<TableRow> tabLay02_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay02_Rows_TextViews = new ArrayList<>();
         x = 0;
-        first = true; // Hacer el texto en negrita para la primer columna
+        first = true;
         for (String row : bateria.getAllRows().split(";")) {
             tabLay02_Rows.add(new TableRow(this));
             tabLay02_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -80,6 +85,10 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay02_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay02_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay02_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                if (first) {
+                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    first = false;
+                }
                 tabLay02_Rows.get(x).addView(tabLay02_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
@@ -92,7 +101,7 @@ public class ThirdActivity extends AppCompatActivity {
         ArrayList<ArrayList<TextView>> tabLay03_Rows_TextViews = new ArrayList<>();
         Escaneo escaneo = new Escaneo(getApplicationContext());
         x = 0;
-        first = true; // Hacer el texto en negrita para la primer columna
+        first = true;
         for (String row : escaneo.getAllScans().split(";")) {
             tabLay03_Rows.add(new TableRow(this));
             tabLay03_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -102,6 +111,10 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay03_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay03_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay03_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                if (first) {
+                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    first = false;
+                }
                 tabLay03_Rows.get(x).addView(tabLay03_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
@@ -114,7 +127,7 @@ public class ThirdActivity extends AppCompatActivity {
         ArrayList<ArrayList<TextView>> tabLay04_Rows_TextViews = new ArrayList<>();
         Analizador analizador = new Analizador();
         x = 0;
-        first = true; // Hacer el texto en negrita para la primer columna
+        first = true;
         for (String row : analizador.getAllData(getApplicationContext()).split(";")) {
             tabLay04_Rows.add(new TableRow(this));
             tabLay04_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -124,6 +137,10 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay04_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay04_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay04_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                if (first) {
+                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    first = false;
+                }
                 tabLay04_Rows.get(x).addView(tabLay04_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
@@ -135,72 +152,60 @@ public class ThirdActivity extends AppCompatActivity {
         Button btn01 = this.findViewById(R.id.third_btn_01);
         btn01_status = false;
 
-        btn01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn01_status) {
-                    tabLay01.setVisibility(View.GONE);
-                    btn01.setText("Ver Datos de la Batería (Último Escaneo)");
-                    btn01_status = false;
-                } else {
-                    tabLay01.setVisibility(View.VISIBLE);
-                    btn01.setText("Ocultar Datos de la Batería (Último Escaneo)");
-                    btn01_status = true;
-                }
+        btn01.setOnClickListener(v -> {
+            if (btn01_status) {
+                tabLay01.setVisibility(View.GONE);
+                btn01.setText(getString(R.string.third_btn_01_1));
+                btn01_status = false;
+            } else {
+                tabLay01.setVisibility(View.VISIBLE);
+                btn01.setText(getString(R.string.third_btn_01_0));
+                btn01_status = true;
             }
         });
 
         Button btn02 = this.findViewById(R.id.third_btn_02);
         btn02_status = false;
 
-        btn02.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn02_status) {
-                    tabLay02.setVisibility(View.GONE);
-                    btn02.setText("Ver Datos de la Batería");
-                    btn02_status = false;
-                } else {
-                    tabLay02.setVisibility(View.VISIBLE);
-                    btn02.setText("Ocultar Datos de la Batería");
-                    btn02_status = true;
-                }
+        btn02.setOnClickListener(v -> {
+            if (btn02_status) {
+                tabLay02.setVisibility(View.GONE);
+                btn02.setText(getString(R.string.third_btn_02_1));
+                btn02_status = false;
+            } else {
+                tabLay02.setVisibility(View.VISIBLE);
+                btn02.setText(getString(R.string.third_btn_02_0));
+                btn02_status = true;
             }
         });
 
         Button btn03 = this.findViewById(R.id.third_btn_03);
         btn03_status = false;
 
-        btn03.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn03_status) {
-                    tabLay03.setVisibility(View.GONE);
-                    btn03.setText("Ver Escaneos");
-                    btn03_status = false;
-                } else {
-                    tabLay03.setVisibility(View.VISIBLE);
-                    btn03.setText("Ocultar Escaneos");
-                    btn03_status = true;
-                }
+        btn03.setOnClickListener(v -> {
+            if (btn03_status) {
+                tabLay03.setVisibility(View.GONE);
+                btn03.setText(getString(R.string.third_btn_03_1));
+                btn03_status = false;
+            } else {
+                tabLay03.setVisibility(View.VISIBLE);
+                btn03.setText(getString(R.string.third_btn_03_0));
+                btn03_status = true;
             }
         });
 
         Button btn04 = this.findViewById(R.id.third_btn_04);
         btn04_status = false;
 
-        btn04.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btn04_status) {
-                    tabLay04.setVisibility(View.GONE);
-                    btn04.setText("Ver Datos del Analizador");
-                    btn04_status = false;
-                } else {
-                    tabLay04.setVisibility(View.VISIBLE);
-                    btn04.setText("Ocultar Datos del Analizador");
-                    btn04_status = true;
-                }
+        btn04.setOnClickListener(v -> {
+            if (btn04_status) {
+                tabLay04.setVisibility(View.GONE);
+                btn04.setText(getString(R.string.third_btn_04_1));
+                btn04_status = false;
+            } else {
+                tabLay04.setVisibility(View.VISIBLE);
+                btn04.setText(getString(R.string.third_btn_04_0));
+                btn04_status = true;
             }
         });
     }

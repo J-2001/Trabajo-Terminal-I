@@ -12,24 +12,16 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class Usuario {
 
-    private int id; // Puede no ser int
-    private String osVersion;
-    private String deviceName;
-    private String deviceModel;
-
     public Usuario(Context context, Context layoutContext) {
-        // Buscamos si la base de datos "Usuario" tiene al menos un valor
         UsuarioDBHelper dbHelper = new UsuarioDBHelper(context);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(UsuarioContract.UsuarioEntry.TABLE_NAME, null, null, null, null, null, null);
         if (cursor.moveToNext()) {
-            // Si lo tiene, el usuario ya esta registrado
             Log.d("Usuario", cursor.getInt(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_ID)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_OS_VERSION)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_DEVICE_NAME)) + "\n" +
                         cursor.getString(cursor.getColumnIndexOrThrow(UsuarioContract.UsuarioEntry.COLUMN_DEVICE_MODEL)));
         } else {
-            // Si no, lo registramos llamando a registerUser()
             registerUser(dbHelper.getWritableDatabase(), layoutContext);
         }
 
@@ -39,14 +31,14 @@ public class Usuario {
     private void registerUser(SQLiteDatabase db, Context context) {
         db.insert(UsuarioContract.UsuarioEntry.TABLE_NAME, null, toContentValues());
 
-        // Petición de registro al servidor
+        // Send register to server
 
         Snackbar snackbar = Snackbar.make(((Activity) context).findViewById(R.id.mainActivity), "Usuario Registrado", Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
 
     public void sendData() {
-        // Metodo no void, envía las bases de datos de la aplicación
+        // Send All Data to Server
     }
 
     public ContentValues toContentValues() {
@@ -60,22 +52,19 @@ public class Usuario {
     }
 
     public int getId() {
-        id = 1;
-        return id;
+        // No int
+        return 1;
     }
 
     public String getOsVersion() {
-        osVersion = System.getProperty("os.version") + "-" + Build.VERSION.INCREMENTAL;
-        return osVersion;
+        return System.getProperty("os.version") + "-" + Build.VERSION.INCREMENTAL;
     }
 
     public String getDeviceName() {
-        deviceName = Build.DEVICE;
-        return deviceName;
+        return Build.DEVICE;
     }
 
     public String getDeviceModel() {
-        deviceModel = Build.MODEL + "-" + Build.PRODUCT;
-        return deviceModel;
+        return Build.MODEL + "-" + Build.PRODUCT;
     }
 }

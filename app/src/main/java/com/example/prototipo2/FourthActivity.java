@@ -21,17 +21,15 @@ public class FourthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth);
 
-        // Huella de Carbono Total
         Huella huella = new Huella();
         TextView tv01 = this.findViewById(R.id.fourth_tv_01);
         tv01.setText(getString(R.string.fourth_tv_01, huella.getTotalHuellaCarbono(getApplicationContext())));
 
-        // Llenado de las TableLayout
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
         int x = 0;
-        boolean first = true; // Hacer el texto en negrita para la primer columna
+        boolean first = true;
         for (String row : huella.getAllRows(getApplicationContext()).split(";")) {
             tabLay01_Rows.add(new TableRow(this));
             tabLay01_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));

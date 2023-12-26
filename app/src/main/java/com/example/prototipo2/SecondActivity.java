@@ -33,35 +33,29 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent netflix = getPackageManager().getLaunchIntentForPackage("com.netflix.mediaclient");//"com.google.android.youtube");//
 
-        ibtnNetflix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!btnTest_status) {
-                    if (netflix != null) {
-                        ibtnNetflix.setClickable(false);
-                        btnTest.setVisibility(View.VISIBLE);
-                        btnTest_status = true;
-                        startForegroundService(intent);
-                        startActivity(netflix);
-                    } else {
-                        Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Netflix!", Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-                    }
+        ibtnNetflix.setOnClickListener(v -> {
+            if (!btnTest_status) {
+                if (netflix != null) {
+                    ibtnNetflix.setClickable(false);
+                    btnTest.setVisibility(View.VISIBLE);
+                    btnTest_status = true;
+                    startForegroundService(intent);
+                    startActivity(netflix);
+                } else {
+                    Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Netflix!", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
                 }
             }
         });
 
-        btnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (btnTest_status) {
-                    stopService(intent);
-                    btnTest_status = false;
-                    btnTest.setVisibility(View.GONE);
-                    ibtnNetflix.setClickable(true);
-                    Snackbar snackbar = Snackbar.make(coordinatorLayout, "Escaneo Terminado!", Snackbar.LENGTH_SHORT);
-                    snackbar.show();
-                }
+        btnTest.setOnClickListener(v -> {
+            if (btnTest_status) {
+                stopService(intent);
+                btnTest_status = false;
+                btnTest.setVisibility(View.GONE);
+                ibtnNetflix.setClickable(true);
+                Snackbar snackbar = Snackbar.make(coordinatorLayout, "Escaneo Terminado!", Snackbar.LENGTH_SHORT);
+                snackbar.show();
             }
         });
 
