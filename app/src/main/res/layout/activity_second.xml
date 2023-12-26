@@ -32,6 +32,42 @@
                 android:scaleType="centerInside"
                 android:contentDescription="@string/second_ibtn_netflix"/>
 
+            <ImageButton
+                android:id="@+id/second_ibtn_disneyplus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/disneyplus"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/second_ibtn_disneyplus"/>
+
+            <ImageButton
+                android:id="@+id/second_ibtn_hbomax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hbomax"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/second_ibtn_hbomax"/>
+
+            <ImageButton
+                android:id="@+id/second_ibtn_primevideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/primevideo"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/second_ibtn_primevideo"/>
+
+            <ImageButton
+                android:id="@+id/second_ibtn_starplus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/starplus"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/second_ibtn_starplus"/>
+
             <Button
                 android:id="@+id/second_btn_test"
                 android:layout_width="match_parent"

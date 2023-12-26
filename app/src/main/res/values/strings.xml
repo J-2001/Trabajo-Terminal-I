@@ -5,7 +5,11 @@
     <string name="main_btn_03">Ver huella de carbono generada</string>
     <string name="main_tv_01">Acuerdo de Privacidad</string>
     <string name="second_tv_01">Selección de aplicación de Video Streaming</string>
-    <string name="second_ibtn_netflix">Netflix</string>
+    <string name="second_ibtn_netflix">com.netflix.mediaclient</string>
+    <string name="second_ibtn_disneyplus">com.disney.disneyplus</string>
+    <string name="second_ibtn_hbomax">com.hbo.hbonow</string>
+    <string name="second_ibtn_primevideo">com.amazon.avod.thirdpartyclient</string>
+    <string name="second_ibtn_starplus">com.disney.starplus</string>
     <string name="second_btn_test">Detener Escaneo (Test)</string>
     <string name="third_tv_01">Ver el Comportamiento de la Batería</string>
     <string name="third_btn_01_0">Ocultar Datos de la Batería (Último Escaneo)</string>
