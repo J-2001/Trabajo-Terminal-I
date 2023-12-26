@@ -24,14 +24,15 @@ public class SecondActivity extends AppCompatActivity {
         CoordinatorLayout coordinatorLayout = this.findViewById(R.id.secondActivity);
 
         ImageButton ibtnNetflix = this.findViewById(R.id.second_ibtn_netflix);
+        ImageButton ibtnDisneyPlus = this.findViewById(R.id.second_ibtn_disneyplus);
 
         btnTest = this.findViewById(R.id.second_btn_test);
-
         btnTest_status = false;
 
         Intent intent = new Intent(getApplicationContext(), Analizador.class);
 
-        Intent netflix = getPackageManager().getLaunchIntentForPackage("com.netflix.mediaclient");//"com.google.android.youtube");//
+        Intent netflix = getPackageManager().getLaunchIntentForPackage(getString(R.string.second_ibtn_netflix));
+        Intent disneyPlus = getPackageManager().getLaunchIntentForPackage(getString(R.string.second_ibtn_disneyplus));
 
         ibtnNetflix.setOnClickListener(v -> {
             if (!btnTest_status) {
@@ -43,6 +44,21 @@ public class SecondActivity extends AppCompatActivity {
                     startActivity(netflix);
                 } else {
                     Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Netflix!", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                }
+            }
+        });
+
+        ibtnDisneyPlus.setOnClickListener(v -> {
+            if (!btnTest_status) {
+                if (disneyPlus != null) {
+                    ibtnDisneyPlus.setClickable(false);
+                    btnTest.setVisibility(View.VISIBLE);
+                    btnTest_status = true;
+                    startForegroundService(intent);
+                    startActivity(disneyPlus);
+                } else {
+                    Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Disney+!", Snackbar.LENGTH_SHORT);
                     snackbar.show();
                 }
             }
