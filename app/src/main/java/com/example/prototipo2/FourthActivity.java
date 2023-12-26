@@ -41,11 +41,11 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 if (first) {
                     tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                    first = false;
                 }
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(y));
                 y += 1;
             }
+            first = false;
             tabLay01.addView(tabLay01_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             x += 1;
         }
