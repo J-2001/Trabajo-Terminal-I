@@ -152,12 +152,9 @@ public class Analizador extends Service {
         ArrayList<Float> ccpms = getAllCCpm();
 
         if (ccpms.size() == 0) {
-            Log.d("updateMedia()", "1");
             return 0;
         }
-        Log.d("updateMedia()", "2");
-        Log.d("updateMedia()3", "" + ccpms);
-        Log.d("updateMedia()4", "" + ccpms.size());
+
         float sum = 0;
 
         for (Float ccpm : ccpms) {

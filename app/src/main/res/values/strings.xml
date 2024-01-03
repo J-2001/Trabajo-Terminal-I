@@ -3,6 +3,7 @@
     <string name="main_btn_01">Selección de aplicación de Video Streaming</string>
     <string name="main_btn_02">Ver el comportamiento de la batería</string>
     <string name="main_btn_03">Ver huella de carbono generada</string>
+    <string name="main_btn_04">Ver prácticas sostenibles</string>
     <string name="main_tv_01">Acuerdo de Privacidad</string>
     <string name="second_tv_01">Selección de aplicación de Video Streaming</string>
     <string name="second_ibtn_netflix">com.netflix.mediaclient</string>
@@ -11,7 +12,7 @@
     <string name="second_ibtn_primevideo">com.amazon.avod.thirdpartyclient</string>
     <string name="second_ibtn_starplus">com.disney.starplus</string>
     <string name="second_btn_test">Detener Escaneo (Test)</string>
-    <string name="third_tv_01">Ver el Comportamiento de la Batería</string>
+    <string name="third_tv_01">Comportamiento de la Batería</string>
     <string name="third_btn_01_0">Ocultar Datos de la Batería (Último Escaneo)</string>
     <string name="third_btn_01_1">Ver Datos de la Batería (Último Escaneo)</string>
     <string name="third_btn_02_0">Ocultar Datos de la Batería</string>
@@ -20,7 +21,7 @@
     <string name="third_btn_03_1">Ver Escaneos</string>
     <string name="third_btn_04_0">Ocultar Datos del Analizador</string>
     <string name="third_btn_04_1">Ver Datos del Analizador</string>
-    <string name="fourth_tv_00">Ver huella de carbono generada</string>
+    <string name="fourth_tv_00">Huella de carbono generada</string>
     <string name="fourth_tv_01">%f gCO2e</string>
     <string name="fourth_btn_01_0">Ocultar Huella por Escaneo</string>
     <string name="fourth_btn_01_1">Ver Huella por Escaneo</string>
