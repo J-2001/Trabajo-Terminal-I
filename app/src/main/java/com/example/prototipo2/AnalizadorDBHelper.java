@@ -15,7 +15,8 @@ public class AnalizadorDBHelper extends SQLiteOpenHelper {
             AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + " INTEGER NOT NULL," +
             AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + " REAL NOT NULL," +
             AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + " REAL NOT NULL," +
-            AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + " REAL NOT NULL)";
+            AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + " REAL NOT NULL," +
+            AnalizadorContract.AnalizadorEntry.COLUMN_PZ + " REAL NOT NULL)";
     public static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + AnalizadorContract.AnalizadorEntry.TABLE_NAME;
 
     public AnalizadorDBHelper(Context context) {
