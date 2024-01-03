@@ -25,4 +25,6 @@
     <string name="fourth_tv_01">%f gCO2e</string>
     <string name="fourth_btn_01_0">Ocultar Huella por Escaneo</string>
     <string name="fourth_btn_01_1">Ver Huella por Escaneo</string>
+    <string name="fifth_tv_01">Prácticas Sostenibles</string>
+    <string name="fifth_btn">Ver Consejo #%d</string>
 </resources>

@@ -44,6 +44,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(fourthActivity);
         });
 
+        Button btn04 = this.findViewById(R.id.main_btn_04);
+
+        btn04.setOnClickListener(v -> {
+            Intent fifthActivity = new Intent(MainActivity.this, FifthActivity.class);
+            startActivity(fifthActivity);
+        });
+
         // NotificationChannel
         CharSequence name = "Trabajo Terminal";
         String description = "Consumo de energía en aplicaciones de Video Streaming";
