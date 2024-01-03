@@ -94,7 +94,9 @@ public class Analizador extends Service {
                     ccpm = (float) (cc * 60 / ((currentRowTimeStamp - previousRowTimeStamp) / 1000.0));
 
                     media = updateMedia();
+                    Log.d("Media = ", String.valueOf(media));
                     desvEst = updateDesvEst();
+                    Log.d("Desv. Est. =", String.valueOf(desvEst));
 
                     float x = 0;
 
@@ -117,9 +119,9 @@ public class Analizador extends Service {
                 Log.i("Analizador", "Nada...");
             }
         };
+        Log.w("Analizador", "Analizador iniciado");
         timer.scheduleAtFixedRate(timerTask, 0, 10000);
         foregroundNotification();
-        Log.w("Analizador", "Analizador iniciado");
 
         return START_REDELIVER_INTENT;
     }
@@ -149,10 +151,13 @@ public class Analizador extends Service {
     public float updateMedia() {
         ArrayList<Float> ccpms = getAllCCpm();
 
-        if (ccpms == null) {
+        if (ccpms.size() == 0) {
+            Log.d("updateMedia()", "1");
             return 0;
         }
-
+        Log.d("updateMedia()", "2");
+        Log.d("updateMedia()3", "" + ccpms);
+        Log.d("updateMedia()4", "" + ccpms.size());
         float sum = 0;
 
         for (Float ccpm : ccpms) {
@@ -165,7 +170,7 @@ public class Analizador extends Service {
     public float updateDesvEst() {
         ArrayList<Float> ccpms = getAllCCpm();
 
-        if (ccpms == null) {
+        if (ccpms.size() == 0) {
             return 0;
         }
 

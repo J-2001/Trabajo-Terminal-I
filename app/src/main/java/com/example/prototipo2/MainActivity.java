@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*
-        Delete databases (Testing)
-         */
+        /*                          Delete databases (Testing)
+        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
+        dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);                       */
 
         Usuario usuario = new Usuario(getApplicationContext(), this);
 

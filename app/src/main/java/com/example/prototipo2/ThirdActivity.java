@@ -86,7 +86,7 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay02_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay02_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 if (first) {
-                    tabLay02_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    tabLay02_Rows_TextViews.get(x).get(y).setTypeface(tabLay02_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
                 }
                 tabLay02_Rows.get(x).addView(tabLay02_Rows_TextViews.get(x).get(y));
                 y += 1;
@@ -112,7 +112,7 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay03_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay03_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 if (first) {
-                    tabLay03_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    tabLay03_Rows_TextViews.get(x).get(y).setTypeface(tabLay03_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
                 }
                 tabLay03_Rows.get(x).addView(tabLay03_Rows_TextViews.get(x).get(y));
                 y += 1;
@@ -138,7 +138,7 @@ public class ThirdActivity extends AppCompatActivity {
                 tabLay04_Rows_TextViews.get(x).get(y).setText(r);
                 tabLay04_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 if (first) {
-                    tabLay04_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
+                    tabLay04_Rows_TextViews.get(x).get(y).setTypeface(tabLay04_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
                 }
                 tabLay04_Rows.get(x).addView(tabLay04_Rows_TextViews.get(x).get(y));
                 y += 1;
