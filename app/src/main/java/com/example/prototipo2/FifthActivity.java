@@ -6,10 +6,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -18,12 +18,13 @@ import java.util.Random;
 
 public class FifthActivity extends AppCompatActivity {
 
-    private static final String root_frag = "root_fragment";
     private static final int limit = 2;
     private LinearLayout layout;
+    private ArrayList<FrameLayout> frameLayouts;
     private Button button;
     private List<Integer> displayed;
     private int number;
+    private int counter;
     private boolean first;
 
     private final OnClickListener listener = new OnClickListener() {
@@ -61,22 +62,28 @@ public class FifthActivity extends AppCompatActivity {
         button.setOnClickListener(listener);
         layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
+        frameLayouts = new ArrayList<>();
+        counter = 0;
         first = true;
     }
 
     public void loadFragment(Fragment fragment) {
+        frameLayouts.add(new FrameLayout(this));
+        frameLayouts.get(counter).setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+        int id = View.generateViewId();
+        frameLayouts.get(counter).setId(id);
+        layout.addView(frameLayouts.get(counter), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        // ft.add(id, fragment);
         if (first)  {
             ft.add(R.id.fifth_frmlay, fragment);
-            fm.popBackStack(root_frag, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            ft.addToBackStack(root_frag);
             first = false;
         } else {
             ft.replace(R.id.fifth_frmlay, fragment);
-            ft.addToBackStack(null);
         }
         ft.commit();
+        counter += 1;
     }
 
     public int newNumber() {
@@ -93,13 +100,4 @@ public class FifthActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
-            return true;
-        }
-
-        return super.onKeyDown(keyCode, event);
-    }
 }

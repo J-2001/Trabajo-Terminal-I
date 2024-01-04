@@ -5,10 +5,31 @@
     android:layout_height="match_parent"
     tools:context=".Consejo01Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/frag_01_tv" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_01_tv_01"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_01_tv_02"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:src="@drawable/frag_01_iv_01"
+            android:contentDescription="@string/frag_01_iv_01"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
 
 </FrameLayout>
