@@ -25,7 +25,7 @@ public class FifthActivity extends AppCompatActivity {
     private List<Integer> displayed;
     private int number;
     private int counter;
-    private boolean first;
+    // private boolean first;
 
     private final OnClickListener listener = new OnClickListener() {
         @Override
@@ -64,7 +64,7 @@ public class FifthActivity extends AppCompatActivity {
 
         frameLayouts = new ArrayList<>();
         counter = 0;
-        first = true;
+        // first = true;
     }
 
     public void loadFragment(Fragment fragment) {
@@ -75,13 +75,13 @@ public class FifthActivity extends AppCompatActivity {
         layout.addView(frameLayouts.get(counter), new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        // ft.add(id, fragment);
-        if (first)  {
+        ft.add(id, fragment);
+        /* if (first)  {
             ft.add(R.id.fifth_frmlay, fragment);
             first = false;
         } else {
             ft.replace(R.id.fifth_frmlay, fragment);
-        }
+        } */
         ft.commit();
         counter += 1;
     }

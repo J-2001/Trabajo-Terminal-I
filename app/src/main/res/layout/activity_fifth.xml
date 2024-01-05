@@ -24,10 +24,10 @@
                 android:text="@string/fifth_tv_01"
                 android:gravity="center"/>
 
-            <FrameLayout
+            <!--<FrameLayout
                 android:id="@+id/fifth_frmlay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"/>-->
 
         </LinearLayout>
 

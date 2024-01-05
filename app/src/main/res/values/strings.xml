@@ -29,9 +29,15 @@
     <string name="fifth_btn">Ver Consejo #%d</string>
     <string name="frag_01_tv_01">Consejo 01</string>
     <string name="frag_01_tv_02">Protege tu dispositivo móvil de caídas</string>
-    <string name="frag_01_tv_03">Si tu dispositivo móvio se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo</string>
+    <string name="frag_01_tv_03">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo</string>
     <string name="frag_01_iv_01">Teléfono cayendo, dibujo</string>
-    <string name="frag_02_tv">Consejo 02</string>
+    <string name="frag_01_iv_02">Funda de teléfono</string>
+    <string name="frag_02_tv_01">Consejo 02</string>
+    <string name="frag_02_tv_02">Protege la pantalla de tu dispositivo móvil</string>
+    <string name="frag_02_tv_03">Si la pantalla de tu dispositivo móvil se raya o rompe, no funcionará correctamente y tendrás que comprarte otro, para evitar esto, ponle una mica (cubierta) protectora</string>
+    <string name="frag_02_iv_01">Teléfono rayado, pantalla rota</string>
+    <string name="frag_02_iv_02">Mica protectora aplicándose a teléfono</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
