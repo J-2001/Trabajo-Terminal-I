@@ -27,16 +27,21 @@
     <string name="fourth_btn_01_1">Ver Huella por Escaneo</string>
     <string name="fifth_tv_01">Prácticas Sostenibles</string>
     <string name="fifth_btn">Ver Consejo #%d</string>
-    <string name="frag_01_tv_01">Consejo 01</string>
-    <string name="frag_01_tv_02">Protege tu dispositivo móvil de caídas</string>
-    <string name="frag_01_tv_03">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo</string>
+    <string name="frag_tv_0">Consejo 0%d</string>
+    <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>
+    <string name="frag_01_tv_02">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo.</string>
     <string name="frag_01_iv_01">Teléfono cayendo, dibujo</string>
     <string name="frag_01_iv_02">Funda de teléfono</string>
-    <string name="frag_02_tv_01">Consejo 02</string>
-    <string name="frag_02_tv_02">Protege la pantalla de tu dispositivo móvil</string>
-    <string name="frag_02_tv_03">Si la pantalla de tu dispositivo móvil se raya o rompe, no funcionará correctamente y tendrás que comprarte otro, para evitar esto, ponle una mica (cubierta) protectora</string>
+    <string name="frag_02_tv_01">Protege la pantalla de tu dispositivo móvil</string>
+    <string name="frag_02_tv_02">Si la pantalla de tu dispositivo móvil se raya o rompe, no funcionará correctamente y tendrás que comprarte otro, para evitar esto, ponle una mica (cubierta) protectora.</string>
     <string name="frag_02_iv_01">Teléfono rayado, pantalla rota</string>
     <string name="frag_02_iv_02">Mica protectora aplicándose a teléfono</string>
+    <string name="frag_03_tv_01">Intenta primero reparar tu dispositivo móvil</string>
+    <string name="frag_03_tv_02">En caso de que tu dispositivo se estropee o rompa, intenta repararlo primero, que una pequeña falla no sea excusa para cambiarlo.</string>
+    <string name="frag_03_iv_01">Teléfono en reparación</string>
+    <string name="frag_04_tv_01">Evita la descarga completa</string>
+    <string name="frag_04_tv_02">Dejar que la batería se descargue por completo (0%) propicia a que se degrade rápidamente la salud de la batería. Para evitar esto se recomienda que se cargue el dispositivo móvil cuando la batería alcance el 20%; por lo general, los dispositivos notifican al usuario cuando esto sucede o el icono de la batería se torna de un color rojo. Esto entra en la "regla de oro": 20–80.</string>
+    <string name="frag_04_iv_01">Teléfono descargado, batería baja</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

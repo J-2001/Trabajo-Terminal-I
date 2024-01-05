@@ -5,10 +5,40 @@
     android:layout_height="match_parent"
     tools:context=".Consejo03Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/frag_03_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_03_tv_01"
+            android:gravity="center"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/frag_03_iv_01"
+            android:contentDescription="@string/frag_03_iv_01"
+            android:scaleType="centerInside"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/frag_03_tv_02"/>
+
+        <!-- Aquí se podría colocar una recomendación para
+             buscar en Maps, lugares cercanos que reparan
+             teléfonos -->
+
+    </LinearLayout>
 
 </FrameLayout>

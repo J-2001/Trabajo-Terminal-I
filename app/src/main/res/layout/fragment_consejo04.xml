@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Consejo01Fragment">
+    tools:context=".Consejo04Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center">
 
         <TextView
-            android:id="@+id/frag_01_tv"
+            android:id="@+id/frag_04_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"/>
@@ -20,27 +20,24 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_01_tv_01"
+            android:text="@string/frag_04_tv_01"
             android:gravity="center"/>
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:src="@drawable/frag_01_iv_01"
-            android:contentDescription="@string/frag_01_iv_01"
+            android:layout_height="200dp"
+            android:src="@drawable/frag_04_iv_01"
+            android:contentDescription="@string/frag_04_iv_01"
             android:scaleType="centerInside"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_01_tv_02"/>
+            android:text="@string/frag_04_tv_02"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:src="@drawable/frag_01_iv_02"
-            android:contentDescription="@string/frag_01_iv_02"
-            android:scaleType="centerInside"/>
+        <!-- Aquí se podría colocar una recomendación para
+             establecer una alarma o notificación cuando el
+             teléfono tenga un 20% de batería -->
 
     </LinearLayout>
 

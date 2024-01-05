@@ -12,15 +12,15 @@
         android:gravity="center_horizontal">
 
         <TextView
+            android:id="@+id/frag_02_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_02_tv_01"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_02_tv_02"
+            android:text="@string/frag_02_tv_01"
             android:gravity="center"/>
 
         <ImageView
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_02_tv_03"/>
+            android:text="@string/frag_02_tv_02"/>
 
         <ImageView
             android:layout_width="wrap_content"
