@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -49,6 +50,13 @@ public class MainActivity extends AppCompatActivity {
         btn04.setOnClickListener(v -> {
             Intent fifthActivity = new Intent(MainActivity.this, FifthActivity.class);
             startActivity(fifthActivity);
+        });
+
+        TextView tv = this.findViewById(R.id.main_tv);
+
+        tv.setOnClickListener(v -> {
+            Intent sixthActivity = new Intent(MainActivity.this, SixthActivity.class);
+            startActivity(sixthActivity);
         });
 
         // NotificationChannel

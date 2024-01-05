@@ -27,6 +27,8 @@
     <string name="fourth_btn_01_1">Ver Huella por Escaneo</string>
     <string name="fifth_tv_01">Prácticas Sostenibles</string>
     <string name="fifth_btn">Ver Consejo #%d</string>
+    <string name="sixth_tv_01">Acuerdo de Privacidad</string>
+    <string name="sixth_tv_02">Yadda yadda yadda</string>
     <string name="frag_tv_0">Consejo 0%d</string>
     <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>
     <string name="frag_01_tv_02">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo.</string>

@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class FifthActivity extends AppCompatActivity {
 
-    private static final int limit = 4;
+    private static final int limit = 5;
     private LinearLayout layout;
     private ArrayList<FrameLayout> frameLayouts;
     private Button button;
@@ -43,6 +43,9 @@ public class FifthActivity extends AppCompatActivity {
                     break;
                 case 4:
                     loadFragment(new Consejo04Fragment());
+                    break;
+                case 5:
+                    loadFragment(new Consejo05Fragment());
                     break;
             }
             number = newNumber();
