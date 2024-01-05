@@ -21,7 +21,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/second_tv_01"
-                android:gravity="center"/>
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="25dp"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_netflix"
@@ -30,7 +34,12 @@
                 android:src="@drawable/netflix"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/second_ibtn_netflix"/>
+                android:contentDescription="@string/second_ibtn_netflix"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@null"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="40dp"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_disneyplus"
@@ -39,7 +48,10 @@
                 android:src="@drawable/disneyplus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/second_ibtn_disneyplus"/>
+                android:contentDescription="@string/second_ibtn_disneyplus"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@null"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_hbomax"
@@ -48,7 +60,10 @@
                 android:src="@drawable/hbomax"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/second_ibtn_hbomax"/>
+                android:contentDescription="@string/second_ibtn_hbomax"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@null"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_primevideo"
@@ -57,7 +72,10 @@
                 android:src="@drawable/primevideo"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/second_ibtn_primevideo"/>
+                android:contentDescription="@string/second_ibtn_primevideo"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@null"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_starplus"
@@ -66,7 +84,10 @@
                 android:src="@drawable/starplus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:contentDescription="@string/second_ibtn_starplus"/>
+                android:contentDescription="@string/second_ibtn_starplus"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@null"/>
 
             <Button
                 android:id="@+id/second_btn_test"

@@ -40,6 +40,8 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), Analizador.class);
 
+        /*ibtnNetflix.setHorizontalFadingEdgeEnabled(true);
+        ibtnNetflix.setFadingEdgeLength(40);*/
         ibtnNetflix.setOnClickListener(v -> {
             if (!btnTest_status) {
                 netflix = getPackageManager().getLaunchIntentForPackage(getString(R.string.second_ibtn_netflix));
