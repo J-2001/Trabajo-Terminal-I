@@ -1,9 +1,11 @@
 package com.example.prototipo2;
 
+import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -181,7 +183,32 @@ public class Analizador extends Service {
     }
 
     public void showNotification() {
-        //
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        /* Aquí se podrían buscar distintas fuertes de exceso de batería y mostrar distintos layouts para disminuirlas
+        LayoutInflater inflater;
+        */
+        builder.setTitle("P(Z)>x")
+                .setMessage(String.valueOf(pz))
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("Analizador.showNotification()", "Dialog aceptado!");
+                    }
+                })
+                .setNeutralButton("Omitir x s", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("Analizaodr.showNotification()", "Dialog omitido!");
+                    }
+                })
+                .setNegativeButton("Descartar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d("Analizador.showNotification()", "Dialog descartado!");
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void insertIntoDB() {
