@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Nombre de la Aplicación</string>
+    <string name="channel_id_1">Analizador01</string>
+    <string name="channel_id_2">Analizador02</string>
+    <string name="channel_name">Analizador</string>
+    <string name="channel_description_1">Analizador activo para detectar un consumo de energía excesivo</string>
+    <string name="channel_description_2">Por medio del modelo matemático, el analizador ha detectado un consumo excesivo de energía</string>
     <string name="main_btn_01">Selección de aplicación de Video Streaming</string>
     <string name="main_btn_02">Ver el comportamiento de la batería</string>
     <string name="main_btn_03">Ver huella de carbono generada</string>

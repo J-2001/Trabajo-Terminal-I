@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String CHANNEL_ID = "AnalizadorConsumoDeEnergia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         /*                          Delete databases (Testing)
         AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
         dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);                       */
+
+        createNotificationChannel();
 
         Usuario usuario = new Usuario(getApplicationContext(), this);
 
@@ -58,14 +59,15 @@ public class MainActivity extends AppCompatActivity {
             Intent sixthActivity = new Intent(MainActivity.this, SixthActivity.class);
             startActivity(sixthActivity);
         });
+    }
 
-        // NotificationChannel
-        CharSequence name = "Trabajo Terminal";
-        String description = "Consumo de energía en aplicaciones de Video Streaming";
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-        channel.setDescription(description);
+    private void createNotificationChannel() {
+        NotificationChannel channel1 = new NotificationChannel(getString(R.string.channel_id_1), getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+        channel1.setDescription(getString(R.string.channel_description_1));
+        NotificationChannel channel2 = new NotificationChannel(getString(R.string.channel_id_2), getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+        channel2.setDescription(getString(R.string.channel_description_2));
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
-        notificationManager.createNotificationChannel(channel);
+        notificationManager.createNotificationChannel(channel1);
+        notificationManager.createNotificationChannel(channel2);
     }
 }

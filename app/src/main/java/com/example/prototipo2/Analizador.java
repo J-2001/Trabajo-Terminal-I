@@ -7,13 +7,16 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -129,7 +132,11 @@ public class Analizador extends Service {
     }
 
     public void foregroundNotification() {
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID).setContentTitle("Analizador").setContentText("Test").setSmallIcon(R.drawable.ic_launcher_foreground).build();
+        Notification notification = new NotificationCompat.Builder(this, getString(R.string.channel_id_1))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Analizador")
+                .setContentText("Analizador iniciado...")
+                .build();
         startForeground(1, notification);
     }
 
@@ -183,10 +190,27 @@ public class Analizador extends Service {
     }
 
     public void showNotification() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("P(Z>x)")
+                .setContentText(String.valueOf(pz))
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        notificationManager.notify(2, builder.build());
+        /* AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
         /* Aquí se podrían buscar distintas fuertes de exceso de batería y mostrar distintos layouts para disminuirlas
         LayoutInflater inflater;
-        */
+
         builder.setTitle("P(Z)>x")
                 .setMessage(String.valueOf(pz))
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -208,7 +232,7 @@ public class Analizador extends Service {
                     }
                 });
         AlertDialog dialog = builder.create();
-        dialog.show();
+        dialog.show(); */
     }
 
     public void insertIntoDB() {
