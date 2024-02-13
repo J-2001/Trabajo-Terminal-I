@@ -1,11 +1,9 @@
 package com.example.prototipo2;
 
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -25,7 +23,6 @@ import java.util.TimerTask;
 
 public class Analizador extends Service {
 
-    private static final String CHANNEL_ID = "AnalizadorConsumoDeEnergia";
     private static final DecimalFormat df = new DecimalFormat("0.00");
     private int previousRowId;
     private int previousRowChargeCounter;
