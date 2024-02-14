@@ -21,6 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     private Intent hbomax;
     private Intent primeVideo;
     private Intent starPlus;
+    private Intent crunchyroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class SecondActivity extends AppCompatActivity {
         ImageButton ibtnHBOmax = this.findViewById(R.id.second_ibtn_hbomax);
         ImageButton ibtnPrimeVideo = this.findViewById(R.id.second_ibtn_primevideo);
         ImageButton ibtnStarPlus = this.findViewById(R.id.second_ibtn_starplus);
+        ImageButton ibtnCrunchyroll = this.findViewById(R.id.second_ibtn_crunchyroll);
 
         btnTest = this.findViewById(R.id.second_btn_test);
         btnTest_status = false;
@@ -50,6 +52,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnHBOmax.setClickable(false);
                     ibtnPrimeVideo.setClickable(false);
                     ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
                     btnTest.setVisibility(View.VISIBLE);
                     btnTest_status = true;
                     startForegroundService(intent);
@@ -74,6 +77,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnHBOmax.setClickable(false);
                     ibtnPrimeVideo.setClickable(false);
                     ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
                     btnTest.setVisibility(View.VISIBLE);
                     btnTest_status = true;
                     startForegroundService(intent);
@@ -98,6 +102,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnHBOmax.setClickable(false);
                     ibtnPrimeVideo.setClickable(false);
                     ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
                     btnTest.setVisibility(View.VISIBLE);
                     btnTest_status = true;
                     startForegroundService(intent);
@@ -122,6 +127,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnHBOmax.setClickable(false);
                     ibtnPrimeVideo.setClickable(false);
                     ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
                     btnTest.setVisibility(View.VISIBLE);
                     btnTest_status = true;
                     startForegroundService(intent);
@@ -146,6 +152,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnHBOmax.setClickable(false);
                     ibtnPrimeVideo.setClickable(false);
                     ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
                     btnTest.setVisibility(View.VISIBLE);
                     btnTest_status = true;
                     startForegroundService(intent);
@@ -156,6 +163,31 @@ public class SecondActivity extends AppCompatActivity {
                     starPlus = new Intent(Intent.ACTION_VIEW);
                     starPlus.setData(Uri.parse("market://details?id=" + getString(R.string.second_ibtn_starplus)));
                     startActivity(starPlus);
+                }
+            }
+        });
+
+        ibtnCrunchyroll.setOnClickListener(v -> {
+            if (!btnTest_status) {
+                crunchyroll = getPackageManager().getLaunchIntentForPackage(getString(R.string.second_ibtn_crunchyroll));
+
+                if (crunchyroll != null) {
+                    ibtnNetflix.setClickable(false);
+                    ibtnDisneyPlus.setClickable(false);
+                    ibtnHBOmax.setClickable(false);
+                    ibtnPrimeVideo.setClickable(false);
+                    ibtnStarPlus.setClickable(false);
+                    ibtnCrunchyroll.setClickable(false);
+                    btnTest.setVisibility(View.VISIBLE);
+                    btnTest_status = true;
+                    startForegroundService(intent);
+                    startActivity(crunchyroll);
+                } else {
+                    Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Crunchyroll", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                    crunchyroll = new Intent(Intent.ACTION_VIEW);
+                    crunchyroll.setData(Uri.parse("market://details?id=" + getString(R.string.second_ibtn_crunchyroll)));
+                    startActivity(crunchyroll);
                 }
             }
         });

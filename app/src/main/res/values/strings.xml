@@ -22,6 +22,7 @@
     <string name="second_ibtn_hbomax">com.hbo.hbonow</string>
     <string name="second_ibtn_primevideo">com.amazon.avod.thirdpartyclient</string>
     <string name="second_ibtn_starplus">com.disney.starplus</string>
+    <string name="second_ibtn_crunchyroll">com.</string>
     <string name="second_btn_test">Detener Escaneo (Test)</string>
     <string name="third_tv_01">Comportamiento de la Batería</string>
     <string name="third_btn_01_0">Ocultar Datos de la Batería (Último Escaneo)</string>
