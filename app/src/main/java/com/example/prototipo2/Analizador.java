@@ -1,10 +1,13 @@
 package com.example.prototipo2;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -18,6 +21,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,6 +41,7 @@ public class Analizador extends Service {
     private float media;
     private float desvEst;
     private float pz;
+    private int tiempoIgnorar;
     private Bateria bateria;
     private Escaneo escaneo;
     private Timer timer;
@@ -57,9 +62,13 @@ public class Analizador extends Service {
         media = 0;
         desvEst = 0;
         pz = 0;
+        tiempoIgnorar = 0;
         bateria = new Bateria(getApplicationContext());
         escaneo = new Escaneo(getApplicationContext());
         timer = new Timer();
+        BroadcastReceiver br = new MyBroadcastReceiver();
+        IntentFilter filter = new IntentFilter(getString(R.string.broadcast_action_1));
+        this.registerReceiver(br, filter);
     }
 
     @Override
@@ -113,10 +122,17 @@ public class Analizador extends Service {
                     Log.d("P(Z>x)=", String.valueOf(pz));
 
                     if (pz != -1) {
-                        showNotification();
+                        if (tiempoIgnorar > 0) {
+                            Log.d("Notificación no Mostrada",  "tiempoIgnorar:" + tiempoIgnorar);
+                        } else {
+                            showNotification();
+                        }
                     }
 
                     insertIntoDB();
+                }
+                if (tiempoIgnorar > 0) {
+                    tiempoIgnorar -= 1;
                 }
                 Log.i("Analizador", "Nada...");
             }
@@ -154,6 +170,14 @@ public class Analizador extends Service {
         return null;
     }
 
+    public class MyBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("Analizador MyBroadcastReceiver", Objects.requireNonNull(intent.getAction()));
+            tiempoIgnorar = intent.getIntExtra("MIN", 0) * 6;
+        }
+    }
+
     public float updateMedia() {
         ArrayList<Float> ccpms = getAllCCpm();
 
@@ -187,11 +211,26 @@ public class Analizador extends Service {
     }
 
     public void showNotification() {
+        Intent intent = new Intent(this, NotificationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra(getString(R.string.extra_0), 1);
+        intent.putExtra(getString(R.string.extra_1_1), ccpm);
+        intent.putExtra(getString(R.string.extra_1_2), media);
+        intent.putExtra(getString(R.string.extra_1_3), desvEst);
+        intent.putExtra(getString(R.string.extra_1_4), pz);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        Intent ignorar = new Intent(this, MyBroadcastReceiver.class);
+        ignorar.setAction(getString(R.string.broadcast_action_1));
+        ignorar.putExtra("MIN", 1);
+        PendingIntent ignorarPendingIntent = PendingIntent.getBroadcast(this, 0, ignorar, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("P(Z>x)")
                 .setContentText(String.valueOf(pz))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_launcher_foreground, "Omitir (1 min)", ignorarPendingIntent)
+                .setAutoCancel(true);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -204,32 +243,6 @@ public class Analizador extends Service {
             return;
         }
         notificationManager.notify(2, builder.build());
-        /* AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        /* Aquí se podrían buscar distintas fuertes de exceso de batería y mostrar distintos layouts para disminuirlas
-        LayoutInflater inflater;
-
-        builder.setTitle("P(Z)>x")
-                .setMessage(String.valueOf(pz))
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Analizador.showNotification()", "Dialog aceptado!");
-                    }
-                })
-                .setNeutralButton("Omitir x s", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Analizaodr.showNotification()", "Dialog omitido!");
-                    }
-                })
-                .setNegativeButton("Descartar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d("Analizador.showNotification()", "Dialog descartado!");
-                    }
-                });
-        AlertDialog dialog = builder.create();
-        dialog.show(); */
     }
 
     public void insertIntoDB() {

@@ -5,6 +5,12 @@
     <string name="channel_name">Analizador</string>
     <string name="channel_description_1">Analizador activo para detectar un consumo de energía excesivo</string>
     <string name="channel_description_2">Por medio del modelo matemático, el analizador ha detectado un consumo excesivo de energía</string>
+    <string name="extra_0">CATEGORIA</string>
+    <string name="extra_1_1">CCPM</string>
+    <string name="extra_1_2">MEDIA</string>
+    <string name="extra_1_3">DESVEST</string>
+    <string name="extra_1_4">PZ</string>
+    <string name="broadcast_action_1">ignorarNotificacionesAnalizador</string>
     <string name="main_btn_01">Selección de aplicación de Video Streaming</string>
     <string name="main_btn_02">Ver el comportamiento de la batería</string>
     <string name="main_btn_03">Ver huella de carbono generada</string>
