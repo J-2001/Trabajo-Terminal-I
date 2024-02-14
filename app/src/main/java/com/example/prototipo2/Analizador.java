@@ -218,11 +218,11 @@ public class Analizador extends Service {
         intent.putExtra(getString(R.string.extra_1_2), media);
         intent.putExtra(getString(R.string.extra_1_3), desvEst);
         intent.putExtra(getString(R.string.extra_1_4), pz);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
         Intent ignorar = new Intent(this, MyBroadcastReceiver.class);
         ignorar.setAction(getString(R.string.broadcast_action_1));
         ignorar.putExtra("MIN", 1);
-        PendingIntent ignorarPendingIntent = PendingIntent.getBroadcast(this, 0, ignorar, 0);
+        PendingIntent ignorarPendingIntent = PendingIntent.getBroadcast(this, 0, ignorar, PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("P(Z>x)")
