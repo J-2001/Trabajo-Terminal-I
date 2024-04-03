@@ -1,19 +1,41 @@
 package com.example.prototipo2;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    Log.d("Permiso de Notificaciones", "FCM SDK puede enviar notificaciones!");
+                } else {
+                    Log.d("Permiso de Notificaciones", "El usuario no recibira notificaciones");
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
 
         Usuario usuario = new Usuario(getApplicationContext(), this);
+
+        CoordinatorLayout coordinatorLayout = this.findViewById(R.id.mainActivity);
 
         Button btn01 = this.findViewById(R.id.main_btn_01);
 
@@ -64,6 +88,37 @@ public class MainActivity extends AppCompatActivity {
             Intent sixthActivity = new Intent(MainActivity.this, NotificationActivity.class); // SixthActivity.class);
             startActivity(sixthActivity);
         });
+
+        askNotificationPermission();
+
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+            @Override
+            public void onComplete(@NonNull Task<String> task) {
+                if (!task.isSuccessful()) {
+                    Log.w("FirebaseMessaging", "Fetching FCM registration token failed", task.getException());
+                    return;
+                }
+
+                String token = task.getResult();
+
+                Snackbar snackbar = Snackbar.make(coordinatorLayout, "Token: " + token, Snackbar.LENGTH_LONG);
+                snackbar.show();
+                Log.d("FCM Token", token);
+            }
+        });
+    }
+
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                Log.i("Permiso de Notificaciones", "FCM SDK puede enviar notificaciones");
+            //} else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                // UI que le pida al usuario permiso para recibir las notificaciones
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 
     private void createNotificationChannel() {
