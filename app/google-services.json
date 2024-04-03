@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "634407587742",
+    "project_id": "trabajo-terminal-servidor",
+    "storage_bucket": "trabajo-terminal-servidor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:634407587742:android:89ecbb0bb7d14851db908f",
+        "android_client_info": {
+          "package_name": "com.escom.trabajoterminal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFr41Qjis6BeNX-BegsIVAlSE2MWw_l60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
