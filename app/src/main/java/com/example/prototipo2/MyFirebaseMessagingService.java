@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -33,6 +34,30 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
             }
         }).start();
+    }
+
+    @Override
+    public void onMessageReceived(@NonNull RemoteMessage message) {
+        super.onMessageReceived(message);
+
+        Log.d("onMessageReceived()", "From: " + message.getFrom());
+
+        if (!message.getData().isEmpty()) {
+            Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
+            /*
+            if (/* Check if data needs to be processed by long running job *//* true) {
+                // For long-running tasks (10 seconds or more) use WorkManager.
+                scheduleJob();
+            } else {
+                // Handle message within 10 seconds
+                handleNow();
+            }
+            */
+        }
+
+        if (message.getNotification() != null) {
+            Log.d("onMessageReceived()", "Message Notification Body: " + message.getNotification().getBody());
+        }
     }
 
     public void sendRegistrationToServer(String token) {
