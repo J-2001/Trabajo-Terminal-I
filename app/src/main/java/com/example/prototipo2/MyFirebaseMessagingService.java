@@ -22,16 +22,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onNewToken(token);
 
         Log.d("MyFirebaseMessagingService", "Token: " + token);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Log.d("MyFirebaseMessagingService", "Registrando el token en el servidor");
-                    sendRegistrationToServer(token);
-                    Log.d("MyFirebaseMessagingService", "Registro Correcto!");
-                } catch (Exception e) {
-                    Log.e("Error al registrar el token en el servidor", e.toString());
-                }
+        new Thread(() -> {
+            try {
+                Log.d("MyFirebaseMessagingService", "Registrando el token en el servidor");
+                sendRegistrationToServer(token);
+                Log.d("MyFirebaseMessagingService", "Registro Correcto!");
+            } catch (Exception e) {
+                Log.e("Error al registrar el token en el servidor", e.toString());
             }
         }).start();
     }
