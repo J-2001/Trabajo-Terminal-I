@@ -58,7 +58,7 @@ public class Bateria {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             return (int) db.insert(BateriaContract.BateriaEntry.TABLE_NAME, null, toContentValues());
         } catch (Exception e) {
-            Log.i("Error(01): ", "Bateria.insertIntoDB(): " + e.toString());
+            Log.i("Error(01): ", "Bateria.insertIntoDB(): " + e);
             return -1;
         }
     }

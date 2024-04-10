@@ -294,7 +294,7 @@ public class Analizador extends Service {
 
             return ccpms;
         } catch (Exception e) {
-            Log.i("Error(02): ", "Analizador.getAllCCpm(): " + e.toString());
+            Log.i("Error(02): ", "Analizador.getAllCCpm(): " + e);
 
             return null;
         }
