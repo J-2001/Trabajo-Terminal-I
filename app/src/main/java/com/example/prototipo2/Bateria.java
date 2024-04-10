@@ -16,7 +16,6 @@ import java.util.TreeMap;
 public class Bateria {
 
     private int chargeCounter;
-    private int currentNow;
     private int capacity;
     private int status;
     private float voltage;
@@ -26,7 +25,6 @@ public class Bateria {
 
     public Bateria(Context context) {
         this.chargeCounter = 0;
-        this.currentNow = 0;
         this.capacity = 0;
         this.status = 0;
         this.voltage = 0;
@@ -41,12 +39,14 @@ public class Bateria {
 
     public int updateValues() {
         this.chargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER);
-        this.currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW);
         this.capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
+        Log.i("Pruebas(03): ", "capacity: " + this.capacity);
         this.status = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
+        Log.i("Pruebas(04): ", "status: " + this.status);
         Intent intent = applicationContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         assert intent != null;
         this.voltage = (float) (intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) / 1000.0);
+        Log.i("Pruebas(05): ", "voltage: " + this.voltage);
         Date date = new Date();
         this.timeStamp = date.getTime();
 
@@ -58,7 +58,7 @@ public class Bateria {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             return (int) db.insert(BateriaContract.BateriaEntry.TABLE_NAME, null, toContentValues());
         } catch (Exception e) {
-            Log.e("Bateria.insertIntoDB()", e.toString());
+            Log.i("Error(01): ", "Bateria.insertIntoDB(): " + e.toString());
             return -1;
         }
     }
@@ -91,15 +91,12 @@ public class Bateria {
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, selection, selectionArgs, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(BateriaContract.BateriaEntry._ID + "," + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "," +
-                BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," +
-                BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," +
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," + BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
         while (cursor.moveToNext()) {
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW)));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)));
             stringBuilder.append(",");
@@ -121,15 +118,12 @@ public class Bateria {
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(BateriaContract.BateriaEntry._ID + "," + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "," +
-                BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," +
-                BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," +
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," + BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
         while (cursor.moveToNext()) {
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW)));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)));
             stringBuilder.append(",");
@@ -148,7 +142,6 @@ public class Bateria {
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
         values.put(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, getChargeCounter());
-        values.put(BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW, getCurrentNow());
         values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY, getCapacity());
         values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS, getStatus());
         values.put(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE, getVoltage());
@@ -161,9 +154,6 @@ public class Bateria {
         return chargeCounter;
     }
 
-    public int getCurrentNow() {
-        return currentNow;
-    }
 
     public int getCapacity() {
         return capacity;

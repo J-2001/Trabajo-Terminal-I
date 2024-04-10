@@ -11,7 +11,6 @@ public class BateriaDBHelper extends SQLiteOpenHelper {
     public static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + BateriaContract.BateriaEntry.TABLE_NAME + " (" +
             BateriaContract.BateriaEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
             BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + " INTEGER NOT NULL," +
-            BateriaContract.BateriaEntry.COLUMN_CURRENT_NOW + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + " INTEGER NOT NULL," +
             BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + " REAL NOT NULL," +

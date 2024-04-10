@@ -42,6 +42,7 @@ public class Analizador extends Service {
     private float desvEst;
     private float pz;
     private int tiempoIgnorar;
+    private BroadcastReceiver br;
     private Bateria bateria;
     private Escaneo escaneo;
     private Timer timer;
@@ -66,7 +67,7 @@ public class Analizador extends Service {
         bateria = new Bateria(getApplicationContext());
         escaneo = new Escaneo(getApplicationContext());
         timer = new Timer();
-        BroadcastReceiver br = new MyBroadcastReceiver();
+        br = new MyBroadcastReceiver();
         IntentFilter filter = new IntentFilter(getString(R.string.broadcast_action_1));
         this.registerReceiver(br, filter);
     }
@@ -74,10 +75,15 @@ public class Analizador extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         currentRowId = bateria.updateValues();
+        Log.i("Pruebas(07): ", "currentRowId: " + currentRowId);
         currentRowChargeCounter = bateria.getChargeCounter();
+        Log.i("Pruebas(08): ", "currentRowChargeCounter: " + currentRowChargeCounter);
         currentRowTimeStamp = bateria.getTimeStamp();
+        Log.i("Pruebas(09): ", "currentRowTimeStamp: " + currentRowTimeStamp);
         averageVoltage = bateria.getVoltage();
+        Log.i("Pruebas(10): ", "averageVoltage: " + averageVoltage);
         voltageCounter += 1;
+        Log.i("Pruebas(11): ", "voltageCounter: " + voltageCounter);
 
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);
@@ -86,58 +92,73 @@ public class Analizador extends Service {
             @Override
             public void run() {
                 if (bateria.checkValues()) {
+                    Log.i("Pruebas(14): ", "bateria.checkValues(): true\nCambio en la carga de la bateria");
                     previousRowId = currentRowId;
+                    Log.i("Pruebas(15): ", "previousRowId: " + previousRowId);
                     previousRowChargeCounter = currentRowChargeCounter;
+                    Log.i("Pruebas(16): ", "previousRowChargeCounter: " + previousRowChargeCounter);
                     previousRowTimeStamp = currentRowTimeStamp;
+                    Log.i("Pruebas(17): ", "previousRowTimeStamp: " + previousRowTimeStamp);
                     currentRowId = bateria.updateValues();
-                    Log.d("Bateria", "Nuevo registro!");
+                    Log.i("Pruebas(18): ", "currentRowId: " + currentRowId);
                     currentRowChargeCounter = bateria.getChargeCounter();
+                    Log.i("Pruebas(19): ", "currentRowChargeCounter: " + currentRowChargeCounter);
                     currentRowTimeStamp = bateria.getTimeStamp();
+                    Log.i("Pruebas(20): ", "currentRowTimeStamp: " + currentRowTimeStamp);
                     averageVoltage += bateria.getVoltage();
+                    Log.i("Pruebas(21): ", "averageVoltage: " + averageVoltage);
                     voltageCounter += 1;
+                    Log.i("Pruebas(22): ", "voltageCounter: " + voltageCounter);
                     status = bateria.getStatus();
+                    Log.i("Pruebas(23): ", "status: " + status);
 
                     int cc = Math.abs(currentRowChargeCounter - previousRowChargeCounter);
+                    Log.i("Pruebas(24): ", "cc: " + cc);
                     if (status == 3) {
+                        Log.i("Pruebas(25): ", "status: " + status + "\nEl dispositivo no se esta cargando");
                         escaneo.updateDatosConsumo(cc);
                     }
 
                     ccpm = (float) (cc * 60 / ((currentRowTimeStamp - previousRowTimeStamp) / 1000.0));
+                    Log.i("Pruebas(26): ", "ccpm: " + ccpm);
 
                     media = updateMedia();
-                    Log.d("Media = ", String.valueOf(media));
+                    Log.i("Pruebas(29): ", "media: " + media);
                     desvEst = updateDesvEst();
-                    Log.d("Desv. Est. =", String.valueOf(desvEst));
+                    Log.i("Pruebas(32): ", "desvEst: " + desvEst);
 
                     float x = 0;
 
                     if (desvEst != 0) {
                         x = (ccpm - media) / desvEst;
+                        Log.i("Pruebas(33): ", "x: " + x);
                     }
 
                     String z = df.format(x);
+                    Log.i("Pruebas(34): ", "z: " + z);
 
                     DistribucionNormalEstandar dne = new DistribucionNormalEstandar();
                     pz = dne.getP(Float.parseFloat(z));
-                    Log.d("P(Z>x)=", String.valueOf(pz));
+                    Log.i("Pruebas(35): ", "pz:\nP(Z>x): " + pz);
 
                     if (pz != -1) {
                         if (tiempoIgnorar > 0) {
-                            Log.d("Notificación no Mostrada",  "tiempoIgnorar:" + tiempoIgnorar);
+                            Log.i("Pruebas(36): ", "tiempoIgnorar: " + tiempoIgnorar);
                         } else {
                             showNotification();
                         }
                     }
 
                     insertIntoDB();
+                } else {
+                    Log.i("Pruebas(13): ", "bateria.checkValues(): false\nNo ha cambiado la carga de la bateria");
                 }
                 if (tiempoIgnorar > 0) {
                     tiempoIgnorar -= 1;
                 }
-                Log.i("Analizador", "Nada...");
             }
         };
-        Log.w("Analizador", "Analizador iniciado");
+        Log.i("Pruebas(12): ", "Analizador - TimerTask Iniciado!");
         timer.scheduleAtFixedRate(timerTask, 0, 10000);
         foregroundNotification();
 
@@ -147,7 +168,7 @@ public class Analizador extends Service {
     public void foregroundNotification() {
         Notification notification = new NotificationCompat.Builder(this, getString(R.string.channel_id_1))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Analizador")
+                .setContentTitle("Trabajo Terminal")
                 .setContentText("Analizador iniciado...")
                 .build();
         startForeground(1, notification);
@@ -161,6 +182,7 @@ public class Analizador extends Service {
         averageVoltage = averageVoltage / voltageCounter;
         escaneo.setAverageVoltage(averageVoltage);
         escaneo.insertIntoDB();
+        this.unregisterReceiver(br);
         Log.w("Analizador", "Analizador destruido");
     }
 
@@ -180,8 +202,9 @@ public class Analizador extends Service {
 
     public float updateMedia() {
         ArrayList<Float> ccpms = getAllCCpm();
+        Log.i("Pruebas(27): ", "ccpms: " + ccpms);
 
-        if (ccpms.size() == 0) {
+        if (ccpms.isEmpty()) {
             return 0;
         }
 
@@ -190,22 +213,25 @@ public class Analizador extends Service {
         for (Float ccpm : ccpms) {
             sum += ccpm;
         }
+        Log.i("Pruebas(28): ", "sum: " + sum);
 
         return sum / ccpms.size();
     }
 
     public float updateDesvEst() {
         ArrayList<Float> ccpms = getAllCCpm();
+        Log.i("Pruebas(30): ", "ccpms: " + ccpms);
 
-        if (ccpms.size() == 0) {
+        if (ccpms.isEmpty()) {
             return 0;
         }
 
         float sum = 0;
 
         for (Float ccpm : ccpms) {
-            sum += Math.pow(ccpm - media, 2);
+            sum += (float) Math.pow(ccpm - media, 2);
         }
+        Log.i("Pruebas(31): ", "sum: " + sum);
 
         return (float) Math.sqrt(sum / ccpms.size());
     }
@@ -268,7 +294,7 @@ public class Analizador extends Service {
 
             return ccpms;
         } catch (Exception e) {
-            Log.e("Analizador.getAllCCpm()", e.toString());
+            Log.i("Error(02): ", "Analizador.getAllCCpm(): " + e.toString());
 
             return null;
         }
