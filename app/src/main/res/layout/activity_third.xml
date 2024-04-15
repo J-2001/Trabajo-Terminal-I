@@ -34,9 +34,18 @@
 
             <Button
                 android:id="@+id/third_btn_01"
-                android:layout_width="match_parent"
+                android:text="@string/third_btn_01_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/third_btn_01_1"/>
+                android:maxLines="2"
+                android:textSize="17sp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="#8CA"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="38dp"
+                android:drawableBottom="@drawable/ic_eye"
+                />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -52,9 +61,18 @@
 
             <Button
                 android:id="@+id/third_btn_02"
-                android:layout_width="match_parent"
+                android:text="@string/third_btn_02_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/third_btn_02_1"/>
+                android:maxLines="2"
+                android:textSize="17sp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="#8CA"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="38dp"
+                android:drawableBottom="@drawable/ic_eye"
+                />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
