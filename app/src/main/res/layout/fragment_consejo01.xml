@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:padding="30dp"
             android:textAlignment="center"
+            android:textStyle="bold|italic"
             android:textAppearance="?attr/textAppearanceBody1"
             android:text="@string/frag_01_tv_02"/>
 

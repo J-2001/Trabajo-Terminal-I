@@ -34,7 +34,8 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:src="@drawable/frag_03_iv_01"
+            android:src="@drawable/ic_reparar"
+            android:layout_marginTop="20dp"
             android:contentDescription="@string/frag_03_iv_01"
             android:scaleType="centerInside"/>
 
@@ -42,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="30dp"
+            android:textStyle="bold|italic"
             android:text="@string/frag_03_tv_02"
             android:textAppearance="?attr/textAppearanceBody1"
             android:textAlignment="center"
