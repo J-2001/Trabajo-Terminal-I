@@ -21,7 +21,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:padding="20dp"
                 android:text="@string/fifth_tv_01"
+                android:background="@drawable/gradientetres"
                 android:gravity="center"/>
 
             <!--<FrameLayout

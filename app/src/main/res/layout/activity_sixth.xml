@@ -20,11 +20,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sixth_tv_01"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:padding="20dp"
+                />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:padding="15dp"
+                android:textAlignment="center"
                 android:text="@string/sixth_tv_02"/>
 
         </LinearLayout>

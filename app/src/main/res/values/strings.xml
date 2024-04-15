@@ -40,7 +40,17 @@
     <string name="fifth_tv_01">Prácticas Sostenibles</string>
     <string name="fifth_btn">Ver Consejo #%d</string>
     <string name="sixth_tv_01">Acuerdo de Privacidad</string>
-    <string name="sixth_tv_02">Yadda yadda yadda</string>
+    <string name="sixth_tv_02">Acuerdo de Privacidad para la Aplicación de Control de Consumo de Batería
+
+Este Acuerdo de Privacidad describe cómo se recopilan, utilizan y comparten tus datos cuando utilizas nuestra aplicación de Control de Consumo de Batería ("la Aplicación").
+
+Información Recopilada
+
+La Aplicación recopila y almacena información sobre el consumo de batería de tu dispositivo móvil. Esto puede incluir datos como el nivel de batería, la duración de la carga y descarga, el consumo de energía de las aplicaciones instaladas y otros datos relacionados con el rendimiento de la batería.
+
+Uso de la Información
+
+Utilizamos la información recopilada para mejorar la eficiencia energética de tu dispositivo móvil y para proporcionarte análisis detallados sobre el consumo de batería de tus aplicaciones. Esta información nos ayuda a identificar y solucionar problemas de consumo de energía, así como a optimizar el rendimiento de la batería.</string>
     <string name="frag_tv_0">Consejo 0%d</string>
     <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>
     <string name="frag_01_tv_02">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo.</string>
@@ -59,7 +69,6 @@
     <string name="frag_05_tv_01">Evite dejar el dispositivo enchufado</string>
     <string name="frag_05_tv_02">Cuando la carga del dispositivo móvil se encuentra cerca de su capacidad máxima, se fuerzan y degradan las celdas de iones, lo que se traduce en que su salud se resiente y la autonomía baja con el tiempo. Por esto se recomienda desconectar el dispositivo del enchufe cuando este alcance un 80% de carga. Esto entra en la "regla de oro": 20–80</string>
     <string name="frag_05_iv_01">Prohibido carga al maximo, X 100%</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
+        <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
