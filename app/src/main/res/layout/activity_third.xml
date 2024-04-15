@@ -43,7 +43,7 @@
                 android:textColor="@color/black"
                 android:backgroundTint="#8CA"
                 android:layout_marginHorizontal="60dp"
-                android:layout_marginBottom="38dp"
+                android:layout_marginBottom="5dp"
                 android:drawableBottom="@drawable/ic_eye"
                 />
 
@@ -70,7 +70,7 @@
                 android:textColor="@color/black"
                 android:backgroundTint="#8CA"
                 android:layout_marginHorizontal="60dp"
-                android:layout_marginBottom="38dp"
+                android:layout_marginBottom="5dp"
                 android:drawableBottom="@drawable/ic_eye"
                 />
 
@@ -88,9 +88,18 @@
 
             <Button
                 android:id="@+id/third_btn_03"
-                android:layout_width="match_parent"
+                android:text="@string/third_btn_03_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/third_btn_03_1"/>
+                android:maxLines="2"
+                android:textSize="17sp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="#8CA"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="5dp"
+                android:drawableBottom="@drawable/ic_eye"
+                />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -103,12 +112,21 @@
                     android:visibility="gone"/>
 
             </HorizontalScrollView>
-            
+
             <Button
                 android:id="@+id/third_btn_04"
-                android:layout_width="match_parent"
+                android:text="@string/third_btn_04_1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/third_btn_04_1"/>
+                android:maxLines="2"
+                android:textSize="17sp"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:backgroundTint="#8CA"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="5dp"
+                android:drawableBottom="@drawable/ic_eye"
+                />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
