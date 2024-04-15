@@ -48,6 +48,7 @@
             android:textAppearance="?attr/textAppearanceBody1"
             android:text="@string/frag_02_tv_02"/>
 
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="200dp"

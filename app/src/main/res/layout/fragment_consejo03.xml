@@ -49,6 +49,7 @@
             android:textAlignment="center"
             />
 
+
         <!-- Aquí se podría colocar una recomendación para
              buscar en Maps, lugares cercanos que reparan
              teléfonos -->
