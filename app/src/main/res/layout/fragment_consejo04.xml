@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Consejo04Fragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    tools:context=".Consejo04Fragment"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,15 +17,16 @@
         android:gravity="center_horizontal">
 
         <TextView
-            android:id="@+id/frag_04_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/frag_04_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/frag_04_tv_01"
+            android:textAppearance="?attr/textAppearanceHeadline6"
             android:gravity="center"/>
 
         <ImageView
@@ -33,7 +39,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/frag_04_tv_02"/>
+            android:padding="30dp"
+            android:textAppearance="?attr/textAppearanceBody1"
+            android:text="@string/frag_04_tv_02"
+            android:textAlignment="center"
+            />
+
 
         <!-- Aquí se podría colocar una recomendación para
              establecer una alarma o notificación cuando el
@@ -41,4 +52,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</androidx.cardview.widget.CardView>
