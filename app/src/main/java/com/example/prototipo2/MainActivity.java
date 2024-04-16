@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = this.findViewById(R.id.main_tv);
 
         tv.setOnClickListener(v -> {
-            Intent sixthActivity = new Intent(MainActivity.this, NotificationActivity.class); // SixthActivity.class);
+            Intent sixthActivity = new Intent(MainActivity.this, SixthActivity.class); //NotificationActivity.class);
             startActivity(sixthActivity);
         });
 

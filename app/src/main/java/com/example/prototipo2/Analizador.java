@@ -145,6 +145,7 @@ public class Analizador extends Service {
                         if (tiempoIgnorar > 0) {
                             Log.i("Pruebas(36): ", "tiempoIgnorar: " + tiempoIgnorar);
                         } else {
+                            Log.i("Pruebas(37): ", "Mostrando Notificacion...");
                             showNotification();
                         }
                     }
@@ -237,7 +238,26 @@ public class Analizador extends Service {
     }
 
     public void showNotification() {
-        Intent intent = new Intent(this, NotificationActivity.class);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle("Pruebas Analizador")
+                .setContentText("P(Z>x)" + pz)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Log.i("Pruebas(38): ", "No se tiene permiso para mostrar notificaciones!");
+            return;
+        }
+        notificationManager.notify(2, builder.build());
+        Log.i("Pruebas(39): ", "Notificacion mostrada!");
+        /*Intent intent = new Intent(this, NotificationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(getString(R.string.extra_0), 1);
         intent.putExtra(getString(R.string.extra_1_1), ccpm);
@@ -256,19 +276,7 @@ public class Analizador extends Service {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .addAction(R.drawable.ic_launcher_foreground, "Omitir (1 min)", ignorarPendingIntent)
-                .setAutoCancel(true);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        notificationManager.notify(2, builder.build());
+                .setAutoCancel(true);*/
     }
 
     public void insertIntoDB() {
