@@ -114,6 +114,7 @@ public class Analizador extends Service {
 
                     int cc = Math.abs(currentRowChargeCounter - previousRowChargeCounter);
                     Log.i("Pruebas(24): ", "cc: " + cc);
+
                     if (status == 3) {
                         Log.i("Pruebas(25): ", "status: " + status + "\nEl dispositivo no se esta cargando");
                         escaneo.updateDatosConsumo(cc);
@@ -130,7 +131,14 @@ public class Analizador extends Service {
                     float x = 0;
 
                     if (desvEst != 0) {
-                        x = (ccpm - media) / desvEst;
+                        // Dado que buscamos evaluar cuando la carga de la bateria se consume excesivamente se deben de evaluar dos posibles casos de uso:
+                        if (status == 3) {
+                            // Si el dispositivo NO se esta cargando solo nos interesan los CCpm que superan la media, o sea, la bateria esta disminuyendo a grandes intervalos
+                            x = (ccpm - media) / desvEst;
+                        } else {
+                            // Si el dispositivo SI se esta cargando solo nos interesan los CCpm por debajo de la media, o sea, la bateria se esta cargando en intervalos muy bajos
+                            x = (media - ccpm) / desvEst;
+                        }
                         Log.i("Pruebas(33): ", "x: " + x);
                     }
 
@@ -238,11 +246,26 @@ public class Analizador extends Service {
     }
 
     public void showNotification() {
+        Intent intent = new Intent(this, NotificationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("desc", "Se detecto un cambio en la carga de la bateria...");
+        intent.putExtra("stat", String.valueOf(status));
+        intent.putExtra("ccpm", String.valueOf(ccpm));
+        intent.putExtra("media", String.valueOf(media));
+        intent.putExtra("desvest", String.valueOf(desvEst));
+        intent.putExtra("pz", String.valueOf(pz));
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Intent ignorar; // Action Button
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Pruebas Analizador")
-                .setContentText("P(Z>x)" + pz)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+                .setContentText("Probando...") //P(Z>x)" + pz)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true);
+
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -257,18 +280,9 @@ public class Analizador extends Service {
         }
         notificationManager.notify(2, builder.build());
         Log.i("Pruebas(39): ", "Notificacion mostrada!");
-        /*Intent intent = new Intent(this, NotificationActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra(getString(R.string.extra_0), 1);
-        intent.putExtra(getString(R.string.extra_1_1), ccpm);
-        intent.putExtra(getString(R.string.extra_1_2), media);
-        intent.putExtra(getString(R.string.extra_1_3), desvEst);
-        intent.putExtra(getString(R.string.extra_1_4), pz);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        Intent ignorar = new Intent(this, MyBroadcastReceiver.class);
+        /*Intent ignorar = new Intent(this, MyBroadcastReceiver.class);
         ignorar.setAction(getString(R.string.broadcast_action_1));
         ignorar.putExtra("MIN", 1);
-        PendingIntent ignorarPendingIntent = PendingIntent.getBroadcast(this, 0, ignorar, PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("P(Z>x)")

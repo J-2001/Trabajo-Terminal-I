@@ -9,6 +9,7 @@
 
     <queries>
         <package android:name="com.netflix.mediaclient" />
+        <package android:name="com.crunchyroll.crunchyroid" />
     </queries>
 
     <application
@@ -23,6 +24,9 @@
         tools:targetApi="31">
         <activity
             android:name=".NotificationActivity"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
             android:theme="@style/Theme.Transparent"
             android:exported="false" />
         <activity
