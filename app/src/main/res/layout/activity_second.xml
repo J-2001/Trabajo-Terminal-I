@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="30dp">
+        android:fadingEdgeLength="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,14 +58,14 @@
                 android:background="@null"/>
 
             <ImageButton
-                android:id="@+id/second_ibtn_hbomax"
+                android:id="@+id/second_ibtn_starplus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hbomax"
+                android:src="@drawable/starplus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
                 android:padding="5dp"
-                android:contentDescription="@string/second_ibtn_hbomax"
+                android:contentDescription="@string/second_ibtn_starplus"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
@@ -84,16 +84,16 @@
                 android:background="@null"/>
 
             <ImageButton
-                android:id="@+id/second_ibtn_starplus"
+                android:id="@+id/second_ibtn_max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/starplus"
+                android:src="@drawable/max"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
                 android:padding="5dp"
-                android:contentDescription="@string/second_ibtn_starplus"
+                android:contentDescription="@string/second_ibtn_max"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
             <ImageButton
@@ -106,15 +106,21 @@
                 android:padding="5dp"
                 android:contentDescription="@string/second_ibtn_crunchyroll"
                 android:layout_marginHorizontal="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
-            <Button
-                android:id="@+id/second_btn_test"
+            <ImageButton
+                android:id="@+id/second_ibtn_vix"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/second_btn_test"
-                android:visibility="gone"/>
+                android:src="@drawable/vix"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:padding="5dp"
+                android:contentDescription="@string/second_ibtn_vix"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="15dp"
+                android:background="@null"/>
 
         </LinearLayout>
 
