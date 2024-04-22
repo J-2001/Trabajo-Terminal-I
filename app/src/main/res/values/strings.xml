@@ -34,8 +34,8 @@
     <string name="third_btn_03_1">Ver Escaneos</string>
     <string name="third_btn_04_0">Ocultar Datos del Analizador</string>
     <string name="third_btn_04_1">Ver Datos del Analizador</string>
-    <string name="fourth_tv_00">Huella de carbono generada</string>
-    <string name="fourth_tv_01">%f gCO2e</string>
+    <string name="fourth_tv_00">Su\nHuella de Carbono\nGenerada es de:</string>
+    <string name="fourth_tv_01">%.2f gCO2e</string>
     <string name="fourth_btn_01_0">Ocultar Huella por Escaneo</string>
     <string name="fourth_btn_01_1">Ver Huella por Escaneo</string>
     <string name="fifth_tv_01">Prácticas Sostenibles</string>

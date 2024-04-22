@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fourthActivity"
@@ -21,12 +22,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/fourth_tv_00"
-                android:textSize="20sp"
-                android:padding="25dp"
+                android:textSize="30sp"
+                android:padding="0dp"
                 android:textStyle="bold"
                 android:gravity="center"
-                android:layout_marginTop="60dp"
-                android:layout_marginBottom="60dp"/>
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="0dp"/>
 
             <TextView
                 android:id="@+id/fourth_tv_01"
@@ -37,20 +38,19 @@
                 android:textStyle="bold"
                 android:gravity="center"/>
 
-             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fourth_btn_01"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:maxLines="2"
                 android:text="@string/fourth_btn_01_1"
                 android:backgroundTint="#8CAFF3"
                 android:textSize="17sp"
-                 android:layout_marginTop="20dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
-                 app:icon="@drawable/ic_eye"
+                app:icon="@drawable/ic_eye"
                 android:layout_marginHorizontal="60dp"
-                android:layout_marginBottom="38dp"
-                />
+                android:layout_marginBottom="38dp"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"

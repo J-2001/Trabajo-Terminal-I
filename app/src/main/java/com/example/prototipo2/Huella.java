@@ -20,7 +20,7 @@ public class Huella {
     }
 
     public void calcularHuellaCarbono(Context context) {
-        float n = datosConsumo * 1000000 * voltage; // Wh
+        float n = (float) (datosConsumo / 1000000.0 * voltage); // Wh
         huellaCarbono = n * factorEmision; // gCO2e
         insertIntoDB(context);
     }
@@ -63,6 +63,8 @@ public class Huella {
             float totalHuellaCarbono = 0;
             while (cursor.moveToNext()) {
                 totalHuellaCarbono += cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO));
+                Log.i("Pruebas(01): ", "cursor.getFloat(): " + cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO)));
+                Log.i("Pruebas(02): ", "totalHuellaCarbono: " + totalHuellaCarbono);
             }
             cursor.close();
 
