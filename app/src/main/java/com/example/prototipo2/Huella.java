@@ -63,8 +63,6 @@ public class Huella {
             float totalHuellaCarbono = 0;
             while (cursor.moveToNext()) {
                 totalHuellaCarbono += cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO));
-                Log.i("Pruebas(01): ", "cursor.getFloat(): " + cursor.getFloat(cursor.getColumnIndexOrThrow(HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO)));
-                Log.i("Pruebas(02): ", "totalHuellaCarbono: " + totalHuellaCarbono);
             }
             cursor.close();
 
