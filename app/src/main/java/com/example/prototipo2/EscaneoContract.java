@@ -13,6 +13,7 @@ public class EscaneoContract {
         public static final String COLUMN_DURACION_ESCANEO = "DURACION_ESCANEO";
         public static final String COLUMN_DATOS_CONSUMO = "DATOS_CONSUMO";
         public static final String COLUMN_AVERAGE_VOLTAGE = "AVERAGE_VOLTAGE";
+        public static final String COLUMN_VIDEO_STREAMING = "VIDEO_STREAMING";
     }
 
 }

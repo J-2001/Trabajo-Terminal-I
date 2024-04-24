@@ -42,6 +42,7 @@ public class Analizador extends Service {
     private float desvEst;
     private float pz;
     private int tiempoIgnorar;
+    private String videoStreaming;
     private BroadcastReceiver br;
     private Bateria bateria;
     private Escaneo escaneo;
@@ -84,6 +85,9 @@ public class Analizador extends Service {
         Log.i("Pruebas(10): ", "averageVoltage: " + averageVoltage);
         voltageCounter += 1;
         Log.i("Pruebas(11): ", "voltageCounter: " + voltageCounter);
+
+        videoStreaming = intent.getStringExtra("videostreaming");
+        Log.i("Pruebas(40): ", "Video Streaming: " + videoStreaming);
 
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);

@@ -167,7 +167,7 @@
                 android:backgroundTint="#8CAFF3"
                 app:icon="@drawable/ic_eye"
                 android:layout_marginHorizontal="45dp"
-                android:layout_marginBottom="2dp"/>
+                android:layout_marginBottom="30dp"/>
 
             <TableLayout
                 android:id="@+id/fourth_tablay_01"
