@@ -15,6 +15,7 @@ public class Escaneo {
     private long duracion;
     private int datosConsumo;
     private float averageVoltage;
+    private String videoStreaming;
     private final Context applicationContext;
 
     public Escaneo(Context context) {
@@ -24,6 +25,8 @@ public class Escaneo {
         this.endTimeStamp = 0;
         this.duracion = 0;
         this.datosConsumo = 0;
+        this.averageVoltage = 0;
+        this.videoStreaming = "";
         this.applicationContext = context;
     }
 
@@ -39,6 +42,19 @@ public class Escaneo {
         } catch (Exception e) {
             Log.e("Escaneo.insertIntoDB()", e.toString());
         }
+    }
+
+    public String getScanVideoStreaming(String scanID) {
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING};
+        String selection = EscaneoContract.EscaneoEntry._ID + " = ?";
+        String[] selectionArgs = {scanID};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        cursor.moveToNext();
+        String vs = cursor.getString(cursor.getColumnIndexOrThrow(columns[0]));
+        cursor.close();
+        return vs;
     }
 
     public long[] getScanTimeStamps(String scanID) {
@@ -71,23 +87,40 @@ public class Escaneo {
     public String getAllScans() {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, null, null, null, null, null);
+        String[] columns = {EscaneoContract.EscaneoEntry._ID, EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID,
+                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO,
+                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO, EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE,
+                EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(EscaneoContract.EscaneoEntry._ID + "," + EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID + "," +
-                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID + "," + EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO + "," +
-                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO + "," + EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE + ";");
+        stringBuilder.append(columns[0]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[1]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[2]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[3]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[4]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[5]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[6]);
+        stringBuilder.append(";");
         while (cursor.moveToNext()) {
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry._ID)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[4])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE)));
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
+            stringBuilder.append(",");
+            stringBuilder.append(cursor.getString(cursor.getColumnIndexOrThrow(columns[6])));
             stringBuilder.append(";");
         }
         cursor.close();
@@ -106,6 +139,7 @@ public class Escaneo {
         values.put(EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO, getDuracion());
         values.put(EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO, getDatosConsumo());
         values.put(EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE, getAverageVoltage());
+        values.put(EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING, getVideoStreaming());
 
         return values;
     }
@@ -139,6 +173,10 @@ public class Escaneo {
         return averageVoltage;
     }
 
+    public String getVideoStreaming() {
+        return videoStreaming;
+    }
+
     public void setStartId(int startId) {
         this.startId = startId;
     }
@@ -157,5 +195,9 @@ public class Escaneo {
 
     public void setAverageVoltage(float averageVoltage) {
         this.averageVoltage = averageVoltage;
+    }
+
+    public void setVideoStreaming(String videoStreaming) {
+        this.videoStreaming = videoStreaming;
     }
 }

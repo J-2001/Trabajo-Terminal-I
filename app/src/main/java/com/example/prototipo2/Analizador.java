@@ -86,11 +86,12 @@ public class Analizador extends Service {
         voltageCounter += 1;
         Log.i("Pruebas(11): ", "voltageCounter: " + voltageCounter);
 
-        videoStreaming = intent.getStringExtra("videostreaming");
-        Log.i("Pruebas(40): ", "Video Streaming: " + videoStreaming);
-
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);
+
+        videoStreaming = intent.getStringExtra("videostreaming");
+        escaneo.setVideoStreaming(videoStreaming);
+        Log.i("Pruebas(40): ", "Video Streaming: " + videoStreaming);
 
         timerTask = new TimerTask() {
             @Override

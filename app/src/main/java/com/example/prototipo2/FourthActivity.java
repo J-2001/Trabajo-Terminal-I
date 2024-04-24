@@ -18,7 +18,7 @@ public class FourthActivity extends AppCompatActivity {
 
     private boolean btn01_status = false;
     private static final int textSize = 17;
-    private static final int horizontalMargin = 35;
+    private static final int horizontalMargin = 36;
     private static final int verticalMargin = 5;
 
     @Override
@@ -99,23 +99,35 @@ public class FourthActivity extends AppCompatActivity {
                 trlp.setMargins(dpToPx(horizontalMargin), 0, dpToPx(horizontalMargin), 0);
                 tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(trlp);
                 tabLay01_Rows_TextViews.get(x).get(1).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(1).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(x).get(1).setTypeface(tabLay01_Rows_TextViews.get(x).get(1).getTypeface(), Typeface.BOLD);
                 tabLay01_Rows_TextViews.get(x).get(1).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
 
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(2).setText(getString(R.string.fourth_tl_tv_03));
-                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                TableRow.LayoutParams trlp1 = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+                trlp1.setMargins(0, 0, dpToPx(horizontalMargin), 0);
+                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(trlp1);
                 tabLay01_Rows_TextViews.get(x).get(2).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(2).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(x).get(2).setTypeface(tabLay01_Rows_TextViews.get(x).get(2).getTypeface(), Typeface.BOLD);
                 tabLay01_Rows_TextViews.get(x).get(2).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
+
+                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(x).get(3).setText(getString(R.string.fourth_tl_tv_04));
+                tabLay01_Rows_TextViews.get(x).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(x).get(3).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(x).get(3).setTypeface(tabLay01_Rows_TextViews.get(x).get(3).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(x).get(3).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(3));
                 first = false;
             } else {
                 String[] r = row.split(",");
                 Escaneo escaneo = new Escaneo(getApplicationContext());
                 long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
                 DateHandler dh = new DateHandler();
+                String videoStreaming = escaneo.getScanVideoStreaming(r[1]);
+
                 tabLay01_Rows_TextViews.get(x).get(0).setText(dh.timeStampToFormattedString(timeStamps[0]));
                 tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(x).get(0).setTextSize(textSize);
@@ -130,11 +142,18 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
 
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(2).setText(r[2]);
+                tabLay01_Rows_TextViews.get(x).get(2).setText(videoStreaming);
                 tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(x).get(2).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(x).get(2).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
+
+                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(x).get(3).setText(r[2]);
+                tabLay01_Rows_TextViews.get(x).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(x).get(3).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(x).get(3).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(3));
             }
 
             tabLay01.addView(tabLay01_Rows.get(x));
