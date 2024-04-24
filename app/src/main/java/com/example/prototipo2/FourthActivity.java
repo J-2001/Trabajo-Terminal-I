@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -14,7 +17,7 @@ import java.util.ArrayList;
 
 public class FourthActivity extends AppCompatActivity {
 
-    private boolean btn01_status;
+    private boolean btn01_status = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,43 +44,90 @@ public class FourthActivity extends AppCompatActivity {
         TextView tv05 = this.findViewById(R.id.fourth_tv_15);
         tv05.setText(getString(R.string.fourth_tv_15, equivalencias[3]));
 
+        ImageView iv01 = this.findViewById(R.id.fourth_iv_01);
+        tv02.measure(0, 0);
+        iv01.getLayoutParams().height = tv02.getMeasuredHeight();
+        iv01.requestLayout();
+
+
+        ImageView iv02 = this.findViewById(R.id.fourth_iv_02);
+        tv03.measure(0, 0);
+        iv02.getLayoutParams().height = tv03.getMeasuredHeight();
+        iv02.requestLayout();
+
+        ImageView iv03 = this.findViewById(R.id.fourth_iv_03);
+        tv04.measure(0, 0);
+        iv03.getLayoutParams().height = tv04.getMeasuredHeight();
+        iv03.requestLayout();
+
+        ImageView iv04 = this.findViewById(R.id.fourth_iv_04);
+        tv05.measure(0, 0);
+        iv04.getLayoutParams().height = tv05.getMeasuredHeight();
+        iv04.requestLayout();
+
+        String rows = huella.getAllRows(getApplicationContext());
+
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
-        int x = 0;
         boolean first = true;
-        for (String row : huella.getAllRows(getApplicationContext()).split(";")) {
+        int x = 0;
+
+        for (String row : rows.split(";")) {
             tabLay01_Rows.add(new TableRow(this));
             tabLay01_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+
             tabLay01_Rows_TextViews.add(new ArrayList<>());
-            int y = 0;
-            for (String r : row.split(",")) {
+
+            tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+
+            if (first) {
+                tabLay01_Rows_TextViews.get(x).get(0).setText("Inicio");
+                tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(x).get(0).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(0));
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(y).setText(r);
-                tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                if (first) {
-                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                }
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(y));
-                y += 1;
+                tabLay01_Rows_TextViews.get(x).get(1).setText("Fin");
+                tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(x).get(1).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
+                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(x).get(2).setText("Huella de Carbono");
+                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(x).get(2).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
+                first = false;
+            } else {
+                String[] r = row.split(",");
+                Escaneo escaneo = new Escaneo(getApplicationContext());
+                long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
+                tabLay01_Rows_TextViews.get(x).get(0).setText(String.valueOf(timeStamps[0]));
+                tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(0));
+                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(x).get(1).setText(String.valueOf(timeStamps[1]));
+                tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
+                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(x).get(2).setText(r[2]);
+                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
             }
-            first = false;
+
             tabLay01.addView(tabLay01_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
             x += 1;
         }
 
-        // Buttons
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
-        btn01_status = false;
 
         btn01.setOnClickListener(v -> {
             if (btn01_status) {
                 tabLay01.setVisibility(View.GONE);
-                btn01.setText(getString(R.string.fourth_btn_01_1));
+                btn01.setText(getString(R.string.fourth_btn_01_0));
                 btn01_status = false;
             } else {
                 tabLay01.setVisibility(View.VISIBLE);
-                btn01.setText(getString(R.string.fourth_btn_01_0));
+                btn01.setText(getString(R.string.fourth_btn_01_1));
                 btn01_status = true;
             }
         });

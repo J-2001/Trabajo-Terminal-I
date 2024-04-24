@@ -53,7 +53,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="25dp">
+                android:layout_marginBottom="30dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/fourth_iv_01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gasoline"
+                    android:contentDescription="@string/fourth_iv_01"
+                    android:adjustViewBounds="true"
+                    android:layout_marginEnd="25dp"/>
 
                 <TextView
                     android:id="@+id/fourth_tv_12"
@@ -70,7 +80,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="25dp">
+                android:layout_marginBottom="30dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/fourth_iv_02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/vehicle"
+                    android:contentDescription="@string/fourth_iv_02"
+                    android:adjustViewBounds="true"
+                    android:layout_marginEnd="25dp"/>
 
                 <TextView
                     android:id="@+id/fourth_tv_13"
@@ -87,7 +107,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="25dp">
+                android:layout_marginBottom="30dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/fourth_iv_03"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/gas"
+                    android:contentDescription="@string/fourth_iv_03"
+                    android:adjustViewBounds="true"
+                    android:layout_marginEnd="25dp"/>
 
                 <TextView
                     android:id="@+id/fourth_tv_14"
@@ -104,7 +134,17 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="0dp">
+                android:layout_marginBottom="45dp"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/fourth_iv_04"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/coal"
+                    android:contentDescription="@string/fourth_iv_04"
+                    android:adjustViewBounds="true"
+                    android:layout_marginEnd="25dp"/>
 
                 <TextView
                     android:id="@+id/fourth_tv_15"
@@ -118,29 +158,22 @@
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fourth_btn_01"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:maxLines="2"
-                android:text="@string/fourth_btn_01_1"
-                android:backgroundTint="#8CAFF3"
-                android:textSize="17sp"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                app:icon="@drawable/ic_eye"
-                android:layout_marginHorizontal="60dp"
-                android:layout_marginBottom="38dp"/>
-
-            <HorizontalScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/fourth_btn_01_0"
+                android:textSize="18sp"
+                android:maxLines="3"
+                android:backgroundTint="#8CAFF3"
+                app:icon="@drawable/ic_eye"
+                android:layout_marginHorizontal="45dp"
+                android:layout_marginBottom="2dp"/>
 
-                <TableLayout
-                    android:id="@+id/fourth_tablay_01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-            </HorizontalScrollView>
+            <TableLayout
+                android:id="@+id/fourth_tablay_01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

@@ -63,6 +63,19 @@ public class Bateria {
         }
     }
 
+    public long getTimeStamp(int id) {
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String selection = BateriaContract.BateriaEntry._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        cursor.moveToNext();
+        long ts = cursor.getLong(cursor.getColumnIndexOrThrow(columns[0]));
+        cursor.close();
+        return ts;
+    }
+
     public Map<Long, Integer> getLastScanData() {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

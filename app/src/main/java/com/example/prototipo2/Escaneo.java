@@ -41,6 +41,21 @@ public class Escaneo {
         }
     }
 
+    public long[] getScanTimeStamps(String scanID) {
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID};
+        String selection = EscaneoContract.EscaneoEntry._ID + " = ?";
+        String[] selectionArgs = {scanID};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        cursor.moveToNext();
+        int[] ids = {cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[1]))};
+        cursor.close();
+        Bateria bateria = new Bateria(applicationContext);
+
+        return new long[]{bateria.getTimeStamp(ids[0]), bateria.getTimeStamp(ids[1])};
+    }
+
     public int[] getLastScanIDs() {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
