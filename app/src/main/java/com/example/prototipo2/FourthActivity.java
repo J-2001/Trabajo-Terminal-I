@@ -12,14 +12,20 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+
 import java.util.ArrayList;
 
 public class FourthActivity extends AppCompatActivity {
 
     private boolean btn01_status = false;
-    private static final int textSize = 17;
-    private static final int horizontalMargin = 36;
-    private static final int verticalMargin = 5;
+    private static final int textSize = 11;
+    private static final int horizontalMargin1 = 1;
+    private static final int horizontalMargin2 = 1;
+    private static final int verticalMargin = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +73,7 @@ public class FourthActivity extends AppCompatActivity {
         iv04.getLayoutParams().height = tv05.getMeasuredHeight();
         iv04.requestLayout();
 
-        String rows = huella.getAllRows(getApplicationContext());
+        String[] rows = huella.getAllRows(getApplicationContext()).split(";");
 
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
@@ -75,7 +81,7 @@ public class FourthActivity extends AppCompatActivity {
         boolean first = true;
         int x = 0;
 
-        for (String row : rows.split(";")) {
+        for (String row : rows) {
             tabLay01_Rows.add(new TableRow(this));
             TableLayout.LayoutParams tllp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
             tllp.setMargins(0, 0, 0, dpToPx(verticalMargin));
@@ -96,7 +102,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(1).setText(getString(R.string.fourth_tl_tv_02));
                 TableRow.LayoutParams trlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-                trlp.setMargins(dpToPx(horizontalMargin), 0, dpToPx(horizontalMargin), 0);
+                trlp.setMargins(dpToPx(horizontalMargin1), 0, 0, 0);
                 tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(trlp);
                 tabLay01_Rows_TextViews.get(x).get(1).setTextSize(textSize+1);
                 tabLay01_Rows_TextViews.get(x).get(1).setTypeface(tabLay01_Rows_TextViews.get(x).get(1).getTypeface(), Typeface.BOLD);
@@ -106,7 +112,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(x).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(x).get(2).setText(getString(R.string.fourth_tl_tv_03));
                 TableRow.LayoutParams trlp1 = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-                trlp1.setMargins(0, 0, dpToPx(horizontalMargin), 0);
+                trlp1.setMargins(dpToPx(horizontalMargin2), 0, dpToPx(horizontalMargin2), 0);
                 tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(trlp1);
                 tabLay01_Rows_TextViews.get(x).get(2).setTextSize(textSize+1);
                 tabLay01_Rows_TextViews.get(x).get(2).setTypeface(tabLay01_Rows_TextViews.get(x).get(2).getTypeface(), Typeface.BOLD);
@@ -162,6 +168,10 @@ public class FourthActivity extends AppCompatActivity {
 
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
 
+        if (rows.length < 2) {
+            btn01.setVisibility(View.GONE);
+        }
+
         btn01.setOnClickListener(v -> {
             if (btn01_status) {
                 tabLay01.setVisibility(View.GONE);
@@ -173,6 +183,16 @@ public class FourthActivity extends AppCompatActivity {
                 btn01_status = true;
             }
         });
+
+        PieChart chart = this.findViewById(R.id.fourth_chart_01);
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(1, "Uno"));
+        entries.add(new PieEntry(2, "Dos"));
+        entries.add(new PieEntry(3, "Tres"));
+        PieDataSet dataSet = new PieDataSet(entries, "Label");
+        PieData data = new PieData(dataSet);
+        chart.setData(data);
+        chart.invalidate();
     }
 
     public float[] getEquivalencias(float gco2e) {
