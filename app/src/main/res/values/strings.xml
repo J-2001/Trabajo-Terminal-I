@@ -52,7 +52,8 @@
     <string name="fourth_tl_tv_03">Aplicación</string>
     <string name="fourth_tl_tv_04">Huella de Carbono</string>
     <string name="fifth_tv_01">Prácticas Sostenibles</string>
-    <string name="fifth_btn">Ver Consejo #%d</string>
+    <string name="fifth_btn_prv">Consejo\nAnterior</string>
+    <string name="fifth_btn_nxt">Siguiente\nConsejo</string>
     <string name="sixth_tv_01">Acuerdo de Privacidad</string>
     <string name="sixth_tv_02">Acuerdo de Privacidad para la Aplicación de Control de Consumo de Batería
 

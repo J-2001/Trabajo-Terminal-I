@@ -18,6 +18,10 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class FourthActivity extends AppCompatActivity {
 
@@ -81,6 +85,8 @@ public class FourthActivity extends AppCompatActivity {
         boolean first = true;
         int x = 0;
 
+        Map<String, Float>  hashMap = new HashMap<>();
+
         for (String row : rows) {
             tabLay01_Rows.add(new TableRow(this));
             TableLayout.LayoutParams tllp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
@@ -133,6 +139,14 @@ public class FourthActivity extends AppCompatActivity {
                 long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
                 DateHandler dh = new DateHandler();
                 String videoStreaming = escaneo.getScanVideoStreaming(r[1]);
+                float footprint = Float.parseFloat(r[2]);
+                if (footprint > 0) {
+                    if (hashMap.containsKey(videoStreaming)) {
+                        hashMap.put(videoStreaming, hashMap.get(videoStreaming) + footprint);
+                    } else {
+                        hashMap.put(videoStreaming, footprint);
+                    }
+                }
 
                 tabLay01_Rows_TextViews.get(x).get(0).setText(dh.timeStampToFormattedString(timeStamps[0]));
                 tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -185,11 +199,27 @@ public class FourthActivity extends AppCompatActivity {
         });
 
         PieChart chart = this.findViewById(R.id.fourth_chart_01);
+        chart.getDescription().setEnabled(false);
+
+        Map<Float, String> treeMap = new TreeMap<>(Collections.reverseOrder());
+        for (String s : hashMap.keySet()) {
+            float v = hashMap.get(s);
+            if (treeMap.containsKey(v)) {
+                treeMap.put(v + 0.000001f, s);
+            } else {
+                treeMap.put(v, s);
+            }
+        }
+
         ArrayList<PieEntry> entries = new ArrayList<>();
         entries.add(new PieEntry(1, "Uno"));
         entries.add(new PieEntry(2, "Dos"));
         entries.add(new PieEntry(3, "Tres"));
-        PieDataSet dataSet = new PieDataSet(entries, "Label");
+        for (float f : treeMap.keySet()) {
+            entries.add(new PieEntry(f, treeMap.get(f)));
+        }
+
+        PieDataSet dataSet = new PieDataSet(entries, "MyLabel");
         PieData data = new PieData(dataSet);
         chart.setData(data);
         chart.invalidate();

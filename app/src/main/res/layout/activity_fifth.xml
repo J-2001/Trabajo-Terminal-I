@@ -6,36 +6,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FifthActivity"
-    android:background="@drawable/gradientedos"
-    >
+    android:background="@drawable/gradientedos">
 
-    <ScrollView
+    <LinearLayout
+        android:id="@+id/fifth_linlay"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
-        <LinearLayout
-            android:id="@+id/fifth_linlay"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:text="@string/fifth_tv_01"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:gravity="center"
+            android:padding="30dp"
+            android:background="@drawable/gradientetres"/>
 
-            <TextView
+        <FrameLayout
+            android:id="@+id/fifth_frmlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginHorizontal="20dp">
+
+            <Button
+                android:id="@+id/fifth_btn_prv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:padding="20dp"
-                android:text="@string/fifth_tv_01"
-                android:background="@drawable/gradientetres"
-                android:gravity="center"/>
+                android:layout_weight="1"
+                android:text="@string/fifth_btn_prv"
+                android:textSize="18sp"
+                android:layout_marginEnd="10dp"/>
 
-            <!--<FrameLayout
-                android:id="@+id/fifth_frmlay"
+            <Button
+                android:id="@+id/fifth_btn_nxt"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>-->
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/fifth_btn_nxt"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"/>
 
         </LinearLayout>
 
-    </ScrollView>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -19,6 +19,8 @@ import java.util.Random;
 public class FifthActivity extends AppCompatActivity {
 
     private static final int limit = 5;
+    private List<Integer> order = new ArrayList<>();
+    private int pointer = 0;
     private LinearLayout layout;
     private ArrayList<FrameLayout> frameLayouts;
     private Button button;
@@ -51,7 +53,7 @@ public class FifthActivity extends AppCompatActivity {
             number = newNumber();
             if (number != -1) {
                 button = new Button(layout.getContext());
-                button.setText(getString(R.string.fifth_btn, number));
+                button.setText("");
                 button.setOnClickListener(listener);
                 layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             }
@@ -63,11 +65,19 @@ public class FifthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fifth);
 
+        while (order.size() < limit) {
+            Random random = new Random();
+            int r = random.nextInt(limit);
+            if (!order.contains(r)) {
+                order.add(r);
+            }
+        }
+
         layout = this.findViewById(R.id.fifth_linlay);
         displayed = new ArrayList<>();
         number = newNumber();
         button = new Button(this);
-        button.setText(getString(R.string.fifth_btn, number));
+        button.setText("");
         button.setOnClickListener(listener);
         layout.addView(button, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
 
