@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import java.util.Arrays;
-
 public class Huella {
 
     private static final float factorEmision = 0.435F; // gCO2e/Wh
