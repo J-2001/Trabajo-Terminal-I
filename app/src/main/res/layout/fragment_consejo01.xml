@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    tools:context=".Consejo01Fragment"
-    >
+    tools:context=".Consejo01Fragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
@@ -20,19 +16,20 @@
             android:id="@+id/frag_01_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/frag_tv_0"
+            android:textSize="30sp"
+            android:textStyle="bold"
             android:gravity="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/frag_01_tv_01"
-            android:gravity="center"
+            android:textSize="25sp"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            android:maxLines="2"
-            android:padding="20dp"
-            />
-
-
+            android:gravity="center"
+            android:layout_marginVertical="25dp"
+            android:layout_marginHorizontal="30dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -59,4 +56,4 @@
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</FrameLayout>

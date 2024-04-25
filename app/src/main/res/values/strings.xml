@@ -84,6 +84,6 @@ Utilizamos la información recopilada para mejorar la eficiencia energética de 
     <string name="frag_05_tv_01">Evite dejar el dispositivo enchufado</string>
     <string name="frag_05_tv_02">Cuando la carga del dispositivo móvil se encuentra cerca de su capacidad máxima, se fuerzan y degradan las celdas de iones, lo que se traduce en que su salud se resiente y la autonomía baja con el tiempo. Por esto se recomienda desconectar el dispositivo del enchufe cuando este alcance un 80% de carga. Esto entra en la "regla de oro": 20–80</string>
     <string name="frag_05_iv_01">Prohibido carga al maximo, X 100%</string>
-        <!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
