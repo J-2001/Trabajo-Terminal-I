@@ -15,6 +15,7 @@ public class AnalizadorContract {
         public static final String COLUMN_MEDIA = "MEDIA";
         public static final String COLUMN_DESV_EST = "DESVIACION_ESTANDAR";
         public static final String COLUMN_PZ = "PZ";
+        public static final String COLUMN_EXCESSIVE = "EXCESSIVE";
     }
 
 }

@@ -87,6 +87,36 @@ public class Escaneo {
         return ids;
     }
 
+    public Map<Long, Integer> getScanData(int id){
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID};
+        String selection = EscaneoContract.EscaneoEntry._ID + " = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        cursor.moveToNext();
+        int[] ids = {cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[1]))};
+        cursor.close();
+        Bateria bateria = new Bateria(applicationContext);
+
+        return bateria.getScanData(ids[0], ids[1]);
+    }
+
+    public int[] getScansIds(){
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {EscaneoContract.EscaneoEntry._ID};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, null, null, null, null, null);
+        int[]ids = new int[cursor.getCount()];
+        int i = 0;
+        while (cursor.moveToNext()) {
+            ids[i] = cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]));
+            i += 1;
+        }
+        cursor.close();
+        return ids;
+    }
+
     public Map<Long, Integer> getScansDataFilteredByVideoStreaming(String vs){
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

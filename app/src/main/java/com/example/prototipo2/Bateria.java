@@ -141,6 +141,50 @@ public class Bateria {
         return stringBuilder.toString();
     }
 
+    public Map<Long, Integer> getRowsDataFilteredByStatus(int stat) {
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String selection = BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + " = ?";
+        String[] selectionArgs = {String.valueOf(stat)};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        Map<Long, Integer> filteredData = new LinkedHashMap<>();
+        while (cursor.moveToNext()) {
+            filteredData.put(cursor.getLong(cursor.getColumnIndexOrThrow(columns[1])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+        }
+        cursor.close();
+        return filteredData;
+    }
+
+    public Map<Long, Integer> getRowsDataFilteredByConsumption(int excessive) {
+        AnalizadorDBHelper analizadorDBHelper = new AnalizadorDBHelper(applicationContext);
+        SQLiteDatabase database = analizadorDBHelper.getReadableDatabase();
+        String[] columnsA = {AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID};
+        String selectionA = AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE + " = ?";
+        String[] selectionArgsA = {String.valueOf(excessive)};
+        Cursor cursorA = database.query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columnsA, selectionA, selectionArgsA, null, null, null);
+        int[] ids = new int[cursorA.getCount()];
+        int i = 0;
+        while (cursorA.moveToNext()) {
+            ids[i] = cursorA.getInt(cursorA.getColumnIndexOrThrow(columnsA[0]));
+            i += 1;
+        }
+        cursorA.close();
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String selection = BateriaContract.BateriaEntry._ID + " = ?";
+        Map<Long, Integer> filteredData = new LinkedHashMap<>();
+        for (int id : ids) {
+            String[] selectionArgs = {String.valueOf(id)};
+            Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+            cursor.moveToNext();
+            filteredData.put(cursor.getLong(cursor.getColumnIndexOrThrow(columns[1])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+            cursor.close();
+        }
+        return filteredData;
+    }
+
     public Map<Long, Integer> getAllRowsData() {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

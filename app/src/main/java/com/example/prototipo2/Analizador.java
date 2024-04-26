@@ -41,6 +41,7 @@ public class Analizador extends Service {
     private float media;
     private float desvEst;
     private float pz;
+    private int excessive;
     private int tiempoIgnorar;
     private String videoStreaming;
     private BroadcastReceiver br;
@@ -64,6 +65,7 @@ public class Analizador extends Service {
         media = 0;
         desvEst = 0;
         pz = 0;
+        excessive = 0;
         tiempoIgnorar = 0;
         bateria = new Bateria(getApplicationContext());
         escaneo = new Escaneo(getApplicationContext());
@@ -154,13 +156,16 @@ public class Analizador extends Service {
                     pz = dne.getP(Float.parseFloat(z));
                     Log.i("Pruebas(35): ", "pz:\nP(Z>x): " + pz);
 
-                    if (pz != -1) {
+                    if (pz != -1 && pz < 1F) {
+                        excessive = 1;
                         if (tiempoIgnorar > 0) {
                             Log.i("Pruebas(36): ", "tiempoIgnorar: " + tiempoIgnorar);
                         } else {
                             Log.i("Pruebas(37): ", "Mostrando Notificacion...");
                             showNotification();
                         }
+                    } else {
+                        excessive = 0;
                     }
 
                     insertIntoDB();
@@ -368,6 +373,7 @@ public class Analizador extends Service {
         values.put(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA, getMedia());
         values.put(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, getDesvEst());
         values.put(AnalizadorContract.AnalizadorEntry.COLUMN_PZ, getPz());
+        values.put(AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE, getExcessive());
 
         return values;
     }
@@ -398,5 +404,9 @@ public class Analizador extends Service {
 
     public float getPz() {
         return pz;
+    }
+
+    public int getExcessive() {
+        return excessive;
     }
 }
