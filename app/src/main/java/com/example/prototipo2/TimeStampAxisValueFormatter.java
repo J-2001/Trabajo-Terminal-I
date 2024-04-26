@@ -1,7 +1,5 @@
 package com.example.prototipo2;
 
-import android.util.Log;
-
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
