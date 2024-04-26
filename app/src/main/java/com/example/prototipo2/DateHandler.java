@@ -12,4 +12,8 @@ public class DateHandler {
         return sdf.format(date);
     }
 
+    public String timeStampToFormattedString(float timeStamp) {
+        return timeStampToFormattedString(Float.valueOf(timeStamp).longValue());
+    }
+
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -11,6 +12,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -31,21 +33,33 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
-        // Charts
         LineChart chart01 = this.findViewById(R.id.third_chart_01);
-        chart01.setBackgroundColor(getResources().getColor(R.color.white, null));
+        chart01.getXAxis().setValueFormatter(new TimeStampAxisValueFormatter());
+        chart01.getXAxis().setLabelRotationAngle(270);
+        chart01.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        chart01.getAxisRight().setEnabled(false);
+
         List<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(111111111000F, 1));//171409011100
+        entries.add(new Entry(111111112000F, 3));
+        entries.add(new Entry(111111113000F, 1));
+        entries.add(new Entry(111111114000F, 4));
+        entries.add(new Entry(111111115000F, 1));//171409011100
+        entries.add(new Entry(111111116000F, 3));
+        entries.add(new Entry(111111117000F, 1));
+        entries.add(new Entry(111111118000F, 4));
         Bateria bateria = new Bateria(getApplicationContext());
-        for (Map.Entry<Long, Integer> d : bateria.getLastScanData().entrySet()) {
-            entries.add(new Entry(d.getKey(), d.getValue()));
+        Map<Long, Integer> data = bateria.getAllRowsData();
+        for (long l : data.keySet()) {
+            entries.add(new Entry(l, data.get(l)));
         }
-        LineDataSet dataSet = new LineDataSet(entries, "Charge Counter");
-        dataSet.setColor(getResources().getColor(R.color.red_a700, null));
+
+        LineDataSet dataSet = new LineDataSet(entries, "MyLabel");
         LineData lineData = new LineData(dataSet);
         chart01.setData(lineData);
         chart01.invalidate();
 
-        // TableLayouts
+        /*/ TableLayouts
         TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
@@ -207,6 +221,8 @@ public class ThirdActivity extends AppCompatActivity {
                 btn04.setText(getString(R.string.third_btn_04_0));
                 btn04_status = true;
             }
-        });
+        });*/
     }
+
+
 }

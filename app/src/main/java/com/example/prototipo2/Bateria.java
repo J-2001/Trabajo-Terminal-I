@@ -10,6 +10,7 @@ import android.os.BatteryManager;
 import android.util.Log;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -123,6 +124,19 @@ public class Bateria {
         cursor.close();
 
         return stringBuilder.toString();
+    }
+
+    public Map<Long, Integer> getAllRowsData() {
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, null, null, null, null, null);
+        Map<Long, Integer> data = new LinkedHashMap<>();
+        while (cursor.moveToNext()){
+            data.put(cursor.getLong(cursor.getColumnIndexOrThrow(columns[1])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+        }
+        cursor.close();
+        return data;
     }
 
     public String getAllRows() {
