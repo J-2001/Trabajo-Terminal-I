@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,19 +41,25 @@ public class ThirdActivity extends AppCompatActivity {
         chart01.getAxisRight().setEnabled(false);
 
         List<Entry> entries = new ArrayList<>();
-        entries.add(new Entry(111111111000F, 1));//171409011100
-        entries.add(new Entry(111111112000F, 3));
-        entries.add(new Entry(111111113000F, 1));
-        entries.add(new Entry(111111114000F, 4));
-        entries.add(new Entry(111111115000F, 1));//171409011100
-        entries.add(new Entry(111111116000F, 3));
-        entries.add(new Entry(111111117000F, 1));
-        entries.add(new Entry(111111118000F, 4));
         Bateria bateria = new Bateria(getApplicationContext());
         Map<Long, Integer> data = bateria.getAllRowsData();
-        for (long l : data.keySet()) {
-            entries.add(new Entry(l, data.get(l)));
+        Map<Float, Integer> dataF = formatter(data);
+        for (Float f : dataF.keySet()) {
+            entries.add(new Entry(f, dataF.get(f)));
         }
+        Map<Long, Integer> test = new LinkedHashMap<>();
+        test.put(1714109070663L, 1);
+        test.put(1714109170663L, 3);
+        test.put(1714109270663L, 1);
+        test.put(1714109370663L, 4);
+        Map<Float, Integer> testF = formatter(test);
+        for (Float f : testF.keySet()) {
+            entries.add(new Entry(f, testF.get(f)));
+        }
+        /*entries.add(new Entry(1, 1));
+        entries.add(new Entry(2, 3));
+        entries.add(new Entry(3, 1));
+        entries.add(new Entry(4, 4));*/
 
         LineDataSet dataSet = new LineDataSet(entries, "MyLabel");
         LineData lineData = new LineData(dataSet);
@@ -224,5 +231,14 @@ public class ThirdActivity extends AppCompatActivity {
         });*/
     }
 
+    private Map<Float, Integer> formatter(Map<Long, Integer> orig) {
+        Map<Float, Integer> formatted = new LinkedHashMap<>();
+        for (Long l : orig.keySet()) {
+            String key = l.toString().substring(3, 10);
+            formatted.put(Float.valueOf(key), orig.get(l));
+            Log.i("Pruebas(03): ", "Formatted: " + key);
+        }
+        return formatted;
+    }
 
 }

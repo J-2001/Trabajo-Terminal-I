@@ -1,5 +1,7 @@
 package com.example.prototipo2;
 
+import android.util.Log;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -12,8 +14,12 @@ public class DateHandler {
         return sdf.format(date);
     }
 
-    public String timeStampToFormattedString(float timeStamp) {
-        return timeStampToFormattedString(Float.valueOf(timeStamp).longValue());
+    public String trimTimeStampToFormattedString(float timeStamp) {
+        String tts = Long.valueOf(Float.valueOf(timeStamp).longValue()).toString();
+        long ts = Long.parseLong("171" + tts + "000");
+        Log.i("Pruebas(01): ", "Trim TimeStamp: " + timeStamp);
+        Log.i("Pruebas(02): ", "TimeStamp: " + ts);
+        return timeStampToFormattedString(ts);
     }
 
 }
