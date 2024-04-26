@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -65,6 +66,43 @@ public class ThirdActivity extends AppCompatActivity {
         LineData lineData = new LineData(dataSet);
         chart01.setData(lineData);
         chart01.invalidate();
+
+        LinearLayout linlay01 = this.findViewById(R.id.third_linlay_01);
+        LinearLayout linlay02 = this.findViewById(R.id.third_linlay_02);
+        LinearLayout linlay03 = this.findViewById(R.id.third_linlay_03);
+        LinearLayout linlay04 = this.findViewById(R.id.third_linlay_04);
+
+        Button btn01 = this.findViewById(R.id.third_btn_01);
+        btn01.setOnClickListener(v -> {
+            linlay01.setVisibility(View.VISIBLE);
+            linlay02.setVisibility(View.GONE);
+            linlay03.setVisibility(View.GONE);
+            linlay04.setVisibility(View.GONE);
+        });
+
+        Button btn02 = this.findViewById(R.id.third_btn_02);
+        btn02.setOnClickListener(v -> {
+            linlay01.setVisibility(View.GONE);
+            linlay02.setVisibility(View.VISIBLE);
+            linlay03.setVisibility(View.GONE);
+            linlay04.setVisibility(View.GONE);
+        });
+
+        Button btn03 = this.findViewById(R.id.third_btn_03);
+        btn03.setOnClickListener(v -> {
+            linlay01.setVisibility(View.GONE);
+            linlay02.setVisibility(View.GONE);
+            linlay03.setVisibility(View.VISIBLE);
+            linlay04.setVisibility(View.GONE);
+        });
+
+        Button btn04 = this.findViewById(R.id.third_btn_04);
+        btn04.setOnClickListener(v -> {
+            linlay01.setVisibility(View.GONE);
+            linlay02.setVisibility(View.GONE);
+            linlay03.setVisibility(View.GONE);
+            linlay04.setVisibility(View.VISIBLE);
+        });
 
         /*/ TableLayouts
         TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
@@ -234,9 +272,8 @@ public class ThirdActivity extends AppCompatActivity {
     private Map<Float, Integer> formatter(Map<Long, Integer> orig) {
         Map<Float, Integer> formatted = new LinkedHashMap<>();
         for (Long l : orig.keySet()) {
-            String key = l.toString().substring(3, 10);
+            String key = l.toString().substring(2, 10);
             formatted.put(Float.valueOf(key), orig.get(l));
-            Log.i("Pruebas(03): ", "Formatted: " + key);
         }
         return formatted;
     }

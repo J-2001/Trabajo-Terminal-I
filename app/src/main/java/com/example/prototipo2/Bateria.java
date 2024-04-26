@@ -77,6 +77,21 @@ public class Bateria {
         return ts;
     }
 
+    public Map<Long, Integer> getScanData(int startId, int endId) {
+        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String selection = BateriaContract.BateriaEntry._ID + " >= ? AND " + BateriaContract.BateriaEntry._ID + " <= ?";
+        String[] selectionArgs = {String.valueOf(startId), String.valueOf(endId)};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        Map<Long, Integer> data = new LinkedHashMap<>();
+        while (cursor.moveToNext()) {
+            data.put(cursor.getLong(cursor.getColumnIndexOrThrow(columns[1])), cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+        }
+        cursor.close();
+        return data;
+    }
+
     public Map<Long, Integer> getLastScanData() {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();

@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class Escaneo {
 
     private int startId;
@@ -82,6 +85,30 @@ public class Escaneo {
         cursor.close();
 
         return ids;
+    }
+
+    public Map<Long, Integer> getScansDataFilteredByVideoStreaming(String vs){
+        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String[] columns = {EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID};
+        String selection = EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING + " = ?";
+        String[] selectionArgs = {vs};
+        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+        int[][] ids = new int[cursor.getCount()][2];
+        int i = 0;
+        while (cursor.moveToNext()) {
+            ids[i][0] = cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]));
+            ids[i][1] = cursor.getInt(cursor.getColumnIndexOrThrow(columns[1]));
+            i += 1;
+        }
+
+        Map<Long, Integer> filteredData = new LinkedHashMap<>();
+        Bateria bateria = new Bateria(applicationContext);
+        for (int[] id : ids) {
+            filteredData.putAll(bateria.getScanData(id[0], id[1]));
+        }
+        cursor.close();
+        return filteredData;
     }
 
     public String getAllScans() {

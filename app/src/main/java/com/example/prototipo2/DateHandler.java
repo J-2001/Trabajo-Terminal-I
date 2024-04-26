@@ -16,9 +16,7 @@ public class DateHandler {
 
     public String trimTimeStampToFormattedString(float timeStamp) {
         String tts = Long.valueOf(Float.valueOf(timeStamp).longValue()).toString();
-        long ts = Long.parseLong("171" + tts + "000");
-        Log.i("Pruebas(01): ", "Trim TimeStamp: " + timeStamp);
-        Log.i("Pruebas(02): ", "TimeStamp: " + ts);
+        long ts = Long.parseLong("17" + tts + "000");
         return timeStampToFormattedString(ts);
     }
 
