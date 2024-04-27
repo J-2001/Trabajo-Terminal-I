@@ -83,58 +83,57 @@ public class FourthActivity extends AppCompatActivity {
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
         ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
         boolean first = true;
-        int x = 0;
 
         Map<String, Float>  hashMap = new HashMap<>();
 
-        for (String row : rows) {
+        for (int i = 0; i < rows.length; i++) {
             tabLay01_Rows.add(new TableRow(this));
             TableLayout.LayoutParams tllp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
             tllp.setMargins(0, 0, 0, dpToPx(verticalMargin));
-            tabLay01_Rows.get(x).setLayoutParams(tllp);
+            tabLay01_Rows.get(i).setLayoutParams(tllp);
 
             tabLay01_Rows_TextViews.add(new ArrayList<>());
 
-            tabLay01_Rows_TextViews.get(x).add(new TextView(this));
+            tabLay01_Rows_TextViews.get(i).add(new TextView(this));
 
             if (first) {
-                tabLay01_Rows_TextViews.get(x).get(0).setText(getString(R.string.fourth_tl_tv_01));
-                tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(0).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(0).setTypeface(tabLay01_Rows_TextViews.get(x).get(0).getTypeface(), Typeface.BOLD);
-                tabLay01_Rows_TextViews.get(x).get(0).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(0));
+                tabLay01_Rows_TextViews.get(i).get(0).setText(getString(R.string.fourth_tl_tv_01));
+                tabLay01_Rows_TextViews.get(i).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(0).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(0).setTypeface(tabLay01_Rows_TextViews.get(i).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(0).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(0));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(1).setText(getString(R.string.fourth_tl_tv_02));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(1).setText(getString(R.string.fourth_tl_tv_02));
                 TableRow.LayoutParams trlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
                 trlp.setMargins(dpToPx(horizontalMargin1), 0, 0, 0);
-                tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(trlp);
-                tabLay01_Rows_TextViews.get(x).get(1).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(1).setTypeface(tabLay01_Rows_TextViews.get(x).get(1).getTypeface(), Typeface.BOLD);
-                tabLay01_Rows_TextViews.get(x).get(1).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
+                tabLay01_Rows_TextViews.get(i).get(1).setLayoutParams(trlp);
+                tabLay01_Rows_TextViews.get(i).get(1).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(1).setTypeface(tabLay01_Rows_TextViews.get(i).get(1).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(1).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(1));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(2).setText(getString(R.string.fourth_tl_tv_03));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(2).setText(getString(R.string.fourth_tl_tv_03));
                 TableRow.LayoutParams trlp1 = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
                 trlp1.setMargins(dpToPx(horizontalMargin2), 0, dpToPx(horizontalMargin2), 0);
-                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(trlp1);
-                tabLay01_Rows_TextViews.get(x).get(2).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(2).setTypeface(tabLay01_Rows_TextViews.get(x).get(2).getTypeface(), Typeface.BOLD);
-                tabLay01_Rows_TextViews.get(x).get(2).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
+                tabLay01_Rows_TextViews.get(i).get(2).setLayoutParams(trlp1);
+                tabLay01_Rows_TextViews.get(i).get(2).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(2).setTypeface(tabLay01_Rows_TextViews.get(i).get(2).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(2).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(2));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(3).setText(getString(R.string.fourth_tl_tv_04));
-                tabLay01_Rows_TextViews.get(x).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(3).setTextSize(textSize+1);
-                tabLay01_Rows_TextViews.get(x).get(3).setTypeface(tabLay01_Rows_TextViews.get(x).get(3).getTypeface(), Typeface.BOLD);
-                tabLay01_Rows_TextViews.get(x).get(3).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(3));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(3).setText(getString(R.string.fourth_tl_tv_04));
+                tabLay01_Rows_TextViews.get(i).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(3).setTypeface(tabLay01_Rows_TextViews.get(i).get(3).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(3).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(3));
                 first = false;
             } else {
-                String[] r = row.split(",");
+                String[] r = rows[i].split(",");
                 Escaneo escaneo = new Escaneo(getApplicationContext());
                 long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
                 DateHandler dh = new DateHandler();
@@ -148,36 +147,35 @@ public class FourthActivity extends AppCompatActivity {
                     }
                 }
 
-                tabLay01_Rows_TextViews.get(x).get(0).setText(dh.timeStampToFormattedString(timeStamps[0]));
-                tabLay01_Rows_TextViews.get(x).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(0).setTextSize(textSize);
-                tabLay01_Rows_TextViews.get(x).get(0).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(0));
+                tabLay01_Rows_TextViews.get(i).get(0).setText(dh.timeStampToFormattedString(timeStamps[0]));
+                tabLay01_Rows_TextViews.get(i).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(0).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(0).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(0));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(1).setText(dh.timeStampToFormattedString(timeStamps[1]));
-                tabLay01_Rows_TextViews.get(x).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(1).setTextSize(textSize);
-                tabLay01_Rows_TextViews.get(x).get(1).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(1));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(1).setText(dh.timeStampToFormattedString(timeStamps[1]));
+                tabLay01_Rows_TextViews.get(i).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(1).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(1).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(1));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(2).setText(videoStreaming);
-                tabLay01_Rows_TextViews.get(x).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(2).setTextSize(textSize);
-                tabLay01_Rows_TextViews.get(x).get(2).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(2));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(2).setText(videoStreaming);
+                tabLay01_Rows_TextViews.get(i).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(2).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(2).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(2));
 
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(3).setText(r[2]);
-                tabLay01_Rows_TextViews.get(x).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(x).get(3).setTextSize(textSize);
-                tabLay01_Rows_TextViews.get(x).get(3).setGravity(Gravity.CENTER);
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(3));
+                tabLay01_Rows_TextViews.get(i).add(new TextView(this));
+                tabLay01_Rows_TextViews.get(i).get(3).setText(r[2]);
+                tabLay01_Rows_TextViews.get(i).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
+                tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(3).setGravity(Gravity.CENTER);
+                tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(3));
             }
 
-            tabLay01.addView(tabLay01_Rows.get(x));
-            x += 1;
+            tabLay01.addView(tabLay01_Rows.get(i));
         }
 
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
@@ -225,7 +223,7 @@ public class FourthActivity extends AppCompatActivity {
         chart.invalidate();
     }
 
-    public float[] getEquivalencias(float gco2e) {
+    private float[] getEquivalencias(float gco2e) {
         float[] equivalencias = {0, 0, 0, 0};
         equivalencias[0] = gco2e / 2347.69814F;
         equivalencias[1] = equivalencias[0] * 9.73577129F;
@@ -234,7 +232,7 @@ public class FourthActivity extends AppCompatActivity {
         return equivalencias;
     }
 
-    public int dpToPx(int dp) {
+    private int dpToPx(int dp) {
         float dpi = getResources().getDisplayMetrics().density;
         return (int) (dp * dpi + 0.5f);
     }

@@ -1,5 +1,6 @@
 package com.example.prototipo2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
@@ -17,13 +18,21 @@ import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipDrawable;
+import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ThirdActivity extends AppCompatActivity {
+
+    private final List<String> videoStreaming = Arrays.asList("Netflix", "Disney+", "Star+", "Prime Video", "Max", "Crunchyroll", "ViX");
+    private static final int textSize = 11;
+    private int pointer = 0;
 
     private boolean btn01_status;
     private boolean btn02_status;
@@ -34,6 +43,65 @@ public class ThirdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+
+        ChipGroup chipgrp01 = this.findViewById(R.id.third_chipgrp_01);
+        ChipGroup chipgrp02 = this.findViewById(R.id.third_chipgrp_02);
+        ChipGroup chipgrp03 = this.findViewById(R.id.third_chipgrp_03);
+        ChipGroup chipgrp04 = this.findViewById(R.id.third_chipgrp_04);
+
+        ArrayList<Chip> chips01 = new ArrayList<>();
+        for (int i = 0; i < videoStreaming.size(); i++) {
+            chips01.add(new Chip(this));
+            chips01.get(i).setText(videoStreaming.get(i));
+            chips01.get(i).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+            chips01.get(i).setTextSize(textSize);
+            chips01.get(i).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+            chipgrp01.addView(chips01.get(i));
+        }
+
+        chipgrp01.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
+            @Override
+            public void onCheckedChanged(@NonNull ChipGroup chipGroup, @NonNull List<Integer> list) {
+                Log.i("Pruebas(01): ", list.toString());
+            }
+        });
+
+        Log.i("Pruebas(02): ", "isCheckable(): " + chips01.get(0).isCheckable());
+        chips01.get(0).setChecked(true);
+        chips01.get(0).setChecked(false);
+
+        Button btn01 = this.findViewById(R.id.third_btn_01);
+        btn01.setOnClickListener(v -> {
+            pointer = 0;
+            chipgrp01.setVisibility(View.VISIBLE);
+            chipgrp02.setVisibility(View.GONE);
+            chipgrp03.setVisibility(View.GONE);
+            chipgrp04.setVisibility(View.GONE);
+        });
+
+        Button btn02 = this.findViewById(R.id.third_btn_02);
+        btn02.setOnClickListener(v -> {
+            chipgrp01.setVisibility(View.GONE);
+            chipgrp02.setVisibility(View.VISIBLE);
+            chipgrp03.setVisibility(View.GONE);
+            chipgrp04.setVisibility(View.GONE);
+        });
+
+        Button btn03 = this.findViewById(R.id.third_btn_03);
+        btn03.setOnClickListener(v -> {
+            chipgrp01.setVisibility(View.GONE);
+            chipgrp02.setVisibility(View.GONE);
+            chipgrp03.setVisibility(View.VISIBLE);
+            chipgrp04.setVisibility(View.GONE);
+        });
+
+        Button btn04 = this.findViewById(R.id.third_btn_04);
+        btn04.setOnClickListener(v -> {
+            chipgrp01.setVisibility(View.GONE);
+            chipgrp02.setVisibility(View.GONE);
+            chipgrp03.setVisibility(View.GONE);
+            chipgrp04.setVisibility(View.VISIBLE);
+        });
 
         LineChart chart01 = this.findViewById(R.id.third_chart_01);
         chart01.getXAxis().setValueFormatter(new TimeStampAxisValueFormatter());
@@ -57,52 +125,13 @@ public class ThirdActivity extends AppCompatActivity {
         for (Float f : testF.keySet()) {
             entries.add(new Entry(f, testF.get(f)));
         }
-        /*entries.add(new Entry(1, 1));
-        entries.add(new Entry(2, 3));
-        entries.add(new Entry(3, 1));
-        entries.add(new Entry(4, 4));*/
 
         LineDataSet dataSet = new LineDataSet(entries, "MyLabel");
         LineData lineData = new LineData(dataSet);
         chart01.setData(lineData);
         chart01.invalidate();
 
-        LinearLayout linlay01 = this.findViewById(R.id.third_linlay_01);
-        LinearLayout linlay02 = this.findViewById(R.id.third_linlay_02);
-        LinearLayout linlay03 = this.findViewById(R.id.third_linlay_03);
-        LinearLayout linlay04 = this.findViewById(R.id.third_linlay_04);
 
-        Button btn01 = this.findViewById(R.id.third_btn_01);
-        btn01.setOnClickListener(v -> {
-            linlay01.setVisibility(View.VISIBLE);
-            linlay02.setVisibility(View.GONE);
-            linlay03.setVisibility(View.GONE);
-            linlay04.setVisibility(View.GONE);
-        });
-
-        Button btn02 = this.findViewById(R.id.third_btn_02);
-        btn02.setOnClickListener(v -> {
-            linlay01.setVisibility(View.GONE);
-            linlay02.setVisibility(View.VISIBLE);
-            linlay03.setVisibility(View.GONE);
-            linlay04.setVisibility(View.GONE);
-        });
-
-        Button btn03 = this.findViewById(R.id.third_btn_03);
-        btn03.setOnClickListener(v -> {
-            linlay01.setVisibility(View.GONE);
-            linlay02.setVisibility(View.GONE);
-            linlay03.setVisibility(View.VISIBLE);
-            linlay04.setVisibility(View.GONE);
-        });
-
-        Button btn04 = this.findViewById(R.id.third_btn_04);
-        btn04.setOnClickListener(v -> {
-            linlay01.setVisibility(View.GONE);
-            linlay02.setVisibility(View.GONE);
-            linlay03.setVisibility(View.GONE);
-            linlay04.setVisibility(View.VISIBLE);
-        });
 
         /*/ TableLayouts
         TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
@@ -269,6 +298,19 @@ public class ThirdActivity extends AppCompatActivity {
         });*/
     }
 
+    private void clearFilter() {
+        switch (pointer) {
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
     private Map<Float, Integer> formatter(Map<Long, Integer> orig) {
         Map<Float, Integer> formatted = new LinkedHashMap<>();
         for (Long l : orig.keySet()) {
@@ -276,6 +318,11 @@ public class ThirdActivity extends AppCompatActivity {
             formatted.put(Float.valueOf(key), orig.get(l));
         }
         return formatted;
+    }
+
+    private int dpToPx(int dp) {
+        float dpi = getResources().getDisplayMetrics().density;
+        return (int) (dp * dpi + 0.5f);
     }
 
 }
