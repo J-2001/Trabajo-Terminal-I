@@ -60,7 +60,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Netflix");
+                    analizador.putExtra("videostreaming", getString(R.string.netflix));
                     startForegroundService(analizador);
                     startActivity(netflix);
                 } else {
@@ -86,7 +86,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Disney+");
+                    analizador.putExtra("videostreaming", getString(R.string.disneyplus));
                     startForegroundService(analizador);
                     startActivity(disneyPlus);
                 } else {
@@ -112,7 +112,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Star+");
+                    analizador.putExtra("videostreaming", getString(R.string.starplus));
                     startForegroundService(analizador);
                     startActivity(starPlus);
                 } else {
@@ -138,7 +138,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Prime Video");
+                    analizador.putExtra("videostreaming", getString(R.string.primevideo));
                     startForegroundService(analizador);
                     startActivity(primeVideo);
                 } else {
@@ -164,8 +164,8 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Max");
                     startForegroundService(analizador);
+                    analizador.putExtra("videostreaming", getString(R.string.max));
                     startActivity(max);
                 } else {
                     Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Max!", Snackbar.LENGTH_SHORT);
@@ -190,7 +190,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "Crunchyroll");
+                    analizador.putExtra("videostreaming", getString(R.string.crunchyroll));
                     startForegroundService(analizador);
                     startActivity(crunchyroll);
                 } else {
@@ -216,7 +216,7 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    analizador.putExtra("videostreaming", "ViX");
+                    analizador.putExtra("videostreaming", getString(R.string.vix));
                     startForegroundService(analizador);
                     startActivity(vix);
                 } else {

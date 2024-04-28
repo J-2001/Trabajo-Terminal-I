@@ -21,32 +21,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/third_tv_01"
-                android:textSize="25sp"
+                android:textSize="30sp"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="0dp"/>
+                android:layout_marginBottom="11dp"/>
             
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/third_chart_01"
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
-                android:layout_marginHorizontal="7dp"/>
+                android:layout_height="147dp"
+                android:layout_marginHorizontal="10dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/third_tv_02"
-                android:textSize="20sp"
+                android:textSize="25sp"
                 android:gravity="center"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="11dp"
                 android:layout_marginBottom="25dp"/>
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp">
+                android:layout_marginHorizontal="25dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -57,31 +57,31 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_01"
-                        android:textSize="15sp"
-                        android:layout_marginEnd="15dp"/>
+                        android:textSize="16sp"
+                        android:layout_marginEnd="20dp"/>
 
                     <Button
                         android:id="@+id/third_btn_02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_02"
-                        android:textSize="15sp"
-                        android:layout_marginEnd="15dp"/>
+                        android:textSize="16sp"
+                        android:layout_marginEnd="20dp"/>
 
                     <Button
                         android:id="@+id/third_btn_03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_03"
-                        android:textSize="15sp"
-                        android:layout_marginEnd="15dp"/>
+                        android:textSize="16sp"
+                        android:layout_marginEnd="20dp"/>
 
                     <Button
                         android:id="@+id/third_btn_04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_04"
-                        android:textSize="15sp"/>
+                        android:textSize="16sp"/>
 
                 </LinearLayout>
 
@@ -92,6 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="15dp"/>
 
             <com.google.android.material.chip.ChipGroup
@@ -99,6 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="15dp"/>
 
             <com.google.android.material.chip.ChipGroup
@@ -106,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="15dp"/>
 
             <com.google.android.material.chip.ChipGroup
@@ -113,55 +116,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="15dp"/>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableLayout
-                    android:id="@+id/third_tablay_01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableLayout
-                    android:id="@+id/third_tablay_02"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableLayout
-                    android:id="@+id/third_tablay_03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-            </HorizontalScrollView>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TableLayout
-                    android:id="@+id/third_tablay_04"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"/>
-
-            </HorizontalScrollView>
 
         </LinearLayout>
 

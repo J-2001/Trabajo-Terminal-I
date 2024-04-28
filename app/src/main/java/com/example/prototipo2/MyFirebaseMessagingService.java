@@ -41,6 +41,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         if (!message.getData().isEmpty()) {
             Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
+
+            if (message.getData().containsKey("extract")) {
+
+            }
             /*
             if (/* Check if data needs to be processed by long running job *//* true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.

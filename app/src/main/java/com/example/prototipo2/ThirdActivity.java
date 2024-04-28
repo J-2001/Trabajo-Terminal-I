@@ -3,6 +3,7 @@ package com.example.prototipo2;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,30 +28,35 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ThirdActivity extends AppCompatActivity {
 
-    private final List<String> videoStreaming = Arrays.asList("Netflix", "Disney+", "Star+", "Prime Video", "Max", "Crunchyroll", "ViX");
-    private static final int textSize = 12;
-    private int[] pointer = {0, 0};
-    private ArrayList<Chip> chips01 = new ArrayList<>();
-    private ArrayList<Chip> chips02 = new ArrayList<>();
-    private ArrayList<Chip> chips03 = new ArrayList<>();
-    private ArrayList<Chip> chips04 = new ArrayList<>();
+    private List<String> videoStreaming;
+    private List<Integer> scansIds;
+    private static final int textSize = 16;
+    private static final int horizontalPadding = 28;
+    private static final int verticalPadding = 11;
+    private final int[] pointer = {0, 0};
+    private ChipGroup chipgrp01;
+    private ChipGroup chipgrp02;
+    private ChipGroup chipgrp03;
+    private ChipGroup chipgrp04;
+    private final ArrayList<Chip> chips01 = new ArrayList<>();
+    private final ArrayList<Chip> chips02 = new ArrayList<>();
+    private final ArrayList<Chip> chips03 = new ArrayList<>();
+    private final ArrayList<Chip> chips04 = new ArrayList<>();
 
-    private boolean btn01_status;
-    private boolean btn02_status;
-    private boolean btn03_status;
-    private boolean btn04_status;
-
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
         LineChart lineChart = this.findViewById(R.id.third_chart_01);
+        lineChart.getDescription().setEnabled(false);
         lineChart.getXAxis().setValueFormatter(new TimeStampAxisValueFormatter());
-        lineChart.getXAxis().setLabelRotationAngle(270);
+        lineChart.getXAxis().setLabelRotationAngle(293);
         lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
         lineChart.getAxisRight().setEnabled(false);
 
@@ -78,81 +84,203 @@ public class ThirdActivity extends AppCompatActivity {
 
         Escaneo escaneo = new Escaneo(getApplicationContext());
 
-        ChipGroup chipgrp01 = this.findViewById(R.id.third_chipgrp_01);
+        chipgrp01 = this.findViewById(R.id.third_chipgrp_01);
+
+        videoStreaming = Arrays.asList(getString(R.string.netflix), getString(R.string.disneyplus), getString(R.string.starplus), getString(R.string.primevideo), getString(R.string.max), getString(R.string.crunchyroll), getString(R.string.vix));
 
         for (int i = 0; i < videoStreaming.size(); i++) {
             chips01.add(new Chip(this));
             chips01.get(i).setText(videoStreaming.get(i));
+            chips01.get(i).setId(i);
             chips01.get(i).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
             chips01.get(i).setTextSize(textSize);
             chips01.get(i).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+            chips01.get(i).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
             chipgrp01.addView(chips01.get(i));
         }
 
-        chipgrp01.setOnCheckedStateChangeListener(new ChipGroup.OnCheckedStateChangeListener() {
-            @Override
-            public void onCheckedChanged(@NonNull ChipGroup chipGroup, @NonNull List<Integer> list) {
-                Log.i("Pruebas(01): ", list.toString());
-                if (pointer[1] == 0) {
-                    if (list.isEmpty()) {
-                        lineChart.setData(lineData);
-                        lineChart.invalidate();
-                    } else {
-                        LineData nLineData = new LineData();
-                        for (int id : list) {
-                            List<Entry> nEntries = new ArrayList<>();
-                            Map<Long, Integer> nData = escaneo.getScansDataFilteredByVideoStreaming(videoStreaming.get(id-1));
-                            /*if (nData.isEmpty()) {
-                                chips01.get(id-1).setEnabled(false);
-                                return;
-                            }*/
-                            Map<Float, Integer> nDataF = formatter(nData);
-                            for (Float f : nDataF.keySet()) {
-                                nEntries.add(new Entry(f, nDataF.get(f)));
-                            }
-                            LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id-1));
-                            nLineData.addDataSet(nLineDataSet);
-                            if (id == 1) {
-                                List<Entry> xentries = new ArrayList<>();
-                                Map<Long, Integer> ntest = new LinkedHashMap<>();
-                                ntest.put(1714109070663L, 4);
-                                ntest.put(1714109170663L, 3);
-                                ntest.put(1714109270663L, 2);
-                                ntest.put(1714109370663L, 1);
-                                Map<Float, Integer> ntestF = formatter(ntest);
-                                for (Float f : ntestF.keySet()) {
-                                    xentries.add(new Entry(f, ntestF.get(f)));
-                                }
-
-                                LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel22");
-                                nLineData.addDataSet(xlineDataSet);
-                            }
-                            if (id == 2) {
-                                List<Entry> xentries = new ArrayList<>();
-                                Map<Long, Integer> ntest = new LinkedHashMap<>();
-                                ntest.put(1714109070663L, 1);
-                                ntest.put(1714109170663L, 2);
-                                ntest.put(1714109270663L, 3);
-                                ntest.put(1714109370663L, 5);
-                                Map<Float, Integer> ntestF = formatter(ntest);
-                                for (Float f : ntestF.keySet()) {
-                                    xentries.add(new Entry(f, ntestF.get(f)));
-                                }
-
-                                LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel33");
-                                nLineData.addDataSet(xlineDataSet);
-                            }
+        chipgrp01.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            if (pointer[1] == 0) {
+                if (list.isEmpty()) {
+                    lineChart.setData(lineData);
+                    lineChart.invalidate();
+                } else {
+                    LineData nLineData = new LineData();
+                    for (int id : list) {
+                        List<Entry> nEntries = new ArrayList<>();
+                        Map<Long, Integer> nData = escaneo.getScansDataFilteredByVideoStreaming(videoStreaming.get(id));
+                        /*if (nData.isEmpty()) {
+                            chips01.get(id).setEnabled(false);
+                            return;
+                        }*/
+                        Map<Float, Integer> nDataF = formatter(nData);
+                        for (Float f : nDataF.keySet()) {
+                            nEntries.add(new Entry(f, nDataF.get(f)));
                         }
-                        lineChart.setData(nLineData);
-                        lineChart.invalidate();
+                        LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id));
+                        nLineData.addDataSet(nLineDataSet);
+                        if (id == 0) {
+                            List<Entry> xentries = new ArrayList<>();
+                            Map<Long, Integer> ntest = new LinkedHashMap<>();
+                            ntest.put(1714109070663L, 4);
+                            ntest.put(1714109170663L, 3);
+                            ntest.put(1714109270663L, 2);
+                            ntest.put(1714109370663L, 1);
+                            Map<Float, Integer> ntestF = formatter(ntest);
+                            for (Float f : ntestF.keySet()) {
+                                xentries.add(new Entry(f, ntestF.get(f)));
+                            }
+
+                            LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel22");
+                            nLineData.addDataSet(xlineDataSet);
+                        }
+                        if (id == 1) {
+                            List<Entry> xentries = new ArrayList<>();
+                            Map<Long, Integer> ntest = new LinkedHashMap<>();
+                            ntest.put(1714109070663L, 1);
+                            ntest.put(1714109170663L, 2);
+                            ntest.put(1714109270663L, 3);
+                            ntest.put(1714109370663L, 5);
+                            Map<Float, Integer> ntestF = formatter(ntest);
+                            for (Float f : ntestF.keySet()) {
+                                xentries.add(new Entry(f, ntestF.get(f)));
+                            }
+
+                            LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel33");
+                            nLineData.addDataSet(xlineDataSet);
+                        }
                     }
+                    lineChart.setData(nLineData);
+                    lineChart.invalidate();
                 }
             }
         });
 
-        ChipGroup chipgrp02 = this.findViewById(R.id.third_chipgrp_02);
-        ChipGroup chipgrp03 = this.findViewById(R.id.third_chipgrp_03);
-        ChipGroup chipgrp04 = this.findViewById(R.id.third_chipgrp_04);
+        DateHandler dh = new DateHandler();
+
+        chipgrp02 = this.findViewById(R.id.third_chipgrp_02);
+
+        scansIds = Arrays.stream(escaneo.getScansIds()).boxed().collect(Collectors.toList());
+
+        for (int i = 0; i< scansIds.size(); i++) {
+            chips02.add(new Chip(this));
+            long[] scanTS = escaneo.getScanTimeStamps(String.valueOf(scansIds.get(i)));
+            String text = dh.timeStampToFormattedString(scanTS[0]) + "-" + dh.timeStampToFormattedString(scanTS[1]);
+            chips02.get(i).setText(text);
+            chips02.get(i).setId(i);
+            chips02.get(i).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+            chips02.get(i).setTextSize(textSize);
+            chips02.get(i).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+            chips02.get(i).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
+            chipgrp02.addView(chips02.get(i));
+        }
+
+        chipgrp02.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            if (pointer[1] == 1) {
+                if (list.isEmpty()) {
+                    lineChart.setData(lineData);
+                    lineChart.invalidate();
+                } else {
+                    LineData nLineData = new LineData();
+                    for (int id : list) {
+                        List<Entry> nEntries = new ArrayList<>();
+                        Map<Long, Integer> nData = escaneo.getScanData(scansIds.get(id));
+                        Map<Float, Integer> nDataF = formatter(nData);
+                        for (Float f : nDataF.keySet()) {
+                            nEntries.add(new Entry(f, nDataF.get(f)));
+                        }
+                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips02.get(id).getText());
+                        nLineData.addDataSet(nLineDataSet);
+                    }
+                    lineChart.setData(nLineData);
+                    lineChart.invalidate();
+                }
+            }
+        });
+
+        chipgrp03 = this.findViewById(R.id.third_chipgrp_03);
+
+        chips03.add(new Chip(this));
+        chips03.get(0).setText(getString(R.string.third_chip_03_01));
+        chips03.get(0).setId(2);
+        chips03.get(0).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+        chips03.get(0).setTextSize(textSize);
+        chips03.get(0).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+        chips03.get(0).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
+        chipgrp03.addView(chips03.get(0));
+        chips03.add(new Chip(this));
+        chips03.get(1).setText(getString(R.string.third_chip_03_02));
+        chips03.get(1).setId(3);
+        chips03.get(1).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+        chips03.get(1).setTextSize(textSize);
+        chips03.get(1).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+        chips03.get(1).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
+        chipgrp03.addView(chips03.get(1));
+
+        chipgrp03.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            if (pointer[1] == 2) {
+                if (list.isEmpty()) {
+                    lineChart.setData(lineData);
+                    lineChart.invalidate();
+                } else {
+                    LineData nLineData = new LineData();
+                    for (int id : list) {
+                        List<Entry> nEntries = new ArrayList<>();
+                        Map<Long, Integer> nData = bateria.getRowsDataFilteredByStatus(id);
+                        Map<Float, Integer> nDataF = formatter(nData);
+                        for (Float f : nDataF.keySet()) {
+                            nEntries.add(new Entry(f, nDataF.get(f)));
+                        }
+                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id-2).getText());
+                        nLineData.addDataSet(nLineDataSet);
+                    }
+                    lineChart.setData(nLineData);
+                    lineChart.invalidate();
+                }
+            }
+        });
+
+        chipgrp04 = this.findViewById(R.id.third_chipgrp_04);
+
+        chips04.add(new Chip(this));
+        chips04.get(0).setText(getString(R.string.third_chip_04_01));
+        chips04.get(0).setId(0);
+        chips04.get(0).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+        chips04.get(0).setTextSize(textSize);
+        chips04.get(0).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+        chips04.get(0).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
+        chipgrp04.addView(chips04.get(0));
+        chips04.add(new Chip(this));
+        chips04.get(1).setText(getString(R.string.third_chip_04_02));
+        chips04.get(1).setId(1);
+        chips04.get(1).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
+        chips04.get(1).setTextSize(textSize);
+        chips04.get(1).setChipDrawable(ChipDrawable.createFromAttributes(this, null, 0, com.google.android.material.R.style.Widget_MaterialComponents_Chip_Choice));
+        chips04.get(1).setPadding(dpToPx(horizontalPadding), dpToPx(verticalPadding), dpToPx(horizontalPadding), dpToPx(verticalPadding));
+        chipgrp04.addView(chips04.get(1));
+
+        chipgrp04.setOnCheckedStateChangeListener((chipGroup, list) -> {
+            if (pointer[1] == 3) {
+                if (list.isEmpty()) {
+                    lineChart.setData(lineData);
+                    lineChart.invalidate();
+                } else {
+                    LineData nLineData = new LineData();
+                    for (int id : list) {
+                        List<Entry> nEntries = new ArrayList<>();
+                        Map<Long, Integer> nData = bateria.getRowsDataFilteredByConsumption(id);
+                        Map<Float, Integer> nDataF = formatter(nData);
+                        for (Float f : nDataF.keySet()) {
+                            nEntries.add(new Entry(f, nDataF.get(f)));
+                        }
+                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id).getText());
+                        nLineData.addDataSet(nLineDataSet);
+                    }
+                    lineChart.setData(nLineData);
+                    lineChart.invalidate();
+                }
+            }
+        });
 
         Button btn01 = this.findViewById(R.id.third_btn_01);
         btn01.setOnClickListener(v -> {
@@ -161,199 +289,79 @@ public class ThirdActivity extends AppCompatActivity {
                 pointer[1] = 0;
                 clearFilters();
             }
-            chipgrp01.setVisibility(View.VISIBLE);
-            chipgrp02.setVisibility(View.GONE);
-            chipgrp03.setVisibility(View.GONE);
-            chipgrp04.setVisibility(View.GONE);
+            if (chipgrp01.getVisibility() == View.GONE) {
+                chipgrp01.setVisibility(View.VISIBLE);
+            } else {
+                chipgrp01.setVisibility(View.GONE);
+                pointer[0] = 0;
+                pointer[1] = -1;
+                clearFilters();
+                pointer[1] = 0;
+            }
+            lineChart.setData(lineData);
+            lineChart.invalidate();
         });
 
         Button btn02 = this.findViewById(R.id.third_btn_02);
         btn02.setOnClickListener(v -> {
-            chipgrp01.setVisibility(View.GONE);
-            chipgrp02.setVisibility(View.VISIBLE);
-            chipgrp03.setVisibility(View.GONE);
-            chipgrp04.setVisibility(View.GONE);
+            if (pointer[1] != 1) {
+                pointer[0] = pointer[1];
+                pointer[1] = 1;
+                clearFilters();
+            }
+            if (chipgrp02.getVisibility() == View.GONE) {
+                chipgrp02.setVisibility(View.VISIBLE);
+            } else {
+                chipgrp02.setVisibility(View.GONE);
+                pointer[0] = 1;
+                pointer[1] = -1;
+                clearFilters();
+                pointer[1] = 1;
+            }
+            lineChart.setData(lineData);
+            lineChart.invalidate();
         });
 
         Button btn03 = this.findViewById(R.id.third_btn_03);
         btn03.setOnClickListener(v -> {
-            chipgrp01.setVisibility(View.GONE);
-            chipgrp02.setVisibility(View.GONE);
-            chipgrp03.setVisibility(View.VISIBLE);
-            chipgrp04.setVisibility(View.GONE);
+            if (pointer[1] != 2) {
+                pointer[0] = pointer[1];
+                pointer[1] = 2;
+                clearFilters();
+            }
+            if (chipgrp03.getVisibility() == View.GONE) {
+                chipgrp03.setVisibility(View.VISIBLE);
+            } else {
+                chipgrp03.setVisibility(View.GONE);
+                pointer[0] = 2;
+                pointer[1] = -1;
+                clearFilters();
+                pointer[1] = 2;
+            }
+            lineChart.setData(lineData);
+            lineChart.invalidate();
         });
 
         Button btn04 = this.findViewById(R.id.third_btn_04);
         btn04.setOnClickListener(v -> {
-            chipgrp01.setVisibility(View.GONE);
-            chipgrp02.setVisibility(View.GONE);
-            chipgrp03.setVisibility(View.GONE);
-            chipgrp04.setVisibility(View.VISIBLE);
+            if (pointer[1] != 3) {
+                pointer[0] = pointer[1];
+                pointer[1] = 3;
+                clearFilters();
+            }
+            if (chipgrp04.getVisibility() == View.GONE) {
+                chipgrp04.setVisibility(View.VISIBLE);
+            } else {
+                chipgrp04.setVisibility(View.GONE);
+                pointer[0] = 3;
+                pointer[1] = -1;
+                clearFilters();
+                pointer[1] = 3;
+            }
+            lineChart.setData(lineData);
+            lineChart.invalidate();
         });
 
-        /*/ TableLayouts
-        TableLayout tabLay01 = this.findViewById(R.id.third_tablay_01);
-        ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
-        ArrayList<ArrayList<TextView>> tabLay01_Rows_TextViews = new ArrayList<>();
-        int x = 0;
-        boolean first = true;
-        for (String row : bateria.getLastScan().split(";")) {
-            tabLay01_Rows.add(new TableRow(this));
-            tabLay01_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            tabLay01_Rows_TextViews.add(new ArrayList<>());
-            int y = 0;
-            for (String r : row.split(",")) {
-                tabLay01_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(x).get(y).setText(r);
-                tabLay01_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                if (first) {
-                    tabLay01_Rows_TextViews.get(x).get(y).setTypeface(tabLay01_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                }
-                tabLay01_Rows.get(x).addView(tabLay01_Rows_TextViews.get(x).get(y));
-                y += 1;
-            }
-            first = false;
-            tabLay01.addView(tabLay01_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            x += 1;
-        }
-
-        TableLayout tabLay02 = this.findViewById(R.id.third_tablay_02);
-        ArrayList<TableRow> tabLay02_Rows = new ArrayList<>();
-        ArrayList<ArrayList<TextView>> tabLay02_Rows_TextViews = new ArrayList<>();
-        x = 0;
-        first = true;
-        for (String row : bateria.getAllRows().split(";")) {
-            tabLay02_Rows.add(new TableRow(this));
-            tabLay02_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            tabLay02_Rows_TextViews.add(new ArrayList<>());
-            int y = 0;
-            for (String r : row.split(",")) {
-                tabLay02_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay02_Rows_TextViews.get(x).get(y).setText(r);
-                tabLay02_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                if (first) {
-                    tabLay02_Rows_TextViews.get(x).get(y).setTypeface(tabLay02_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                }
-                tabLay02_Rows.get(x).addView(tabLay02_Rows_TextViews.get(x).get(y));
-                y += 1;
-            }
-            first = false;
-            tabLay02.addView(tabLay02_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            x += 1;
-        }
-
-        TableLayout tabLay03 = this.findViewById(R.id.third_tablay_03);
-        ArrayList<TableRow> tabLay03_Rows = new ArrayList<>();
-        ArrayList<ArrayList<TextView>> tabLay03_Rows_TextViews = new ArrayList<>();
-        Escaneo escaneo = new Escaneo(getApplicationContext());
-        x = 0;
-        first = true;
-        for (String row : escaneo.getAllScans().split(";")) {
-            tabLay03_Rows.add(new TableRow(this));
-            tabLay03_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            tabLay03_Rows_TextViews.add(new ArrayList<>());
-            int y = 0;
-            for (String r : row.split(",")) {
-                tabLay03_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay03_Rows_TextViews.get(x).get(y).setText(r);
-                tabLay03_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                if (first) {
-                    tabLay03_Rows_TextViews.get(x).get(y).setTypeface(tabLay03_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                }
-                tabLay03_Rows.get(x).addView(tabLay03_Rows_TextViews.get(x).get(y));
-                y += 1;
-            }
-            first = false;
-            tabLay03.addView(tabLay03_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            x += 1;
-        }
-
-        TableLayout tabLay04 = this.findViewById(R.id.third_tablay_04);
-        ArrayList<TableRow> tabLay04_Rows = new ArrayList<>();
-        ArrayList<ArrayList<TextView>> tabLay04_Rows_TextViews = new ArrayList<>();
-        Analizador analizador = new Analizador();
-        x = 0;
-        first = true;
-        for (String row : analizador.getAllData(getApplicationContext()).split(";")) {
-            tabLay04_Rows.add(new TableRow(this));
-            tabLay04_Rows.get(x).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-            tabLay04_Rows_TextViews.add(new ArrayList<>());
-            int y = 0;
-            for (String r : row.split(",")) {
-                tabLay04_Rows_TextViews.get(x).add(new TextView(this));
-                tabLay04_Rows_TextViews.get(x).get(y).setText(r);
-                tabLay04_Rows_TextViews.get(x).get(y).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                if (first) {
-                    tabLay04_Rows_TextViews.get(x).get(y).setTypeface(tabLay04_Rows_TextViews.get(x).get(y).getTypeface(), Typeface.BOLD);
-                }
-                tabLay04_Rows.get(x).addView(tabLay04_Rows_TextViews.get(x).get(y));
-                y += 1;
-            }
-            first = false;
-            tabLay04.addView(tabLay04_Rows.get(x), new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-            x += 1;
-        }
-
-        // Buttons
-        Button btn01 = this.findViewById(R.id.third_btn_01);
-        btn01_status = false;
-
-        btn01.setOnClickListener(v -> {
-            if (btn01_status) {
-                tabLay01.setVisibility(View.GONE);
-                btn01.setText(getString(R.string.third_btn_01_1));
-                btn01_status = false;
-            } else {
-                tabLay01.setVisibility(View.VISIBLE);
-                btn01.setText(getString(R.string.third_btn_01_0));
-                btn01_status = true;
-            }
-        });
-
-        Button btn02 = this.findViewById(R.id.third_btn_02);
-        btn02_status = false;
-
-        btn02.setOnClickListener(v -> {
-            if (btn02_status) {
-                tabLay02.setVisibility(View.GONE);
-                btn02.setText(getString(R.string.third_btn_02_1));
-                btn02_status = false;
-            } else {
-                tabLay02.setVisibility(View.VISIBLE);
-                btn02.setText(getString(R.string.third_btn_02_0));
-                btn02_status = true;
-            }
-        });
-
-        Button btn03 = this.findViewById(R.id.third_btn_03);
-        btn03_status = false;
-
-        btn03.setOnClickListener(v -> {
-            if (btn03_status) {
-                tabLay03.setVisibility(View.GONE);
-                btn03.setText(getString(R.string.third_btn_03_1));
-                btn03_status = false;
-            } else {
-                tabLay03.setVisibility(View.VISIBLE);
-                btn03.setText(getString(R.string.third_btn_03_0));
-                btn03_status = true;
-            }
-        });
-
-        Button btn04 = this.findViewById(R.id.third_btn_04);
-        btn04_status = false;
-
-        btn04.setOnClickListener(v -> {
-            if (btn04_status) {
-                tabLay04.setVisibility(View.GONE);
-                btn04.setText(getString(R.string.third_btn_04_1));
-                btn04_status = false;
-            } else {
-                tabLay04.setVisibility(View.VISIBLE);
-                btn04.setText(getString(R.string.third_btn_04_0));
-                btn04_status = true;
-            }
-        });*/
     }
 
     private void clearFilters() {
@@ -362,12 +370,25 @@ public class ThirdActivity extends AppCompatActivity {
                 for (Chip c : chips01) {
                     c.setChecked(false);
                 }
+                chipgrp01.setVisibility(View.GONE);
                 break;
             case 1:
+                for (Chip c : chips02) {
+                    c.setChecked(false);
+                }
+                chipgrp02.setVisibility(View.GONE);
                 break;
             case 2:
+                for (Chip c : chips03) {
+                    c.setChecked(false);
+                }
+                chipgrp03.setVisibility(View.GONE);
                 break;
             case 3:
+                for (Chip c : chips04) {
+                    c.setChecked(false);
+                }
+                chipgrp04.setVisibility(View.GONE);
                 break;
         }
     }

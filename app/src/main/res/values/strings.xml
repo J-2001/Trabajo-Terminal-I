@@ -5,6 +5,13 @@
     <string name="channel_name">Analizador</string>
     <string name="channel_description_1">Analizador activo para detectar un consumo de energía excesivo</string>
     <string name="channel_description_2">Por medio del modelo matemático, el analizador ha detectado un consumo excesivo de energía</string>
+    <string name="netflix">Netflix</string>
+    <string name="disneyplus">Disney+</string>
+    <string name="starplus">Star+</string>
+    <string name="primevideo">Prime Video</string>
+    <string name="max">Max</string>
+    <string name="crunchyroll">Crunchyroll</string>
+    <string name="vix">ViX</string>
     <string name="extra_0">CATEGORIA</string>
     <string name="extra_1_1">CCPM</string>
     <string name="extra_1_2">MEDIA</string>
@@ -30,6 +37,10 @@
     <string name="third_btn_02">Aplicación\nde VS</string>
     <string name="third_btn_03">Estado de\nla Batería</string>
     <string name="third_btn_04">Consumo de\nla Carga</string>
+    <string name="third_chip_03_01">Cargando</string>
+    <string name="third_chip_03_02">Descargando</string>
+    <string name="third_chip_04_01">Consumo Regular</string>
+    <string name="third_chip_04_02">Consumo Excesivo</string>
     <string name="fourth_tv_01">Su\nHuella de Carbono\nes de</string>
     <string name="fourth_tv_02">que es equivalente a</string>
     <string name="fourth_tv_11">%.2f gCO2e</string>
