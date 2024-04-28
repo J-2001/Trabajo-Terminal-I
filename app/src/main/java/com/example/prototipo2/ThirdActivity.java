@@ -1,18 +1,11 @@
 package com.example.prototipo2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
