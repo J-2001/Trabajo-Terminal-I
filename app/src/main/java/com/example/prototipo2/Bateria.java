@@ -201,23 +201,35 @@ public class Bateria {
     public String getAllRows() {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, null, null, null, null, null);
+        String[] columns = {BateriaContract.BateriaEntry._ID, BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER,
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY, BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS,
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(BateriaContract.BateriaEntry._ID + "," + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," + BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
+        stringBuilder.append(columns[0]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[1]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[2]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[3]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[4]);
+        stringBuilder.append(",");
+        stringBuilder.append(columns[5]);
+        stringBuilder.append(";");
         while (cursor.moveToNext()) {
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS)));
+            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE)));
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)));
+            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(columns[5])));
             stringBuilder.append(";");
         }
         cursor.close();

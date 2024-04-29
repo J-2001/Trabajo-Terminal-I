@@ -5,15 +5,18 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);                       */
 
         createNotificationChannel();
-
-        Usuario usuario = new Usuario(getApplicationContext(), this);
 
         CoordinatorLayout coordinatorLayout = this.findViewById(R.id.mainActivity);
 
@@ -107,6 +108,25 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("FCM Token", token);
             }
         });
+
+        //Log.i("Pruebas(01): ", "OS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
+        Log.i("Pruebas(02): ", "API Level: " + Build.VERSION.SDK_INT);
+        //Log.i("Pruebas(03): ", "Device: " + Build.DEVICE);
+        //Log.i("Pruebas(04): ", "Model (and Product): " + Build.MODEL + "(" + Build.PRODUCT + ")");
+        Log.i("Pruebas(05): ", "Manufacturer: " + Build.MANUFACTURER);
+        //Log.i("Pruebas(06): ", "Tags: " + Build.TAGS);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Log.i("Error(01):", "No hubo permiso!");
+            return;
+        }
+        Log.i("Pruebas(07): ", "Mobile Data: " + ((TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getNetworkType());
     }
 
     private void askNotificationPermission() {

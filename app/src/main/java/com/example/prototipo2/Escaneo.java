@@ -36,12 +36,12 @@ public class Escaneo {
     public void insertIntoDB() {
         try (EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext)) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            Huella huella = new Huella();
+            Huella huella = new Huella(applicationContext);
             huella.setEscaneoId((int) db.insert(EscaneoContract.EscaneoEntry.TABLE_NAME, null, toContentVales()));
             Log.d("Escaneo", "Escaneo Completado!");
             huella.setDatosConsumo(getDatosConsumo());
             huella.setVoltage(getAverageVoltage());
-            huella.calcularHuellaCarbono(applicationContext);
+            huella.calcularHuellaCarbono();
         } catch (Exception e) {
             Log.e("Escaneo.insertIntoDB()", e.toString());
         }

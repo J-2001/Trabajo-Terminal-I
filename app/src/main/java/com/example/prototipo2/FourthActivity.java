@@ -36,8 +36,8 @@ public class FourthActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth);
 
-        Huella huella = new Huella();
-        float huellaCarbono = huella.getTotalHuellaCarbono(getApplicationContext());
+        Huella huella = new Huella(getApplicationContext());
+        float huellaCarbono = huella.getTotalHuellaCarbono();
 
         TextView tv01 = this.findViewById(R.id.fourth_tv_11);
         tv01.setText(getString(R.string.fourth_tv_11, huellaCarbono));
@@ -77,7 +77,7 @@ public class FourthActivity extends AppCompatActivity {
         iv04.getLayoutParams().height = tv05.getMeasuredHeight();
         iv04.requestLayout();
 
-        String[] rows = huella.getAllRows(getApplicationContext()).split(";");
+        String[] rows = huella.getAllRows().split(";");
 
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();

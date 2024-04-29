@@ -3,6 +3,9 @@ package com.example.prototipo2;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -43,7 +46,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
 
             if (message.getData().containsKey("extract")) {
-
+                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).build();
+                WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
             }
             /*
             if (/* Check if data needs to be processed by long running job *//* true) {
