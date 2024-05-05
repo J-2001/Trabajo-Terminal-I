@@ -109,24 +109,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Log.i("Pruebas(01): ", "OS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
+        Log.i("Pruebas(01): ", "OS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
         Log.i("Pruebas(02): ", "API Level: " + Build.VERSION.SDK_INT);
-        //Log.i("Pruebas(03): ", "Device: " + Build.DEVICE);
-        //Log.i("Pruebas(04): ", "Model (and Product): " + Build.MODEL + "(" + Build.PRODUCT + ")");
+        Log.i("Pruebas(03): ", "Device: " + Build.DEVICE);
+        Log.i("Pruebas(04): ", "Model (and Product): " + Build.MODEL + "(" + Build.PRODUCT + ")");
         Log.i("Pruebas(05): ", "Manufacturer: " + Build.MANUFACTURER);
-        //Log.i("Pruebas(06): ", "Tags: " + Build.TAGS);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            Log.i("Error(01):", "No hubo permiso!");
-            return;
-        }
-        Log.i("Pruebas(07): ", "Mobile Data: " + ((TelephonyManager) getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE)).getNetworkType());
+        Log.i("Pruebas(06): ", "Tags: " + Build.TAGS);
     }
 
     private void askNotificationPermission() {

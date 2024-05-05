@@ -33,8 +33,8 @@
     <string name="second_ibtn_vix">com.univision.prendetv</string>
     <string name="third_tv_01">Comportamiento de la Batería</string>
     <string name="third_tv_02">Filtrar por:</string>
-    <string name="third_btn_01">Uso de\nla App</string>
-    <string name="third_btn_02">Aplicación\nde VS</string>
+    <string name="third_btn_01">Aplicación\nde VS</string>
+    <string name="third_btn_02">Uso de\nla App</string>
     <string name="third_btn_03">Estado de\nla Batería</string>
     <string name="third_btn_04">Consumo de\nla Carga</string>
     <string name="third_chip_03_01">Cargando</string>
