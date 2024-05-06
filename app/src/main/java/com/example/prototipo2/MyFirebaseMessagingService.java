@@ -20,6 +20,8 @@ import java.net.URL;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
+    public static int key;
+
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
@@ -45,7 +47,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (!message.getData().isEmpty()) {
             Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
 
-            if (message.getData().containsKey("extract")) {
+            if (message.getData().containsKey("info")) {
+                key = 0;
+                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).build();
+                WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
+            } else if (message.getData().containsKey("extract")) {
+                key = 1;
                 WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).build();
                 WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
             }

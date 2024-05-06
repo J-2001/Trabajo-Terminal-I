@@ -100,12 +100,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d("FCM Token", token);
         });
 
-        Log.i("Pruebas(01): ", "OS Version: " + System.getProperty("os.version") + "(" + Build.VERSION.INCREMENTAL + ")");
-        Log.i("Pruebas(02): ", "API Level: " + Build.VERSION.SDK_INT);
-        Log.i("Pruebas(03): ", "Device: " + Build.DEVICE);
-        Log.i("Pruebas(04): ", "Model (and Product): " + Build.MODEL + "(" + Build.PRODUCT + ")");
-        Log.i("Pruebas(05): ", "Manufacturer: " + Build.MANUFACTURER);
-        Log.i("Pruebas(06): ", "Tags: " + Build.TAGS);
+        Log.i("Manufacturer: ", Build.MANUFACTURER);
+        Log.i("Brand: ", Build.BRAND);
+        Log.i("Model: ", Build.MODEL);
+        Log.i("Android Version: ", Build.VERSION.RELEASE);
     }
 
     private void askNotificationPermission() {

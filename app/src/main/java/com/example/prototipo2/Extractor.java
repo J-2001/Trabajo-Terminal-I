@@ -3,6 +3,7 @@ package com.example.prototipo2;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -26,28 +27,40 @@ public class Extractor extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        Bateria bateria = new Bateria(getApplicationContext());
-        String bateriaDB = bateria.getAllRows();
-        String analizadorDB = getAnalizadorRows();
-        Escaneo escaneo = new Escaneo(getApplicationContext());
-        String escaneoDB = escaneo.getAllScans();
-        Huella huella = new Huella(getApplicationContext());
-        String huellaDB = huella.getAllRows();
+        String data = getDeviceInfo();
 
-        String allDB = bateriaDB + "." + analizadorDB + "." + escaneoDB + "." + huellaDB;
+        String accion = "";
+
+        switch (MyFirebaseMessagingService.key) {
+            case 0:
+                accion = "Info";
+                break;
+            case 1:
+                Bateria bateria = new Bateria(getApplicationContext());
+                String bateriaDB = bateria.getAllRows();
+                String analizadorDB = getAnalizadorRows();
+                Escaneo escaneo = new Escaneo(getApplicationContext());
+                String escaneoDB = escaneo.getAllScans();
+                Huella huella = new Huella(getApplicationContext());
+                String huellaDB = huella.getAllRows();
+
+                data += "." + bateriaDB + "." + analizadorDB + "." + escaneoDB + "." + huellaDB;
+                accion = "Extraction";
+                break;
+        }
 
         try {
             URL url = new URL("https://trabajo-terminal-servidor.uc.r.appspot.com");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             try {
-                String body = "{\"db\": \"" + allDB + "\"}";
+                String body = "{\"data\": \"" + data + "\"}";
                 urlConnection.setDoOutput(true);
                 urlConnection.setFixedLengthStreamingMode(body.getBytes().length);
                 urlConnection.setConnectTimeout(10000);
 
                 urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setRequestProperty("Accion", "Extraction");
+                urlConnection.setRequestProperty("Accion", accion);
 
                 OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
                 os.write(body.getBytes());
@@ -74,6 +87,10 @@ public class Extractor extends Worker {
             Log.e("Extractor Error: ", e.toString());
             return Result.failure();
         }
+    }
+
+    public String getDeviceInfo() {
+        return "Fabricante:" + Build.MANUFACTURER + ";Marca:" + Build.BRAND + ";Modelo:" + Build.MODEL + ";Android:" + Build.VERSION.RELEASE;
     }
 
     public String getAnalizadorRows() {
