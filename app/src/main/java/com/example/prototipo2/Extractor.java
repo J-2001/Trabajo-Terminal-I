@@ -31,7 +31,7 @@ public class Extractor extends Worker {
 
         String accion = "";
 
-        switch (MyFirebaseMessagingService.key) {
+        switch (0) {
             case 0:
                 accion = "Info";
                 break;
@@ -70,8 +70,9 @@ public class Extractor extends Worker {
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
-                while ( is.read(buffer) != -1 ) {
-                    baos.write(buffer);
+                int nRead;
+                while ((nRead = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, nRead);
                 }
                 String response = baos.toString();
 

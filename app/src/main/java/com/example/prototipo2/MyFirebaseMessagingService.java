@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.OutOfQuotaPolicy;
 import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
@@ -49,7 +50,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             if (message.getData().containsKey("info")) {
                 key = 0;
-                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).build();
+                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST).build();
                 WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
             } else if (message.getData().containsKey("extract")) {
                 key = 1;

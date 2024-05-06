@@ -99,11 +99,6 @@ public class MainActivity extends AppCompatActivity {
             snackbar.show();
             Log.d("FCM Token", token);
         });
-
-        Log.i("Manufacturer: ", Build.MANUFACTURER);
-        Log.i("Brand: ", Build.BRAND);
-        Log.i("Model: ", Build.MODEL);
-        Log.i("Android Version: ", Build.VERSION.RELEASE);
     }
 
     private void askNotificationPermission() {
