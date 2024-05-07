@@ -44,23 +44,23 @@ public class Huella {
                 HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO};
         Cursor cursor = db.query(HuellaContract.HuellaEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(columns[0]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[1]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[2]);
-        stringBuilder.append(";");
         while (cursor.moveToNext()) {
+            stringBuilder.append(";");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[2])));
-            stringBuilder.append(";");
         }
         cursor.close();
 
-        return stringBuilder.toString();
+        String all = stringBuilder.toString();
+
+        if (!all.isEmpty()) {
+            return all.substring(1);
+        }
+
+        return all;
     }
 
     public float getTotalHuellaCarbono() {

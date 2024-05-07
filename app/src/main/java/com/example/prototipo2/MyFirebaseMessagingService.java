@@ -1,5 +1,6 @@
 package com.example.prototipo2;
 
+import android.os.Build;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -21,8 +22,6 @@ import java.net.URL;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
-    public static int key;
-
     @Override
     public void onNewToken(@NonNull String token) {
         super.onNewToken(token);
@@ -32,9 +31,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             try {
                 Log.d("MyFirebaseMessagingService", "Registrando el token en el servidor");
                 sendRegistrationToServer(token);
-                Log.d("MyFirebaseMessagingService", "Registro Correcto!");
             } catch (Exception e) {
-                Log.e("Error al registrar el token en el servidor", e.toString());
+                Log.e("Error al registrar el token en el servidor: ", e.toString());
             }
         }).start();
     }
@@ -42,27 +40,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
-        Log.i("Pruebas(01): ", "onMessageReceived");
 
         Log.d("onMessageReceived()", "From: " + message.getFrom());
 
         if (!message.getData().isEmpty()) {
             Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
-            Log.i("Pruebas(02): ", "Data: " + message.getData());
 
-            if (message.getData().containsKey("info")) {
-                key = 0;
-                //Intent intent = new Intent(this, MainActivity.class);
-                //startActivity(intent);
-                Log.i("Pruebas(03): ", "Before Work Request");
-                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST).build();
-                Log.i("Pruebas(04): ", "Before Work Manager");
-                WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
-            } else if (message.getData().containsKey("extract")) {
-                key = 1;
-                WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).build();
-                WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
-            }
             /*
             if (/* Check if data needs to be processed by long running job *//* true) {
                 // For long-running tasks (10 seconds or more) use WorkManager.
@@ -85,7 +68,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             try {
-                String body = "{\"token\": \"" + token + "\"}";
+                String body = "{\"token\": \"" + token + "\", \"info\": \"Fabricante:" + Build.MANUFACTURER + ";Marca:" + Build.BRAND + ";Modelo:" + Build.MODEL + ";Android:" + Build.VERSION.RELEASE + "\"}";
 
                 urlConnection.setDoOutput(true);
                 //urlConnection.setChunkedStreamingMode(0);
@@ -103,19 +86,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 byte[] buffer = new byte[1024];
-                while ( is.read(buffer) != -1 ) {
-                    baos.write(buffer);
+                int nRead;
+                while ((nRead = is.read(buffer)) != -1) {
+                    baos.write(buffer, 0, nRead);
                 }
                 String response = baos.toString();
 
-                Log.i("sendRegistrationToServer", response);
-
+                Log.i("sendRegistrationToServer(): ", response);
+            } catch (Exception e) {
+                throw new Exception(e.getCause());
             } finally {
                 urlConnection.disconnect();
             }
-            
         } catch (Exception e) {
-            Log.e("Error al leer y conectarse a la URL del servidor: ", e.toString());
+            Log.e("Error - sendRegistrationToServer(): ", e.toString());
         }
     }
 

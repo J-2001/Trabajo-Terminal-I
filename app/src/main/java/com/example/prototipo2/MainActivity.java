@@ -11,6 +11,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +22,14 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        /*                          Delete databases (Testing)
-        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
-        dbHelper.onUpgrade(dbHelper.getWritableDatabase(), 1, 1);                       */
 
         createNotificationChannel();
 
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
-                Log.w("FirebaseMessaging", "Fetching FCM registration token failed", task.getException());
+                Log.w("FirebaseMessaging:", "Fetching FCM registration token failed: " + task.getException());
                 return;
             }
 
@@ -97,21 +103,81 @@ public class MainActivity extends AppCompatActivity {
 
             Snackbar snackbar = Snackbar.make(coordinatorLayout, "Token: " + token, Snackbar.LENGTH_LONG);
             snackbar.show();
-            Log.d("FCM Token", token);
+            Log.d("FCM Token:", token);
         });
     }
 
-    private void askNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
-                    PackageManager.PERMISSION_GRANTED) {
-                Log.i("Permiso de Notificaciones", "FCM SDK puede enviar notificaciones");
-            //} else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-                // UI que le pida al usuario permiso para recibir las notificaciones
-            } else {
-                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
-            }
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        new Thread(() -> {
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    try {
+                        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
+                        String[] columns = {AnalizadorContract.AnalizadorEntry._ID, AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID,
+                                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID, AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS,
+                                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM, AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA,
+                                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, AnalizadorContract.AnalizadorEntry.COLUMN_PZ,
+                                AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
+                        Cursor cursor = dbHelper.getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
+                        StringBuilder stringBuilder = new StringBuilder();
+                        while (cursor.moveToNext()) {
+                            stringBuilder.append(";");
+                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])));
+                            stringBuilder.append(",");
+                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[8])));
+                        }
+                        cursor.close();
+                        String analizadorDB = stringBuilder.toString();
+                        if (!analizadorDB.isEmpty()) {
+                            analizadorDB = analizadorDB.substring(1);
+                        }
+                        HttpURLConnection urlConnection = (HttpURLConnection) new URL("https://trabajo-terminal-servidor.uc.r.appspot.com").openConnection();
+                        try {
+                            String body = "{\"data\": \"" + new Bateria(getApplicationContext()).getAllRows() + ":" + analizadorDB + ":" +
+                                    new Escaneo(getApplicationContext()).getAllScans() + ":" + new Huella(getApplicationContext()).getAllRows() + "\"}";
+                            urlConnection.setDoOutput(true);
+                            urlConnection.setFixedLengthStreamingMode(body.getBytes().length);
+                            urlConnection.setConnectTimeout(10000);
+                            urlConnection.setRequestProperty("Content-Type", "application/json");
+                            urlConnection.setRequestProperty("Accion", "Upload");
+                            urlConnection.setRequestProperty("Token", task.getResult());
+                            OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
+                            os.write(body.getBytes());
+                            os.flush();
+                            os.close();
+                            InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            byte[] buffer = new byte[1024];
+                            int nRead;
+                            while ((nRead = is.read(buffer)) != -1) {
+                                baos.write(buffer, 0, nRead);
+                            }
+                            Log.i("MainActivity.onPause()", baos.toString());
+                        } catch (Exception e) {
+                            throw new Exception(e.getCause());
+                        }
+                    } catch (Exception e) {
+                        Log.e("MainActivity.onPause()", e.toString());
+                    }
+                }
+            });
+        }).start();
     }
 
     private void createNotificationChannel() {
@@ -122,5 +188,18 @@ public class MainActivity extends AppCompatActivity {
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel1);
         notificationManager.createNotificationChannel(channel2);
+    }
+
+    private void askNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                Log.i("Permiso de Notificaciones", "FCM SDK puede enviar notificaciones");
+                //} else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                // UI que le pida al usuario permiso para recibir las notificaciones
+            } else {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+        }
     }
 }

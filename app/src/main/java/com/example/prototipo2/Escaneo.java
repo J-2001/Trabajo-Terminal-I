@@ -75,18 +75,6 @@ public class Escaneo {
         return new long[]{bateria.getTimeStamp(ids[0]), bateria.getTimeStamp(ids[1])};
     }
 
-    public int[] getLastScanIDs() {
-        EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String selection = EscaneoContract.EscaneoEntry._ID + " = (SELECT MAX(" + EscaneoContract.EscaneoEntry._ID + ") FROM " + EscaneoContract.EscaneoEntry.TABLE_NAME + ")";
-        Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, null, selection, null, null, null, null);
-        cursor.moveToNext();
-        int[] ids = {cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID)), cursor.getInt(cursor.getColumnIndexOrThrow(EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID))};
-        cursor.close();
-
-        return ids;
-    }
-
     public Map<Long, Integer> getScanData(int id){
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -150,21 +138,8 @@ public class Escaneo {
                 EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING};
         Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(columns[0]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[1]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[2]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[3]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[4]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[5]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[6]);
-        stringBuilder.append(";");
         while (cursor.moveToNext()) {
+            stringBuilder.append(";");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
@@ -178,11 +153,16 @@ public class Escaneo {
             stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getString(cursor.getColumnIndexOrThrow(columns[6])));
-            stringBuilder.append(";");
         }
         cursor.close();
 
-        return stringBuilder.toString();
+        String all = stringBuilder.toString();
+
+        if (!all.isEmpty()) {
+            return all.substring(1);
+        }
+
+        return all;
     }
 
     public void updateDatosConsumo(int datos) {

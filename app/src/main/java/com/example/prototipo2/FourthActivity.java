@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -18,8 +19,10 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -61,7 +64,6 @@ public class FourthActivity extends AppCompatActivity {
         iv01.getLayoutParams().height = tv02.getMeasuredHeight();
         iv01.requestLayout();
 
-
         ImageView iv02 = this.findViewById(R.id.fourth_iv_02);
         tv03.measure(0, 0);
         iv02.getLayoutParams().height = tv03.getMeasuredHeight();
@@ -77,7 +79,8 @@ public class FourthActivity extends AppCompatActivity {
         iv04.getLayoutParams().height = tv05.getMeasuredHeight();
         iv04.requestLayout();
 
-        String[] rows = huella.getAllRows().split(";");
+        List<String> rows = new ArrayList<>(Arrays.asList(huella.getAllRows().split(";")));
+        rows.removeAll(Collections.singletonList(""));
 
         TableLayout tabLay01 = this.findViewById(R.id.fourth_tablay_01);
         ArrayList<TableRow> tabLay01_Rows = new ArrayList<>();
@@ -86,7 +89,7 @@ public class FourthActivity extends AppCompatActivity {
 
         Map<String, Float>  hashMap = new HashMap<>();
 
-        for (int i = 0; i < rows.length; i++) {
+        for (int i = 0; i <= rows.size(); i++) {
             tabLay01_Rows.add(new TableRow(this));
             TableLayout.LayoutParams tllp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
             tllp.setMargins(0, 0, 0, dpToPx(verticalMargin));
@@ -133,7 +136,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(3));
                 first = false;
             } else {
-                String[] r = rows[i].split(",");
+                String[] r = rows.get(i-1).split(",");
                 Escaneo escaneo = new Escaneo(getApplicationContext());
                 long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
                 DateHandler dh = new DateHandler();
@@ -180,7 +183,7 @@ public class FourthActivity extends AppCompatActivity {
 
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
 
-        if (rows.length < 2) {
+        if (rows.isEmpty()) {
             btn01.setVisibility(View.GONE);
         }
 

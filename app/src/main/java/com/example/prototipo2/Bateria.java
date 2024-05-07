@@ -92,55 +92,6 @@ public class Bateria {
         return data;
     }
 
-    public Map<Long, Integer> getLastScanData() {
-        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Escaneo escaneo = new Escaneo(applicationContext);
-        int[] ids = escaneo.getLastScanIDs();
-        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
-        String selection = BateriaContract.BateriaEntry._ID + " >= ? AND " + BateriaContract.BateriaEntry._ID + " <= ?";
-        String[] selectionArgs = {String.valueOf(ids[0]), String.valueOf(ids[1])};
-        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
-        Map<Long, Integer> data = new TreeMap<>();
-        while (cursor.moveToNext()) {
-            data.put(cursor.getLong(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)), cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
-        }
-        cursor.close();
-
-        return data;
-    }
-
-    public String getLastScan() {
-        BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Escaneo escaneo = new Escaneo(applicationContext);
-        int[] ids = escaneo.getLastScanIDs();
-        String selection = BateriaContract.BateriaEntry._ID + " >= ? AND " + BateriaContract.BateriaEntry._ID + " <= ?";
-        String[] selectionArgs = {String.valueOf(ids[0]), String.valueOf(ids[1])};
-        Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, null, selection, selectionArgs, null, null, null);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(BateriaContract.BateriaEntry._ID + "," + BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY + "," + BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS + "," +
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE + "," + BateriaContract.BateriaEntry.COLUMN_TIMESTAMP + ";");
-        while (cursor.moveToNext()) {
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry._ID)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(BateriaContract.BateriaEntry.COLUMN_TIMESTAMP)));
-            stringBuilder.append(";");
-        }
-        cursor.close();
-
-        return stringBuilder.toString();
-    }
-
     public Map<Long, Integer> getRowsDataFilteredByStatus(int stat) {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -206,19 +157,8 @@ public class Bateria {
                 BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(columns[0]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[1]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[2]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[3]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[4]);
-        stringBuilder.append(",");
-        stringBuilder.append(columns[5]);
-        stringBuilder.append(";");
         while (cursor.moveToNext()) {
+            stringBuilder.append(";");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
@@ -230,11 +170,16 @@ public class Bateria {
             stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(columns[5])));
-            stringBuilder.append(";");
         }
         cursor.close();
 
-        return stringBuilder.toString();
+        String all = stringBuilder.toString();
+
+        if (!all.isEmpty()) {
+            return all.substring(1);
+        }
+
+        return all;
     }
 
     public ContentValues toContentValues() {
