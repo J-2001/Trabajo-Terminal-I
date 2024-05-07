@@ -22,11 +22,13 @@ public class Extractor extends Worker {
 
     public Extractor(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
+        Log.i("Pruebas(05): ", "Extractor!");
     }
 
     @NonNull
     @Override
     public Result doWork() {
+        Log.i("Pruebas(06): ", "doWork()");
         String data = getDeviceInfo();
 
         String accion = "";
@@ -34,6 +36,7 @@ public class Extractor extends Worker {
         switch (0) {
             case 0:
                 accion = "Info";
+                Log.i("Pruebas(07): ", "Accion: " + accion);
                 break;
             case 1:
                 Bateria bateria = new Bateria(getApplicationContext());
@@ -50,10 +53,12 @@ public class Extractor extends Worker {
         }
 
         try {
+            Log.i("Pruebas(08): ", "Try...!");
             URL url = new URL("https://trabajo-terminal-servidor.uc.r.appspot.com");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
             try {
+                Log.i("Pruebas(09): ", "openConnection()!");
                 String body = "{\"data\": \"" + data + "\"}";
                 urlConnection.setDoOutput(true);
                 urlConnection.setFixedLengthStreamingMode(body.getBytes().length);
@@ -61,11 +66,13 @@ public class Extractor extends Worker {
 
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("Accion", accion);
+                Log.i("Pruebas(10): ", "Before OutputStream!");
 
                 OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
                 os.write(body.getBytes());
                 os.flush();
                 os.close();
+                Log.i("Pruebas(11): ", "After flush()");
 
                 InputStream is = new BufferedInputStream(urlConnection.getInputStream());
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -75,6 +82,7 @@ public class Extractor extends Worker {
                     baos.write(buffer, 0, nRead);
                 }
                 String response = baos.toString();
+                Log.i("Pruebas(12): ", "response: " + response);
 
                 Log.i("Extractor Response: ", response);
 

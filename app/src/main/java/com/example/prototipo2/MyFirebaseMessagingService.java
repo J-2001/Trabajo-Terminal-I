@@ -42,15 +42,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(@NonNull RemoteMessage message) {
         super.onMessageReceived(message);
+        Log.i("Pruebas(01): ", "onMessageReceived");
 
         Log.d("onMessageReceived()", "From: " + message.getFrom());
 
         if (!message.getData().isEmpty()) {
             Log.d("onMessageReceived()", "Message Data Payload: " + message.getData());
+            Log.i("Pruebas(02): ", "Data: " + message.getData());
 
             if (message.getData().containsKey("info")) {
                 key = 0;
+                //Intent intent = new Intent(this, MainActivity.class);
+                //startActivity(intent);
+                Log.i("Pruebas(03): ", "Before Work Request");
                 WorkRequest workRequest = new OneTimeWorkRequest.Builder(Extractor.class).setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST).build();
+                Log.i("Pruebas(04): ", "Before Work Manager");
                 WorkManager.getInstance(getApplicationContext()).enqueue(workRequest);
             } else if (message.getData().containsKey("extract")) {
                 key = 1;
