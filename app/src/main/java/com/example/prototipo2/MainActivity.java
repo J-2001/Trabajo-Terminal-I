@@ -15,6 +15,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +32,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -110,74 +115,80 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        new Thread(() -> {
-            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-                if (task.isSuccessful()) {
-                    try {
-                        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
-                        String[] columns = {AnalizadorContract.AnalizadorEntry._ID, AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID,
-                                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID, AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS,
-                                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM, AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA,
-                                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, AnalizadorContract.AnalizadorEntry.COLUMN_PZ,
-                                AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
-                        Cursor cursor = dbHelper.getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
-                        StringBuilder stringBuilder = new StringBuilder();
-                        while (cursor.moveToNext()) {
-                            stringBuilder.append(";");
-                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])));
-                            stringBuilder.append(",");
-                            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[8])));
-                        }
-                        cursor.close();
-                        String analizadorDB = stringBuilder.toString();
-                        if (!analizadorDB.isEmpty()) {
-                            analizadorDB = analizadorDB.substring(1);
-                        }
-                        HttpURLConnection urlConnection = (HttpURLConnection) new URL("https://trabajo-terminal-servidor.uc.r.appspot.com").openConnection();
-                        try {
-                            String body = "{\"data\": \"" + new Bateria(getApplicationContext()).getAllRows() + ":" + analizadorDB + ":" +
-                                    new Escaneo(getApplicationContext()).getAllScans() + ":" + new Huella(getApplicationContext()).getAllRows() + "\"}";
-                            urlConnection.setDoOutput(true);
-                            urlConnection.setFixedLengthStreamingMode(body.getBytes().length);
-                            urlConnection.setConnectTimeout(10000);
-                            urlConnection.setRequestProperty("Content-Type", "application/json");
-                            urlConnection.setRequestProperty("Accion", "Upload");
-                            urlConnection.setRequestProperty("Token", task.getResult());
-                            OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
-                            os.write(body.getBytes());
-                            os.flush();
-                            os.close();
-                            InputStream is = new BufferedInputStream(urlConnection.getInputStream());
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            byte[] buffer = new byte[1024];
-                            int nRead;
-                            while ((nRead = is.read(buffer)) != -1) {
-                                baos.write(buffer, 0, nRead);
-                            }
-                            Log.i("MainActivity.onPause()", baos.toString());
-                        } catch (Exception e) {
-                            throw new Exception(e.getCause());
-                        }
-                    } catch (Exception e) {
-                        Log.e("MainActivity.onPause()", e.toString());
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        Handler handler = new Handler(Looper.getMainLooper());
+        executor.execute(() -> handler.post(() -> FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                try {
+                    AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(getApplicationContext());
+                    String[] columns = {AnalizadorContract.AnalizadorEntry._ID, AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID,
+                            AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID, AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS,
+                            AnalizadorContract.AnalizadorEntry.COLUMN_CCPM, AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA,
+                            AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, AnalizadorContract.AnalizadorEntry.COLUMN_PZ,
+                            AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
+                    Cursor cursor = dbHelper.getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while (cursor.moveToNext()) {
+                        stringBuilder.append(";");
+                        stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])));
+                        stringBuilder.append(",");
+                        stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[8])));
                     }
+                    cursor.close();
+                    String analizadorDB = stringBuilder.toString();
+                    if (!analizadorDB.isEmpty()) {
+                        analizadorDB = analizadorDB.substring(1);
+                    }
+                    HttpURLConnection urlConnection = (HttpURLConnection) new URL("https://trabajo-terminal-servidor.uc.r.appspot.com").openConnection();
+                    try {
+                        String body = "{\"data\": \"" + new Bateria(getApplicationContext()).getAllRows() + ":" + analizadorDB + ":" +
+                                new Escaneo(getApplicationContext()).getAllScans() + ":" + new Huella(getApplicationContext()).getAllRows() + "\"}";
+                        urlConnection.setDoOutput(true);
+                        urlConnection.setFixedLengthStreamingMode(body.getBytes().length);
+                        urlConnection.setConnectTimeout(10000);
+                        urlConnection.setRequestProperty("Content-Type", "application/json");
+                        urlConnection.setRequestProperty("Accion", "Upload");
+                        urlConnection.setRequestProperty("Token", task.getResult());
+                        Log.i("Pruebas:", "...01...");
+                        OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
+                        Log.i("Pruebas:", "...02...");
+                        os.write(body.getBytes());
+                        Log.i("Pruebas:", "...03...");
+                        os.flush();
+                        os.close();
+                        Log.i("Pruebas:", "...04...");
+                        InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        int nRead;
+                        while ((nRead = is.read(buffer)) != -1) {
+                            baos.write(buffer, 0, nRead);
+                        }
+                        Log.i("MainActivity.onPause()", baos.toString());
+                    } catch (Exception e) {
+                        Log.e("HttpURLConnection1:", e.toString());
+                        Log.e("HttpURLConnection5:", Arrays.toString(e.getStackTrace()));
+                        throw new Exception(e.getCause());
+                    }
+                } catch (Exception e) {
+                    Log.e("MainActivity.onPause()", e.toString());
                 }
-            });
-        }).start();
+            }
+        })));
     }
 
     private void createNotificationChannel() {
