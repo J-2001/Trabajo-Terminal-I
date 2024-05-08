@@ -8,7 +8,6 @@ import androidx.core.content.ContextCompat;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import android.Manifest;
 import android.app.NotificationChannel;
