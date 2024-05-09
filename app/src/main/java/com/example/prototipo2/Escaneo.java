@@ -132,10 +132,9 @@ public class Escaneo {
     public String getAllScans() {
         EscaneoDBHelper dbHelper = new EscaneoDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] columns = {EscaneoContract.EscaneoEntry._ID, EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID,
-                EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO,
-                EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO, EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE,
-                EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING};
+        String[] columns = {EscaneoContract.EscaneoEntry.COLUMN_START_BATERIA_ID, EscaneoContract.EscaneoEntry.COLUMN_END_BATERIA_ID,
+                EscaneoContract.EscaneoEntry.COLUMN_DURACION_ESCANEO, EscaneoContract.EscaneoEntry.COLUMN_DATOS_CONSUMO,
+                EscaneoContract.EscaneoEntry.COLUMN_AVERAGE_VOLTAGE, EscaneoContract.EscaneoEntry.COLUMN_VIDEO_STREAMING};
         Cursor cursor = db.query(EscaneoContract.EscaneoEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
         while (cursor.moveToNext()) {
@@ -144,15 +143,13 @@ public class Escaneo {
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
+            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(columns[2])));
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[4])));
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getString(cursor.getColumnIndexOrThrow(columns[6])));
+            stringBuilder.append(cursor.getString(cursor.getColumnIndexOrThrow(columns[5])));
         }
         cursor.close();
 

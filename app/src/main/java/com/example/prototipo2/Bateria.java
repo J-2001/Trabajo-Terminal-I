@@ -151,9 +151,9 @@ public class Bateria {
     public String getAllRows() {
         BateriaDBHelper dbHelper = new BateriaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] columns = {BateriaContract.BateriaEntry._ID, BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER,
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY, BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS,
-                BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE, BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
+        String[] columns = {BateriaContract.BateriaEntry.COLUMN_CHARGE_COUNTER, BateriaContract.BateriaEntry.COLUMN_BATTERY_CAPACITY,
+                BateriaContract.BateriaEntry.COLUMN_BATTERY_STATUS, BateriaContract.BateriaEntry.COLUMN_BATTERY_VOLTAGE,
+                BateriaContract.BateriaEntry.COLUMN_TIMESTAMP};
         Cursor cursor = db.query(BateriaContract.BateriaEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
         while (cursor.moveToNext()) {
@@ -164,11 +164,9 @@ public class Bateria {
             stringBuilder.append(",");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])));
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[3])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(columns[5])));
+            stringBuilder.append(cursor.getLong(cursor.getColumnIndexOrThrow(columns[4])));
         }
         cursor.close();
 

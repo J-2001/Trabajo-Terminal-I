@@ -40,17 +40,14 @@ public class Huella {
     public String getAllRows() {
         HuellaDBHelper dbHelper = new HuellaDBHelper(applicationContext);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String[] columns = {HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID, HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID,
-                HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO};
+        String[] columns = {HuellaContract.HuellaEntry.COLUMN_ESCANEO_ID, HuellaContract.HuellaEntry.COLUMN_HUELLA_CARBONO};
         Cursor cursor = db.query(HuellaContract.HuellaEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder stringBuilder = new StringBuilder();
         while (cursor.moveToNext()) {
             stringBuilder.append(";");
             stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])));
             stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[2])));
+            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[1])));
         }
         cursor.close();
 

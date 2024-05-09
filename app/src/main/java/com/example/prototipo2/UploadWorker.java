@@ -25,19 +25,17 @@ public class UploadWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        String[] columns = {AnalizadorContract.AnalizadorEntry._ID, AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID,
-                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID, AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS,
-                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM, AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA,
-                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, AnalizadorContract.AnalizadorEntry.COLUMN_PZ,
-                AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
+        String[] columns = {AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID, AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID,
+                AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS, AnalizadorContract.AnalizadorEntry.COLUMN_CCPM,
+                AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA, AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST,
+                AnalizadorContract.AnalizadorEntry.COLUMN_PZ, AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
         Cursor cursor = new AnalizadorDBHelper(getApplicationContext()).getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder analizadorDB = new StringBuilder();
         while (cursor.moveToNext()) {
-            analizadorDB.append(";").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])))
-                    .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])))
+            analizadorDB.append(";").append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])))
+                    .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[3])))
                     .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])))
-                    .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])))
-                    .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[8])));
+                    .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[7])));
         }
         cursor.close();
         if (analizadorDB.length() > 0) {
