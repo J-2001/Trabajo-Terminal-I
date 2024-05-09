@@ -60,15 +60,6 @@ public class ThirdActivity extends AppCompatActivity {
         for (Float f : dataF.keySet()) {
             entries.add(new Entry(f, dataF.get(f)));
         }
-        Map<Long, Integer> test = new LinkedHashMap<>();
-        test.put(1714109070663L, 1);
-        test.put(1714109170663L, 3);
-        test.put(1714109270663L, 1);
-        test.put(1714109370663L, 4);
-        Map<Float, Integer> testF = formatter(test);
-        for (Float f : testF.keySet()) {
-            entries.add(new Entry(f, testF.get(f)));
-        }
 
         LineDataSet lineDataSet = new LineDataSet(entries, "MyLabel");
         LineData lineData = new LineData(lineDataSet);
@@ -102,46 +93,16 @@ public class ThirdActivity extends AppCompatActivity {
                     for (int id : list) {
                         List<Entry> nEntries = new ArrayList<>();
                         Map<Long, Integer> nData = escaneo.getScansDataFilteredByVideoStreaming(videoStreaming.get(id));
-                        /*if (nData.isEmpty()) {
+                        if (nData.isEmpty()) {
                             chips01.get(id).setEnabled(false);
-                            return;
-                        }*/
+                            continue;
+                        }
                         Map<Float, Integer> nDataF = formatter(nData);
                         for (Float f : nDataF.keySet()) {
                             nEntries.add(new Entry(f, nDataF.get(f)));
                         }
                         LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id));
                         nLineData.addDataSet(nLineDataSet);
-                        if (id == 0) {
-                            List<Entry> xentries = new ArrayList<>();
-                            Map<Long, Integer> ntest = new LinkedHashMap<>();
-                            ntest.put(1714109070663L, 4);
-                            ntest.put(1714109170663L, 3);
-                            ntest.put(1714109270663L, 2);
-                            ntest.put(1714109370663L, 1);
-                            Map<Float, Integer> ntestF = formatter(ntest);
-                            for (Float f : ntestF.keySet()) {
-                                xentries.add(new Entry(f, ntestF.get(f)));
-                            }
-
-                            LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel22");
-                            nLineData.addDataSet(xlineDataSet);
-                        }
-                        if (id == 1) {
-                            List<Entry> xentries = new ArrayList<>();
-                            Map<Long, Integer> ntest = new LinkedHashMap<>();
-                            ntest.put(1714109070663L, 1);
-                            ntest.put(1714109170663L, 2);
-                            ntest.put(1714109270663L, 3);
-                            ntest.put(1714109370663L, 5);
-                            Map<Float, Integer> ntestF = formatter(ntest);
-                            for (Float f : ntestF.keySet()) {
-                                xentries.add(new Entry(f, ntestF.get(f)));
-                            }
-
-                            LineDataSet xlineDataSet = new LineDataSet(xentries, "MyLabel33");
-                            nLineData.addDataSet(xlineDataSet);
-                        }
                     }
                     lineChart.setData(nLineData);
                     lineChart.invalidate();
@@ -220,6 +181,10 @@ public class ThirdActivity extends AppCompatActivity {
                     for (int id : list) {
                         List<Entry> nEntries = new ArrayList<>();
                         Map<Long, Integer> nData = bateria.getRowsDataFilteredByStatus(id);
+                        if (nData.isEmpty()) {
+                            chips03.get(id-2).setEnabled(false);
+                            continue;
+                        }
                         Map<Float, Integer> nDataF = formatter(nData);
                         for (Float f : nDataF.keySet()) {
                             nEntries.add(new Entry(f, nDataF.get(f)));
@@ -262,11 +227,15 @@ public class ThirdActivity extends AppCompatActivity {
                     for (int id : list) {
                         List<Entry> nEntries = new ArrayList<>();
                         Map<Long, Integer> nData = bateria.getRowsDataFilteredByConsumption(id);
+                        if (nData.isEmpty()) {
+                            chips04.get(id).setEnabled(false);
+                            continue;
+                        }
                         Map<Float, Integer> nDataF = formatter(nData);
                         for (Float f : nDataF.keySet()) {
                             nEntries.add(new Entry(f, nDataF.get(f)));
                         }
-                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id).getText());
+                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips04.get(id).getText());
                         nLineData.addDataSet(nLineDataSet);
                     }
                     lineChart.setData(nLineData);

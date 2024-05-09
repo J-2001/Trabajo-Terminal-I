@@ -31,7 +31,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/third_chart_01"
                 android:layout_width="match_parent"
-                android:layout_height="147dp"
+                android:layout_height="148dp"
                 android:layout_marginHorizontal="10dp"/>
 
             <TextView
@@ -58,7 +58,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_01"
                         android:textSize="16sp"
-                        android:layout_marginEnd="20dp"/>
+                        android:layout_marginEnd="20dp"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_02"
@@ -66,7 +67,8 @@
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_02"
                         android:textSize="16sp"
-                        android:layout_marginEnd="20dp"/>
+                        android:layout_marginEnd="20dp"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_03"
@@ -74,14 +76,16 @@
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_03"
                         android:textSize="16sp"
-                        android:layout_marginEnd="20dp"/>
+                        android:layout_marginEnd="20dp"
+                        tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/third_btn_04"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        tools:ignore="ButtonStyle" />
 
                 </LinearLayout>
 

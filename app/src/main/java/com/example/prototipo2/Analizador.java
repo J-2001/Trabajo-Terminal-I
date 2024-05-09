@@ -43,7 +43,6 @@ public class Analizador extends Service {
     private float pz;
     private int excessive;
     private int tiempoIgnorar;
-    private String videoStreaming;
     private BroadcastReceiver br;
     private Bateria bateria;
     private Escaneo escaneo;
@@ -91,7 +90,7 @@ public class Analizador extends Service {
         escaneo.setStartId(currentRowId);
         escaneo.setStartTimeStamp(currentRowTimeStamp);
 
-        videoStreaming = intent.getStringExtra("videostreaming");
+        String videoStreaming = intent.getStringExtra("videostreaming");
         escaneo.setVideoStreaming(videoStreaming);
         Log.i("Pruebas(40): ", "Video Streaming: " + videoStreaming);
 
@@ -178,7 +177,7 @@ public class Analizador extends Service {
             }
         };
         Log.i("Pruebas(12): ", "Analizador - TimerTask Iniciado!");
-        timer.scheduleAtFixedRate(timerTask, 0, 10000);
+        timer.schedule(timerTask, 0, 10000);
         foregroundNotification();
 
         return START_REDELIVER_INTENT;
@@ -330,38 +329,6 @@ public class Analizador extends Service {
 
             return null;
         }
-    }
-
-    public String getAllData(Context context) {
-        AnalizadorDBHelper dbHelper = new AnalizadorDBHelper(context);
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, null, null, null, null, null, null);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(AnalizadorContract.AnalizadorEntry._ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID + "," +
-                AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID + "," + AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS + "," +
-                AnalizadorContract.AnalizadorEntry.COLUMN_CCPM + "," + AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA + "," +
-                AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST + "," + AnalizadorContract.AnalizadorEntry.COLUMN_PZ + ";");
-        while (cursor.moveToNext()) {
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry._ID)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PREVIOUS_BATERIA_ID)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CURRENT_BATERIA_ID)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getInt(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_BATTERY_STATUS)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_CCPM)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_MEDIA)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST)));
-            stringBuilder.append(",");
-            stringBuilder.append(cursor.getFloat(cursor.getColumnIndexOrThrow(AnalizadorContract.AnalizadorEntry.COLUMN_PZ)));
-            stringBuilder.append(";");
-        }
-        cursor.close();
-
-        return stringBuilder.toString();
     }
 
     public ContentValues toContentValues() {

@@ -12,7 +12,6 @@ import android.util.Log;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Bateria {
 

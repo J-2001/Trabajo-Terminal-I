@@ -31,17 +31,17 @@ public class UploadWorker extends Worker {
                 AnalizadorContract.AnalizadorEntry.COLUMN_DESV_EST, AnalizadorContract.AnalizadorEntry.COLUMN_PZ,
                 AnalizadorContract.AnalizadorEntry.COLUMN_EXCESSIVE};
         Cursor cursor = new AnalizadorDBHelper(getApplicationContext()).getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
-        String analizadorDB = "";
+        StringBuilder analizadorDB = new StringBuilder();
         while (cursor.moveToNext()) {
-            analizadorDB += ";" + cursor.getInt(cursor.getColumnIndexOrThrow(columns[0])) + "," + cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])) +
-                    "," + cursor.getInt(cursor.getColumnIndexOrThrow(columns[2])) + "," + cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])) + "," +
-                    cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4])) + "," + cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])) + "," +
-                    cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6])) + "," + cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])) + "," +
-                    cursor.getInt(cursor.getColumnIndexOrThrow(columns[8]));
+            analizadorDB.append(";").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])))
+                    .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[3])))
+                    .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])))
+                    .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[7])))
+                    .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[8])));
         }
         cursor.close();
-        if (!analizadorDB.isEmpty()) {
-            analizadorDB = analizadorDB.substring(1);
+        if (analizadorDB.length() > 0) {
+            analizadorDB.deleteCharAt(0);
         }
         try {
             HttpURLConnection urlConnection = (HttpURLConnection) new URL("https://trabajo-terminal-servidor.uc.r.appspot.com").openConnection();

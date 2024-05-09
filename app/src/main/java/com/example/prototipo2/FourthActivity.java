@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -213,9 +212,6 @@ public class FourthActivity extends AppCompatActivity {
         }
 
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(1, "Uno"));
-        entries.add(new PieEntry(2, "Dos"));
-        entries.add(new PieEntry(3, "Tres"));
         for (float f : treeMap.keySet()) {
             entries.add(new PieEntry(f, treeMap.get(f)));
         }
