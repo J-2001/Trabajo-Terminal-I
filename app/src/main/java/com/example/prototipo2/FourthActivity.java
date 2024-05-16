@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -137,10 +138,10 @@ public class FourthActivity extends AppCompatActivity {
             } else {
                 String[] r = rows.get(i-1).split(",");
                 Escaneo escaneo = new Escaneo(getApplicationContext());
-                long[] timeStamps = escaneo.getScanTimeStamps(r[1]);
+                long[] timeStamps = escaneo.getScanTimeStamps(r[0]);
                 DateHandler dh = new DateHandler();
-                String videoStreaming = escaneo.getScanVideoStreaming(r[1]);
-                float footprint = Float.parseFloat(r[2]);
+                String videoStreaming = escaneo.getScanVideoStreaming(r[0]);
+                float footprint = Float.parseFloat(r[1]);
                 if (footprint > 0) {
                     if (hashMap.containsKey(videoStreaming)) {
                         hashMap.put(videoStreaming, hashMap.get(videoStreaming) + footprint);
@@ -170,7 +171,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(2));
 
                 tabLay01_Rows_TextViews.get(i).add(new TextView(this));
-                tabLay01_Rows_TextViews.get(i).get(3).setText(r[2]);
+                tabLay01_Rows_TextViews.get(i).get(3).setText(r[1]);
                 tabLay01_Rows_TextViews.get(i).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(i).get(3).setGravity(Gravity.CENTER);

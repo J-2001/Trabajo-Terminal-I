@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -85,28 +86,27 @@ public class ThirdActivity extends AppCompatActivity {
 
         chipgrp01.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (pointer[1] == 0) {
-                if (list.isEmpty()) {
-                    lineChart.setData(lineData);
-                    lineChart.invalidate();
-                } else {
-                    LineData nLineData = new LineData();
-                    for (int id : list) {
-                        List<Entry> nEntries = new ArrayList<>();
-                        Map<Long, Integer> nData = escaneo.getScansDataFilteredByVideoStreaming(videoStreaming.get(id));
-                        if (nData.isEmpty()) {
-                            chips01.get(id).setEnabled(false);
-                            continue;
-                        }
-                        Map<Float, Integer> nDataF = formatter(nData);
-                        for (Float f : nDataF.keySet()) {
-                            nEntries.add(new Entry(f, nDataF.get(f)));
-                        }
-                        LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id));
-                        nLineData.addDataSet(nLineDataSet);
+                LineData nLineData = new LineData();
+                for (int id : list) {
+                    List<Entry> nEntries = new ArrayList<>();
+                    Map<Long, Integer> nData = escaneo.getScansDataFilteredByVideoStreaming(videoStreaming.get(id));
+                    if (nData.isEmpty()) {
+                        chips01.get(id).setEnabled(false);
+                        continue;
                     }
-                    lineChart.setData(nLineData);
-                    lineChart.invalidate();
+                    Map<Float, Integer> nDataF = formatter(nData);
+                    for (Float f : nDataF.keySet()) {
+                        nEntries.add(new Entry(f, nDataF.get(f)));
+                    }
+                    LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id));
+                    nLineData.addDataSet(nLineDataSet);
                 }
+                if (nLineData.getDataSetCount() == 0) {
+                    lineChart.setData(lineData);
+                } else {
+                    lineChart.setData(nLineData);
+                }
+                lineChart.invalidate();
             }
         });
 
@@ -173,28 +173,27 @@ public class ThirdActivity extends AppCompatActivity {
 
         chipgrp03.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (pointer[1] == 2) {
-                if (list.isEmpty()) {
-                    lineChart.setData(lineData);
-                    lineChart.invalidate();
-                } else {
-                    LineData nLineData = new LineData();
-                    for (int id : list) {
-                        List<Entry> nEntries = new ArrayList<>();
-                        Map<Long, Integer> nData = bateria.getRowsDataFilteredByStatus(id);
-                        if (nData.isEmpty()) {
-                            chips03.get(id-2).setEnabled(false);
-                            continue;
-                        }
-                        Map<Float, Integer> nDataF = formatter(nData);
-                        for (Float f : nDataF.keySet()) {
-                            nEntries.add(new Entry(f, nDataF.get(f)));
-                        }
-                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id-2).getText());
-                        nLineData.addDataSet(nLineDataSet);
+                LineData nLineData = new LineData();
+                for (int id : list) {
+                    List<Entry> nEntries = new ArrayList<>();
+                    Map<Long, Integer> nData = bateria.getRowsDataFilteredByStatus(id);
+                    if (nData.isEmpty()) {
+                        chips03.get(id-2).setEnabled(false);
+                        continue;
                     }
-                    lineChart.setData(nLineData);
-                    lineChart.invalidate();
+                    Map<Float, Integer> nDataF = formatter(nData);
+                    for (Float f : nDataF.keySet()) {
+                        nEntries.add(new Entry(f, nDataF.get(f)));
+                    }
+                    LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id-2).getText());
+                    nLineData.addDataSet(nLineDataSet);
                 }
+                if (nLineData.getDataSetCount() == 0) {
+                    lineChart.setData(lineData);
+                } else {
+                    lineChart.setData(nLineData);
+                }
+                lineChart.invalidate();
             }
         });
 
