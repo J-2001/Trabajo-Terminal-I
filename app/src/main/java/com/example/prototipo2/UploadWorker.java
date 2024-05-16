@@ -32,7 +32,7 @@ public class UploadWorker extends Worker {
         Cursor cursor = new AnalizadorDBHelper(getApplicationContext()).getReadableDatabase().query(AnalizadorContract.AnalizadorEntry.TABLE_NAME, columns, null, null, null, null, null);
         StringBuilder analizadorDB = new StringBuilder();
         while (cursor.moveToNext()) {
-            analizadorDB.append(";").append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])))
+            analizadorDB.append(";").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[0]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[1])))
                     .append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[2]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[3])))
                     .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[4]))).append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[5])))
                     .append(",").append(cursor.getFloat(cursor.getColumnIndexOrThrow(columns[6]))).append(",").append(cursor.getInt(cursor.getColumnIndexOrThrow(columns[7])));
