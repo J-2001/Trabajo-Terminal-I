@@ -5,7 +5,9 @@
     android:id="@+id/thirdActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ThirdActivity">
+    tools:context=".ThirdActivity"
+    android:background="fcffff"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,34 +16,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/third_tv_01"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:textAppearance="?attr/textAppearanceHeadline6"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="11dp"/>
-            
+                android:layout_marginBottom="11dp"
+                android:gravity="center"
+                android:text="@string/third_tv_01"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/third_chart_01"
                 android:layout_width="match_parent"
                 android:layout_height="148dp"
-                android:layout_marginHorizontal="10dp"/>
+                android:layout_marginHorizontal="10dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/third_tv_02"
-                android:textSize="25sp"
-                android:gravity="center"
                 android:layout_marginTop="11dp"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:text="@string/third_tv_02"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -56,34 +60,42 @@
                         android:id="@+id/third_btn_01"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/third_btn_01"
-                        android:textSize="16sp"
                         android:layout_marginEnd="20dp"
+                        android:backgroundTint="#4d82bc"
+                        android:text="@string/third_btn_01"
+                        android:textColor="#FCFFFF"
+                        android:textSize="16sp"
                         tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/third_btn_02"
-                        android:textSize="16sp"
                         android:layout_marginEnd="20dp"
+                        android:backgroundTint="#4d82bc"
+                        android:text="@string/third_btn_02"
+                        android:textColor="#FCFFFF"
+                        android:textSize="16sp"
                         tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_03"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/third_btn_03"
-                        android:textSize="16sp"
                         android:layout_marginEnd="20dp"
+                        android:backgroundTint="#4d82bc"
+                        android:text="@string/third_btn_03"
+                        android:textColor="#FCFFFF"
+                        android:textSize="16sp"
                         tools:ignore="ButtonStyle" />
 
                     <Button
                         android:id="@+id/third_btn_04"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="#4d82bc"
                         android:text="@string/third_btn_04"
+                        android:textColor="#FCFFFF"
                         android:textSize="16sp"
                         tools:ignore="ButtonStyle" />
 
@@ -95,33 +107,33 @@
                 android:id="@+id/third_chipgrp_01"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="15dp"/>
+                android:visibility="gone" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/third_chipgrp_02"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="15dp"/>
+                android:visibility="gone" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/third_chipgrp_03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="15dp"/>
+                android:visibility="gone" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/third_chipgrp_04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="15dp"/>
+                android:visibility="gone" />
 
         </LinearLayout>
 

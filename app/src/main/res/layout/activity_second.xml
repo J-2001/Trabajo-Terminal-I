@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/second_tv_01"
                 android:textSize="21sp"
+                android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceHeadline6"
