@@ -18,27 +18,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:background="@drawable/gradientedos"
         android:padding="16dp">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="?attr/colorPrimary"
-            android:layout_marginBottom="8dp"
-            tools:text="@string/consejo"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/frag_04_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:textColor="?attr/colorPrimary"
+            tools:text="@string/consejo"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="@string/frag_04_tv_01"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:gravity="center"
-            android:textColor="?attr/colorOnBackground"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
         <ImageView
             android:layout_width="wrap_content"

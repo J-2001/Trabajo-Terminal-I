@@ -18,18 +18,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center_horizontal"
+        android:background="@drawable/gradientedos"
         android:padding="16dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/frag_05_tv"
+            android:id="@+id/frag_06_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="24sp"
+            android:layout_marginBottom="8dp"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
-            android:layout_marginBottom="8dp"
-            tools:text="@string/frag_06_tv_01"/>
+            tools:text="@string/consejo"
+            />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="@string/frag_06_tv_01"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
         <ImageView
             android:layout_width="wrap_content"

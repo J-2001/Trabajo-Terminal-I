@@ -16,7 +16,7 @@ import android.widget.TextView;
  * Use the {@link Consejo02Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Consejo06Fragment extends Fragment {
+public class Consejo08Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class Consejo06Fragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public Consejo06Fragment() {
+    public Consejo08Fragment() {
         // Required empty public constructor
     }
 
@@ -40,8 +40,8 @@ public class Consejo06Fragment extends Fragment {
      * @return A new instance of fragment Consejo02Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Consejo06Fragment newInstance(String param1, String param2) {
-        Consejo06Fragment fragment = new Consejo06Fragment();
+    public static Consejo08Fragment newInstance(String param1, String param2) {
+        Consejo08Fragment fragment = new Consejo08Fragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,13 +62,13 @@ public class Consejo06Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_consejo06, container, false);
+        return inflater.inflate(R.layout.fragment_consejo08, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        TextView tv = view.findViewById(R.id.frag_06_tv);
+        TextView tv = view.findViewById(R.id.frag_08_tv);
         tv.setText(getString(R.string.frag_tv_0, 2));
     }
 }
