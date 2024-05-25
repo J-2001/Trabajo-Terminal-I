@@ -6,7 +6,9 @@
     android:id="@+id/fourthActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FourthActivity">
+    tools:context=".FourthActivity"
+    android:background="@drawable/gradienteuno"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
