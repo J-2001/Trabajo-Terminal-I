@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sixth_tv_01"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:padding="20dp"
                 />
@@ -33,6 +34,7 @@
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:padding="15dp"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:text="@string/sixth_tv_02"/>
 
         </LinearLayout>
