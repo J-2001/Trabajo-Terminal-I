@@ -42,7 +42,7 @@
     <string name="third_chip_03_02">Descargando</string>
     <string name="third_chip_04_01">Consumo Regular</string>
     <string name="third_chip_04_02">Consumo Excesivo</string>
-    <string name="fourth_tv_01">Su\nHuella de Carbono\nes de</string>
+    <string name="fourth_tv_01">Su\nhuella de carbono\nes de</string>
     <string name="fourth_tv_02">Que es equivalente a</string>
     <string name="fourth_tv_11">%.2f gCO2e</string>
     <string name="fourth_tv_12">%.2f litros\nde gasolina\nconsumidos</string>
