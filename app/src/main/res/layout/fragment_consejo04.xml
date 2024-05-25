@@ -61,7 +61,7 @@
             android:textStyle="bold|italic"
             android:text="@string/frag_04_tv_02"
             android:textAlignment="center"
-            android:textColor="?attr/colorOnBackground"
+            android:textColor="@color/black"
             android:layout_marginBottom="16dp"/>
 
         <!-- Aquí se podría colocar una recomendación para

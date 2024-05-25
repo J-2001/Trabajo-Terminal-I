@@ -69,6 +69,6 @@ public class Consejo07Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView tv = view.findViewById(R.id.frag_07_tv);
-        tv.setText(getString(R.string.frag_tv_0, 2));
+        tv.setText(getString(R.string.frag_tv_0, 7));
     }
 }

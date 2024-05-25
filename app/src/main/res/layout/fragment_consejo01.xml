@@ -41,7 +41,7 @@
                 android:layout_marginVertical="16dp"
                 android:gravity="center"
                 android:text="@string/frag_01_tv_01"
-                android:textColor="?attr/colorOnBackground"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <ImageView
@@ -59,7 +59,7 @@
                 android:text="@string/frag_01_tv_02"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceBody1"
-                android:textColor="?attr/colorOnBackground"
+                android:textColor="@color/black"
                 android:textStyle="bold|italic" />
 
             <ImageView

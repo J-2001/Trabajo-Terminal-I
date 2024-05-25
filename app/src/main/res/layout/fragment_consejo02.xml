@@ -40,7 +40,7 @@
             android:maxLines="2"
             android:padding="20dp"
             android:gravity="center"
-            android:textColor="?attr/colorOnBackground"
+            android:textColor="@color/black"
             android:layout_marginBottom="8dp"/>
 
         <ImageView
@@ -59,7 +59,7 @@
             android:textStyle="bold|italic"
             android:textAppearance="?attr/textAppearanceBody1"
             android:text="@string/frag_02_tv_02"
-            android:textColor="?attr/colorOnBackground"
+            android:textColor="@color/black"
             android:layout_marginBottom="16dp"/>
 
         <ImageView
