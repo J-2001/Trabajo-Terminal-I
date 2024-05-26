@@ -94,24 +94,29 @@ Utilizamos la información recopilada para mejorar la eficiencia energética de 
     <string name="frag_05_iv_01">Prohibido carga al maximo, X 100%</string>
     <string name="frag_06_tv_01">Consejo para cuidar la batería</string>
     <string name="frag_06_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_07_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_07_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_08_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_08_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_09_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_09_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_10_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_10_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_11_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_11_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_12_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_12_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_13_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_13_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_14_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_14_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
-    <string name="frag_15_tv_01">Consejo para cuidar la batería</string>
-    <string name="frag_15_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>
+    <string name="frag_07_tv_01">Desactiva las Conexiones Innecesarias</string>
+    <string name="frag_07_tv_02">Apaga el Bluetooth, GPS, Wi-Fi y datos móviles cuando no los necesites\n\n
+Usa el modo avión en áreas con señal débil para evitar que el teléfono busque constantemente señal.</string>
+    <string name="frag_08_tv_01">Controla las Aplicaciones en Segundo Plano</string>
+    <string name="frag_08_tv_02">Revisa y cierra las aplicaciones que se ejecutan en segundo plano.\n\n
+Desactiva las notificaciones push de aplicaciones no esenciales.</string>
+    <string name="frag_09_tv_01">Usa el Modo de Ahorro de Energía</string>
+    <string name="frag_09_tv_02">Activa el modo de ahorro de energía de tu dispositivo cuando la batería esté baja.\n\n
+Algunos teléfonos también ofrecen modos de ahorro de energía ultra, que limitan las funciones a las esenciales.</string>
+    <string name="frag_10_tv_01">Actualiza el Software</string>
+    <string name="frag_10_tv_02">Mantén el sistema operativo y las aplicaciones actualizadas para aprovechar las mejoras de eficiencia energética.</string>
+    <string name="frag_11_tv_01">Gestiona la Carga de la Batería</string>
+    <string name="frag_11_tv_02">No dejes que la batería se descargue completamente ni la cargues al 100% continuamente.\n\n
+Intenta mantener la carga entre el 20% y el 80% para prolongar la vida útil de la batería.</string>
+    <string name="frag_12_tv_01">Desactiva las Funciones No Necesarias</string>
+    <string name="frag_12_tv_02">Apaga la vibración y los tonos de teclado si no son necesarios.\n\n
+Reduce el uso de fondos de pantalla animados y widgets.</string>
+    <string name="frag_13_tv_01">Utiliza el Modo Oscuro</string>
+    <string name="frag_13_tv_02">Si tu teléfono tiene pantalla OLED, el modo oscuro puede reducir el consumo de energía.</string>
+    <string name="frag_14_tv_01">Implementación de un Recordatorio Automático</string>
+    <string name="frag_14_tv_02">Para mejorar aún más la eficiencia, configura recordatorios automáticos para revisar y ajustar estos parámetros periódicamente. Esto puede incluir establecer una alarma.</string>
+    <string name="frag_15_tv_01">Monitorea el uso de la batería</string>
+    <string name="frag_15_tv_02">Revisa el uso de la batería. Observa qué aplicaciones y procesos consumen más energía y ajústalos según sea necesario.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

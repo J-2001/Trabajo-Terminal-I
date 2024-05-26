@@ -64,6 +64,7 @@
             android:textColor="@color/black"
             android:layout_marginBottom="16dp"/>
 
+        <!--
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,6 +74,7 @@
             android:layout_gravity="center"
             app:icon="@drawable/ic_alarm"
             android:layout_marginTop="8dp"/>
+        -->
 
     </LinearLayout>
 
