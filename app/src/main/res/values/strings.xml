@@ -13,7 +13,6 @@
     <string name="max">Max</string>
     <string name="crunchyroll">Crunchyroll</string>
     <string name="vix">ViX</string>
-    <string name="consejo">Consejo</string>
     <string name="extra_0">CATEGORIA</string>
     <string name="extra_1_1">CCPM</string>
     <string name="extra_1_2">MEDIA</string>
@@ -78,6 +77,7 @@ La Aplicación recopila y almacena información sobre el consumo de batería de 
 Uso de la Información
 
 Utilizamos la información recopilada para mejorar la eficiencia energética de tu dispositivo móvil y para proporcionarte análisis detallados sobre el consumo de batería de tus aplicaciones. Esta información nos ayuda a identificar y solucionar problemas de consumo de energía, así como a optimizar el rendimiento de la batería.</string>
+    <string name="consejo">Consejo</string>
     <string name="frag_tv_0">Consejo 0%d</string>
     <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>
     <string name="frag_01_tv_02">Si tu dispositivo móvil se cae, tienes que comprar otro y es más daño al ambiente, por eso ponle una funda para protegerlo.</string>

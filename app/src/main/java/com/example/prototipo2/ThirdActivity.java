@@ -4,20 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,10 +30,12 @@ import java.util.stream.Collectors;
 public class ThirdActivity extends AppCompatActivity {
 
     private List<String> videoStreaming;
+    private Map<String, Integer> colors;
     private List<Integer> scansIds;
     private static final int textSize = 16;
     private static final int horizontalPadding = 28;
     private static final int verticalPadding = 11;
+    private final int duration = 1400;
     private final int[] pointer = {0, 0};
     private ChipGroup chipgrp01;
     private ChipGroup chipgrp02;
@@ -46,12 +52,34 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
 
+        videoStreaming = Arrays.asList(getString(R.string.netflix), getString(R.string.disneyplus), getString(R.string.starplus), getString(R.string.primevideo), getString(R.string.max), getString(R.string.crunchyroll), getString(R.string.vix));
+
+        colors = new HashMap<>();
+        colors.put("Default", getColor(R.color.amarillo_oscuro));
+        colors.put(videoStreaming.get(0), getColor(R.color.netflix));
+        colors.put(videoStreaming.get(1), getColor(R.color.disneyplus));
+        colors.put(videoStreaming.get(2), getColor(R.color.starplus));
+        colors.put(videoStreaming.get(3), getColor(R.color.primevideo));
+        colors.put(videoStreaming.get(4), getColor(R.color.max));
+        colors.put(videoStreaming.get(5), getColor(R.color.crunchyroll));
+        colors.put(videoStreaming.get(6), getColor(R.color.vix));
+        colors.put(getString(R.string.third_chip_03_01), getColor(R.color.verde_oscuro));
+        colors.put(getString(R.string.third_chip_03_02), getColor(R.color.rojo_oscuro));
+        colors.put(getString(R.string.third_chip_04_01), getColor(R.color.azul));
+        colors.put(getString(R.string.third_chip_04_02), getColor(R.color.rojo));
+
         LineChart lineChart = this.findViewById(R.id.third_chart_01);
-        lineChart.getDescription().setEnabled(false);
+        //lineChart.setBackgroundColor(getColor(R.color.gris));
         lineChart.getXAxis().setValueFormatter(new TimeStampAxisValueFormatter());
-        lineChart.getXAxis().setLabelRotationAngle(293);
+        lineChart.getXAxis().setLabelRotationAngle(315); //315
         lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getAxisLeft().setValueFormatter(new LargeValueFormatter());
         lineChart.getAxisRight().setEnabled(false);
+        lineChart.getLegend().setTextSize(11);
+        lineChart.getLegend().setFormSize(9);
+        lineChart.getLegend().setXEntrySpace(15);
+        lineChart.getLegend().setFormToTextSpace(5);
+        lineChart.getDescription().setEnabled(false);
 
         List<Entry> entries = new ArrayList<>();
         Bateria bateria = new Bateria(getApplicationContext());
@@ -61,16 +89,18 @@ public class ThirdActivity extends AppCompatActivity {
             entries.add(new Entry(f, dataF.get(f)));
         }
 
-        LineDataSet lineDataSet = new LineDataSet(entries, "MyLabel");
+        LineDataSet lineDataSet = new LineDataSet(entries, "Capacidad de la Batería (en microamperios-hora)");
+        lineDataSet.setColor(colors.get("Default"));
+        lineDataSet.setHighlightEnabled(false);
+
         LineData lineData = new LineData(lineDataSet);
+
         lineChart.setData(lineData);
-        lineChart.invalidate();
+        lineChart.animateX(duration);
 
         Escaneo escaneo = new Escaneo(getApplicationContext());
 
         chipgrp01 = this.findViewById(R.id.third_chipgrp_01);
-
-        videoStreaming = Arrays.asList(getString(R.string.netflix), getString(R.string.disneyplus), getString(R.string.starplus), getString(R.string.primevideo), getString(R.string.max), getString(R.string.crunchyroll), getString(R.string.vix));
 
         for (int i = 0; i < videoStreaming.size(); i++) {
             chips01.add(new Chip(this));
@@ -98,6 +128,8 @@ public class ThirdActivity extends AppCompatActivity {
                         nEntries.add(new Entry(f, nDataF.get(f)));
                     }
                     LineDataSet nLineDataSet = new LineDataSet(nEntries, videoStreaming.get(id));
+                    nLineDataSet.setColor(colors.get(videoStreaming.get(id)));
+                    nLineDataSet.setHighlightEnabled(false);
                     nLineData.addDataSet(nLineDataSet);
                 }
                 if (nLineData.getDataSetCount() == 0) {
@@ -105,7 +137,7 @@ public class ThirdActivity extends AppCompatActivity {
                 } else {
                     lineChart.setData(nLineData);
                 }
-                lineChart.invalidate();
+                lineChart.animateX(duration);
             }
         });
 
@@ -118,7 +150,7 @@ public class ThirdActivity extends AppCompatActivity {
         for (int i = 0; i< scansIds.size(); i++) {
             chips02.add(new Chip(this));
             long[] scanTS = escaneo.getScanTimeStamps(String.valueOf(scansIds.get(i)));
-            String text = dh.timeStampToFormattedString(scanTS[0]) + "-" + dh.timeStampToFormattedString(scanTS[1]);
+            String text = dh.timeStampToFormattedString(scanTS[0]) + " - " + dh.timeStampToFormattedString(scanTS[1]);
             chips02.get(i).setText(text);
             chips02.get(i).setId(i);
             chips02.get(i).setLayoutParams(new ChipGroup.LayoutParams(ChipGroup.LayoutParams.WRAP_CONTENT, ChipGroup.LayoutParams.WRAP_CONTENT));
@@ -130,24 +162,25 @@ public class ThirdActivity extends AppCompatActivity {
 
         chipgrp02.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (pointer[1] == 1) {
-                if (list.isEmpty()) {
-                    lineChart.setData(lineData);
-                    lineChart.invalidate();
-                } else {
-                    LineData nLineData = new LineData();
-                    for (int id : list) {
-                        List<Entry> nEntries = new ArrayList<>();
-                        Map<Long, Integer> nData = escaneo.getScanData(scansIds.get(id));
-                        Map<Float, Integer> nDataF = formatter(nData);
-                        for (Float f : nDataF.keySet()) {
-                            nEntries.add(new Entry(f, nDataF.get(f)));
-                        }
-                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips02.get(id).getText());
-                        nLineData.addDataSet(nLineDataSet);
+                LineData nLineData = new LineData();
+                for (int id : list) {
+                    List<Entry> nEntries = new ArrayList<>();
+                    Map<Long, Integer> nData = escaneo.getScanData(scansIds.get(id));
+                    Map<Float, Integer> nDataF = formatter(nData);
+                    for (Float f : nDataF.keySet()) {
+                        nEntries.add(new Entry(f, nDataF.get(f)));
                     }
-                    lineChart.setData(nLineData);
-                    lineChart.invalidate();
+                    LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips02.get(id).getText());
+                    nLineDataSet.setColor(colors.get(escaneo.getScanVideoStreaming(String.valueOf(scansIds.get(id)))));
+                    nLineDataSet.setHighlightEnabled(false);
+                    nLineData.addDataSet(nLineDataSet);
                 }
+                if (nLineData.getDataSetCount() == 0) {
+                    lineChart.setData(lineData);
+                } else {
+                    lineChart.setData(nLineData);
+                }
+                lineChart.animateX(duration);
             }
         });
 
@@ -185,6 +218,8 @@ public class ThirdActivity extends AppCompatActivity {
                         nEntries.add(new Entry(f, nDataF.get(f)));
                     }
                     LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips03.get(id-2).getText());
+                    nLineDataSet.setColor(colors.get((String) chips03.get(id-2).getText()));
+                    nLineDataSet.setHighlightEnabled(false);
                     nLineData.addDataSet(nLineDataSet);
                 }
                 if (nLineData.getDataSetCount() == 0) {
@@ -192,7 +227,7 @@ public class ThirdActivity extends AppCompatActivity {
                 } else {
                     lineChart.setData(nLineData);
                 }
-                lineChart.invalidate();
+                lineChart.animateX(duration);
             }
         });
 
@@ -217,28 +252,29 @@ public class ThirdActivity extends AppCompatActivity {
 
         chipgrp04.setOnCheckedStateChangeListener((chipGroup, list) -> {
             if (pointer[1] == 3) {
-                if (list.isEmpty()) {
-                    lineChart.setData(lineData);
-                    lineChart.invalidate();
-                } else {
-                    LineData nLineData = new LineData();
-                    for (int id : list) {
-                        List<Entry> nEntries = new ArrayList<>();
-                        Map<Long, Integer> nData = bateria.getRowsDataFilteredByConsumption(id);
-                        if (nData.isEmpty()) {
-                            chips04.get(id).setEnabled(false);
-                            continue;
-                        }
-                        Map<Float, Integer> nDataF = formatter(nData);
-                        for (Float f : nDataF.keySet()) {
-                            nEntries.add(new Entry(f, nDataF.get(f)));
-                        }
-                        LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips04.get(id).getText());
-                        nLineData.addDataSet(nLineDataSet);
+                LineData nLineData = new LineData();
+                for (int id : list) {
+                    List<Entry> nEntries = new ArrayList<>();
+                    Map<Long, Integer> nData = bateria.getRowsDataFilteredByConsumption(id);
+                    if (nData.isEmpty()) {
+                        chips04.get(id).setEnabled(false);
+                        continue;
                     }
-                    lineChart.setData(nLineData);
-                    lineChart.invalidate();
+                    Map<Float, Integer> nDataF = formatter(nData);
+                    for (Float f : nDataF.keySet()) {
+                        nEntries.add(new Entry(f, nDataF.get(f)));
+                    }
+                    LineDataSet nLineDataSet = new LineDataSet(nEntries, (String) chips04.get(id).getText());
+                    nLineDataSet.setColor(colors.get((String) chips04.get(id).getText()));
+                    nLineDataSet.setHighlightEnabled(false);
+                    nLineData.addDataSet(nLineDataSet);
                 }
+                if (nLineData.getDataSetCount() == 0) {
+                    lineChart.setData(lineData);
+                } else {
+                    lineChart.setData(nLineData);
+                }
+                lineChart.animateX(duration);
             }
         });
 
@@ -259,7 +295,7 @@ public class ThirdActivity extends AppCompatActivity {
                 pointer[1] = 0;
             }
             lineChart.setData(lineData);
-            lineChart.invalidate();
+            lineChart.animateX(duration);
         });
 
         Button btn02 = this.findViewById(R.id.third_btn_02);
@@ -279,7 +315,7 @@ public class ThirdActivity extends AppCompatActivity {
                 pointer[1] = 1;
             }
             lineChart.setData(lineData);
-            lineChart.invalidate();
+            lineChart.animateX(duration);
         });
 
         Button btn03 = this.findViewById(R.id.third_btn_03);
@@ -299,7 +335,7 @@ public class ThirdActivity extends AppCompatActivity {
                 pointer[1] = 2;
             }
             lineChart.setData(lineData);
-            lineChart.invalidate();
+            lineChart.animateX(duration);
         });
 
         Button btn04 = this.findViewById(R.id.third_btn_04);
@@ -319,7 +355,7 @@ public class ThirdActivity extends AppCompatActivity {
                 pointer[1] = 3;
             }
             lineChart.setData(lineData);
-            lineChart.invalidate();
+            lineChart.animateX(duration);
         });
 
     }

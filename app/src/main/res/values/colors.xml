@@ -3,8 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red_a700">#FFD50000</color>
-    <color name="transparent">#00000000</color>
-    <color name="footprint">#FF0F961E</color>
+    <color name="rojo">#FF0000</color>
+    <color name="azul">#0000FF</color>
+    <color name="gris">#808080</color>
+    <color name="rojo_oscuro">#8B0000</color>
+    <color name="verde_oscuro">#009846</color>
+    <color name="amarillo_oscuro">#FFC000</color>
+    <color name="footprint">#0F961E</color>
     <color name="netflix">#E30B14</color>
     <color name="disneyplus">#0C8798</color>
     <color name="starplus">#241C44</color>
@@ -12,6 +17,7 @@
     <color name="max">#042EEE</color>
     <color name="crunchyroll">#EE6B05</color>
     <color name="vix">#FB6762</color>
+    <color name="transparent">#00000000</color>
     <color name="splash_background">#E0F7FA</color>
     <color name="splash_text">#00796B</color>
     <color name="splash_logo_tint">#004D40</color>
