@@ -171,7 +171,7 @@ public class Analizador extends Service {
                     insertIntoDB();
                 } else {
                     // Des-comentar para Personalizar la Notificación
-                    showNotification();
+                    //showNotification();
                     Log.i("Pruebas(13): ", "bateria.checkValues(): false\nNo ha cambiado la carga de la bateria");
                 }
                 if (tiempoIgnorar > 0) {
