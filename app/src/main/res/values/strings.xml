@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">Nombre de la Aplicación</string>
+    <string name="app_name">ESCO²M</string>
+    <string name="logotipo">ESCO²M</string>
     <string name="channel_id_1">Analizador01</string>
     <string name="channel_id_2">Analizador02</string>
     <string name="channel_name">Analizador</string>
@@ -18,7 +19,10 @@
     <string name="extra_1_2">MEDIA</string>
     <string name="extra_1_3">DESVEST</string>
     <string name="extra_1_4">PZ</string>
-    <string name="broadcast_action_1">ignorarNotificacionesAnalizador</string>
+    <string name="broadcast_action_1">IGNORAR (5 MIN)</string>
+    <string name="notification_tv_01">Se detectó un consumo excesivo de energía a las %s mientras visualizaba la aplicación %s.\n\nPor lo cuál se recomienda disminuir el brillo de la pantalla, cerrar otras aplicaciones o tomar un pequeño descanso.</string>
+    <string name="notification_tv_02">Presione para Ver los Detalles Específicos…</string>
+    <string name="notification_tv_03">Aplicación de VS: %s\nHora Detectada: %s\nEstado del Dispositivo: %s\nVoltaje detectado: %.2f\nCCpm (Modelo): %.2f\nMedia (Modelo): %.2f\nDesviación Estándar (Modelo): %.2f\nProbabilidad de Consumo Excesivo (Modelo): %.2f</string>
     <string name="main_btn_01">Selección de aplicación de Video Streaming</string>
     <string name="main_btn_02">Ver el comportamiento de la batería</string>
     <string name="main_btn_03">Ver huella de carbono generada</string>
@@ -90,7 +94,7 @@ Utilizamos la información recopilada para mejorar la eficiencia energética de 
     <string name="frag_04_tv_02">Dejar que la batería se descargue por completo (0%) propicia a que se degrade rápidamente la salud de la batería. Para evitar esto se recomienda que se cargue el dispositivo móvil cuando la batería alcance el 20%; por lo general, los dispositivos notifican al usuario cuando esto sucede o el icono de la batería se torna de un color rojo. Esto entra en la "regla de oro": 20–80.</string>
     <string name="frag_04_iv_01">Teléfono descargado, batería baja</string>
     <string name="frag_05_tv_01">Evite dejar el dispositivo enchufado</string>
-   <string name="frag_05_tv_02">Cuando la carga del dispositivo móvil se encuentra cerca de su capacidad máxima, se fuerzan y degradan las celdas de iones, lo que se traduce en que su salud se resiente y la autonomía baja con el tiempo. Por esto se recomienda desconectar el dispositivo del enchufe cuando este alcance un 80% de carga. Esto entra en la "regla de oro": 20–80</string>
+    <string name="frag_05_tv_02">Cuando la carga del dispositivo móvil se encuentra cerca de su capacidad máxima, se fuerzan y degradan las celdas de iones, lo que se traduce en que su salud se resiente y la autonomía baja con el tiempo. Por esto se recomienda desconectar el dispositivo del enchufe cuando este alcance un 80% de carga. Esto entra en la "regla de oro": 20–80</string>
     <string name="frag_05_iv_01">Prohibido carga al maximo, X 100%</string>
     <string name="frag_06_tv_01">Consejo para cuidar la batería</string>
     <string name="frag_06_tv_02">Un consejo para cuidar la batería de tu móvil es reducir el brillo de la pantalla y usar el brillo automático. Esto puede ayudar a prolongar la duración de la batería considerablemente.</string>

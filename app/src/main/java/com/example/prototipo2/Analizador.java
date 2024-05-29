@@ -1,6 +1,7 @@
 package com.example.prototipo2;
 
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -18,10 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -71,7 +72,7 @@ public class Analizador extends Service {
         timer = new Timer();
         br = new MyBroadcastReceiver();
         IntentFilter filter = new IntentFilter(getString(R.string.broadcast_action_1));
-        this.registerReceiver(br, filter);
+        ContextCompat.registerReceiver(this, br, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
     }
 
     @Override
@@ -169,10 +170,13 @@ public class Analizador extends Service {
 
                     insertIntoDB();
                 } else {
+                    // Des-comentar para Personalizar la Notificación
+                    showNotification();
                     Log.i("Pruebas(13): ", "bateria.checkValues(): false\nNo ha cambiado la carga de la bateria");
                 }
                 if (tiempoIgnorar > 0) {
                     tiempoIgnorar -= 1;
+                    Log.i("Pruebas(40): ", "tiempoIgnorar: " + tiempoIgnorar);
                 }
             }
         };
@@ -185,9 +189,9 @@ public class Analizador extends Service {
 
     public void foregroundNotification() {
         Notification notification = new NotificationCompat.Builder(this, getString(R.string.channel_id_1))
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Trabajo Terminal")
-                .setContentText("Analizador iniciado...")
+                .setSmallIcon(R.drawable.ic_logoappfondo)
+                .setContentTitle("Analizador Iniciado")
+                .setContentText("Analizando el comportamiento de la batería...")
                 .build();
         startForeground(1, notification);
     }
@@ -196,11 +200,13 @@ public class Analizador extends Service {
     public void onDestroy() {
         timerTask.cancel();
         escaneo.setEndId(currentRowId);
-        escaneo.setEndTimeStamp(currentRowTimeStamp);
-        averageVoltage = averageVoltage / voltageCounter;
-        escaneo.setAverageVoltage(averageVoltage);
-        escaneo.insertIntoDB();
-        this.unregisterReceiver(br);
+        if (escaneo.getStartId() != escaneo.getEndId()) {
+            escaneo.setEndTimeStamp(currentRowTimeStamp);
+            averageVoltage = averageVoltage / voltageCounter;
+            escaneo.setAverageVoltage(averageVoltage);
+            escaneo.insertIntoDB();
+        }
+        unregisterReceiver(br);
         Log.w("Analizador", "Analizador destruido");
     }
 
@@ -213,8 +219,10 @@ public class Analizador extends Service {
     public class MyBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Analizador MyBroadcastReceiver", Objects.requireNonNull(intent.getAction()));
-            tiempoIgnorar = intent.getIntExtra("MIN", 0) * 6;
+            Log.d("Analizador MyBroadcastReceiver", intent.getAction());
+            tiempoIgnorar = intent.getIntExtra("MIN", 1) * 6;
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.cancel(2);
         }
     }
 
@@ -257,22 +265,28 @@ public class Analizador extends Service {
     public void showNotification() {
         Intent intent = new Intent(this, NotificationActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        intent.putExtra("desc", "Se detecto un cambio en la carga de la bateria...");
-        intent.putExtra("stat", String.valueOf(status));
-        intent.putExtra("ccpm", String.valueOf(ccpm));
-        intent.putExtra("media", String.valueOf(media));
-        intent.putExtra("desvest", String.valueOf(desvEst));
-        intent.putExtra("pz", String.valueOf(pz));
+        intent.putExtra("timestamp", currentRowTimeStamp);
+        intent.putExtra("averagevoltage", averageVoltage / voltageCounter);
+        intent.putExtra("status", status);
+        intent.putExtra("ccpm", ccpm);
+        intent.putExtra("media", media);
+        intent.putExtra("desvest", desvEst);
+        intent.putExtra("pz", pz);
+        intent.putExtra("videostreaming", escaneo.getVideoStreaming());
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
-        Intent ignorar; // Action Button
+        Intent ignorar = new Intent();
+        ignorar.setAction(getString(R.string.broadcast_action_1));
+        ignorar.putExtra("MIN", 5);
+        PendingIntent ignorarPendingIntent = PendingIntent.getBroadcast(this, 0, ignorar, PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Pruebas Analizador")
-                .setContentText("Probando...") //P(Z>x)" + pz)
+                .setSmallIcon(R.drawable.ic_logoappfondo)
+                .setContentTitle("Consumo de Energía Excesivo Detectado")
+                .setContentText("Presione para más información....")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_logoappfondo, getString(R.string.broadcast_action_1), ignorarPendingIntent)
                 .setAutoCancel(true);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
@@ -287,19 +301,9 @@ public class Analizador extends Service {
             Log.i("Pruebas(38): ", "No se tiene permiso para mostrar notificaciones!");
             return;
         }
+
         notificationManager.notify(2, builder.build());
         Log.i("Pruebas(39): ", "Notificacion mostrada!");
-        /*Intent ignorar = new Intent(this, MyBroadcastReceiver.class);
-        ignorar.setAction(getString(R.string.broadcast_action_1));
-        ignorar.putExtra("MIN", 1);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, getString(R.string.channel_id_2))
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("P(Z>x)")
-                .setContentText(String.valueOf(pz))
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_launcher_foreground, "Omitir (1 min)", ignorarPendingIntent)
-                .setAutoCancel(true);*/
     }
 
     public void insertIntoDB() {

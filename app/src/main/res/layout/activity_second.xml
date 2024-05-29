@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradientedos"
-    tools:context=".SecondActivity"
-    >
+    tools:context=".SecondActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="20dp">
+        android:fadingEdgeLength="25dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,13 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/second_tv_01"
-                android:textSize="30sp"
+                android:textSize="29sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:layout_marginTop="35dp"
-                android:layout_marginBottom="25dp"/>
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="36dp"
+                android:layout_marginHorizontal="27dp"/>
 
             <ImageButton
                 android:id="@+id/second_ibtn_netflix"
@@ -40,9 +40,9 @@
                 android:src="@drawable/netflix"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_netflix"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -53,9 +53,9 @@
                 android:src="@drawable/disneyplus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_disneyplus"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -66,9 +66,9 @@
                 android:src="@drawable/starplus"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_starplus"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -79,9 +79,9 @@
                 android:src="@drawable/primevideo"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_primevideo"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -92,9 +92,9 @@
                 android:src="@drawable/max"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_max"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -105,9 +105,9 @@
                 android:src="@drawable/crunchyroll"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_crunchyroll"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 
@@ -118,9 +118,9 @@
                 android:src="@drawable/vix"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:padding="5dp"
+                android:padding="10dp"
                 android:contentDescription="@string/second_ibtn_vix"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="@null"/>
 

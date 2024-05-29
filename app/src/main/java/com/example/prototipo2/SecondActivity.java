@@ -243,7 +243,7 @@ public class SecondActivity extends AppCompatActivity {
             ibtnMax.setClickable(true);
             ibtnCrunchyroll.setClickable(true);
             ibtnVix.setClickable(true);
-            Snackbar snackbar = Snackbar.make(coordinatorLayout, "Analizador Terminado!", Snackbar.LENGTH_SHORT);
+            Snackbar snackbar = Snackbar.make(coordinatorLayout, "App Cerrada!", Snackbar.LENGTH_SHORT);
             snackbar.show();
         }
     }

@@ -93,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
 
             String token = task.getResult();
 
-            Snackbar snackbar = Snackbar.make(coordinatorLayout, "Token: " + token, Snackbar.LENGTH_LONG);
-            snackbar.show();
             Log.d("FCM Token:", token);
         });
     }
