@@ -2,8 +2,12 @@ package com.example.prototipo2;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
@@ -16,6 +20,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +28,14 @@ import android.widget.TextView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,10 +50,61 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> new Thread(() -> {
+            try {
+                HttpURLConnection urlConnection = (HttpURLConnection) new URL("https://trabajo-terminal-servidor.uc.r.appspot.com").openConnection();
+                byte[] body = ("{\"error\": \"" + e + "\"}").getBytes();
+                try {
+                    urlConnection.setDoOutput(true);
+                    urlConnection.setFixedLengthStreamingMode(body.length);
+                    urlConnection.setConnectTimeout(10000);
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setRequestProperty("Accion", "Exception");
+                    urlConnection.setRequestProperty("Name", new DateHandler().newFormattedString());
+                    OutputStream os = new BufferedOutputStream(urlConnection.getOutputStream());
+                    os.write(body);
+                    os.flush();
+                    os.close();
+                    InputStream is = new BufferedInputStream(urlConnection.getInputStream());
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    byte[] buffer = new byte[1024];
+                    int nRead;
+                    while ((nRead = is.read(buffer)) != -1) {
+                        baos.write(buffer, 0, nRead);
+                    }
+                    Log.i("ExceptionHandler", baos.toString());
+                } catch (Exception ex) {
+                    throw new Exception(ex);
+                } finally {
+                    urlConnection.disconnect();
+                }
+            } catch (Exception ex) {
+                Log.e("ExceptionHandler", ex.toString());
+            }
+
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                Log.i("ExceptionHandler", "No se tiene permiso para mostrar notificaciones!");
+                return;
+            }
+
+            NotificationManagerCompat.from(getApplicationContext()).notify(3, new NotificationCompat.Builder(getApplicationContext(), getString(R.string.channel_id_3))
+                    .setSmallIcon(R.drawable.ic_logoappfondo).setContentTitle("Ocurrió Algo Inesperado")
+                    .setContentText("Expanda para mayor información...")
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText("Durante la ejecución de la aplicación, se generó un error no antes previsto.\nEl reporte correspondiente ha sido envíado al servidor.\nComuníquese con los administradores, para indicar que esta situación se generó en su dispositivo.\nQuede a la espera de una nueva versión de la aplicación (con las implementaciones necesarias aplicadas)."))
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT).setAutoCancel(true).build());
+
+            Process.killProcess(Process.myPid());
+        }).start());
 
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
@@ -112,9 +176,12 @@ public class MainActivity extends AppCompatActivity {
         channel1.setDescription(getString(R.string.channel_description_1));
         NotificationChannel channel2 = new NotificationChannel(getString(R.string.channel_id_2), getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
         channel2.setDescription(getString(R.string.channel_description_2));
+        NotificationChannel channel3 = new NotificationChannel(getString(R.string.channel_id_3), getString(R.string.channel_name), NotificationManager.IMPORTANCE_DEFAULT);
+        channel3.setDescription(getString(R.string.channel_description_3));
         NotificationManager notificationManager = getSystemService(NotificationManager.class);
         notificationManager.createNotificationChannel(channel1);
         notificationManager.createNotificationChannel(channel2);
+        notificationManager.createNotificationChannel(channel3);
     }
 
     private void askNotificationPermission() {
