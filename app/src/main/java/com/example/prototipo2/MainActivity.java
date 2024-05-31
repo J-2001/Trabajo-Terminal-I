@@ -2,7 +2,6 @@ package com.example.prototipo2;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
@@ -25,7 +24,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -109,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         createNotificationChannel();
-
-        CoordinatorLayout coordinatorLayout = this.findViewById(R.id.mainActivity);
 
         Button btn01 = this.findViewById(R.id.main_btn_01);
 
