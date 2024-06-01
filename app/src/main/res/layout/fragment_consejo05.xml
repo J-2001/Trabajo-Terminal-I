@@ -59,7 +59,8 @@
             android:textStyle="bold|italic"
             android:text="@string/frag_05_tv_02"
             android:textColor="@color/black"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            tools:ignore="VisualLintLongText" />
 
         <!-- Aquí se podría colocar una recomendación para
              establecer una alarma o notificación cuando el

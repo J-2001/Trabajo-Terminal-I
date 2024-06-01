@@ -62,7 +62,8 @@
             android:textStyle="bold|italic"
             android:text="@string/frag_06_tv_02"
             android:textColor="@color/black"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            tools:ignore="VisualLintLongText" />
 
         <!--
         <com.google.android.material.button.MaterialButton
