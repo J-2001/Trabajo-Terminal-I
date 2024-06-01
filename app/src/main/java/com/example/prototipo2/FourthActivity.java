@@ -201,10 +201,6 @@ public class FourthActivity extends AppCompatActivity {
 
         Button btn01 = this.findViewById(R.id.fourth_btn_01);
 
-        if (rows.isEmpty()) {
-            btn01.setVisibility(View.GONE);
-        }
-
         btn01.setOnClickListener(v -> {
             tabLay01.setVisibility(View.VISIBLE);
             btn01.setVisibility(View.GONE);
@@ -250,6 +246,11 @@ public class FourthActivity extends AppCompatActivity {
 
         chart.setData(data);
         chart.animateY(3000);
+
+        if (rows.isEmpty()) {
+            btn01.setVisibility(View.GONE);
+            chart.setVisibility(View.GONE);
+        }
     }
 
     private float[] getEquivalencias(float gco2e) {

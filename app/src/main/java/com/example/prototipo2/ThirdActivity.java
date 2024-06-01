@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -360,6 +361,18 @@ public class ThirdActivity extends AppCompatActivity {
             lineChart.animateX(duration);
         });
 
+        TextView tv = this.findViewById(R.id.third_tv);
+
+        if (data.isEmpty()) {
+            tv.setVisibility(View.VISIBLE);
+            lineChart.setVisibility(View.GONE);
+            TextView tvt = this.findViewById(R.id.third_tv_t);
+            tvt.setVisibility(View.GONE);
+            btn01.setVisibility(View.GONE);
+            btn02.setVisibility(View.GONE);
+            btn03.setVisibility(View.GONE);
+            btn04.setVisibility(View.GONE);
+        }
     }
 
     private void clearFilters() {
