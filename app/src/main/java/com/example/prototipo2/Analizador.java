@@ -216,7 +216,7 @@ public class Analizador extends Service {
         return null;
     }
 
-    public class MyBroadcastReceiver extends BroadcastReceiver {
+    private class MyBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d("Analizador MyBroadcastReceiver", intent.getAction());

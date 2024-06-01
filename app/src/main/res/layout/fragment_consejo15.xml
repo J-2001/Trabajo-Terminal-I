@@ -44,10 +44,11 @@
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_logoenergi"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/frag_05_iv_01"
             android:scaleType="centerInside"
-            android:layout_marginBottom="16dp"/>
+            android:src="@drawable/ic_logoenergi"
+            tools:ignore="ImageContrastCheck" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
