@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">ESCO²M</string>
     <string name="logotipo">ESCO²M</string>
     <string name="channel_name">Analizador</string>
@@ -69,7 +69,7 @@
     <string name="fifth_btn_nxt">Siguiente\nConsejo</string>
     <string name="sixth_tv_01">Acuerdo de Privacidad</string>
     <string name="sixth_tv_02">Si continua utilizando esta aplicación, significa que usted está de acuerdo con el siguiente Acuerdo de Privacidad.</string>
-    <string name="sixth_tv_03">
+    <string name="sixth_tv_03" tools:ignore="Typos">
         El presente Acuerdo de Privacidad establece los términos en que la aplicación Energy Spent and CO² Manager (ESCO²M) usa y protege la información que es proporcionada por sus usuarios al momento de utilizarla.\nEl equipo responsable por esta aplicación (de aquí en adelente: \"Administradores\") está comprometido con la seguridad de los datos de sus usuarios.\nCuando se recaba la información con la cual el usuario pueda ser identificado, se hace asegurándose que sólo se empleará de acuerdo con los términos de este documento.\nSin embargo este Acuerdo de Privacidad puede cambiar con el tiempo o ser actualizado por lo que se recomienda y enfatiza al usuario revisar continuamente esta sección para asegurarse que está de acuerdo con dichos cambios.
         \n\nInformación que es recogida
         \n\nESCO²M podrá recoger información relacionada a lo siguiente:
