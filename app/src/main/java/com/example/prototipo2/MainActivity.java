@@ -26,7 +26,6 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.BufferedInputStream;
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             Process.killProcess(Process.myPid());
         }).start());
 
-        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        // FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         createNotificationChannel();
 

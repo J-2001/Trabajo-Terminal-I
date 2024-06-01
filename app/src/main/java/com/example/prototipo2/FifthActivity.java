@@ -14,7 +14,7 @@ import java.util.Random;
 
 public class FifthActivity extends AppCompatActivity {
 
-    private final int limit = 16;
+    private final int limit = 15;
     private final List<Integer> order = new ArrayList<>();
     private int pointer = 0;
     private boolean first = true;
@@ -90,22 +90,22 @@ public class FifthActivity extends AppCompatActivity {
             case 8:
                 loadFragment(new Consejo09Fragment());
                 break;
-            case 10:
+            case 9:
                 loadFragment(new Consejo10Fragment());
                 break;
-            case 11:
+            case 10:
                 loadFragment(new Consejo11Fragment());
                 break;
-            case 12:
+            case 11:
                 loadFragment(new Consejo12Fragment());
                 break;
-            case 13:
+            case 12:
                 loadFragment(new Consejo13Fragment());
                 break;
-            case 14:
+            case 13:
                 loadFragment(new Consejo14Fragment());
                 break;
-            case 15:
+            case 14:
                 loadFragment(new Consejo15Fragment());
                 break;
         }
