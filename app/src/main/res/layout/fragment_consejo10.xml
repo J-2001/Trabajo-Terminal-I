@@ -31,7 +31,6 @@
             android:textColor="?attr/colorPrimary"
             tools:text="@string/consejo" />
 
-
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -28,7 +28,6 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
-            tools:text="@string/consejo"
             android:layout_marginBottom="8dp"/>
 
         <com.google.android.material.textview.MaterialTextView

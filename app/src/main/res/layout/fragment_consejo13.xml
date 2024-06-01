@@ -10,14 +10,7 @@
     app:cardUseCompatPadding="true"
     android:layout_margin="16dp"
     tools:context=".Consejo09Fragment"
-    android:background="@drawable/gradienteuno"
-    >
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fragment_consejo11.xml" />
+    android:background="@drawable/gradienteuno">
 
     <LinearLayout
         android:layout_width="match_parent"
