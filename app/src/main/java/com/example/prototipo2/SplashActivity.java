@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private static final int SPLASH_DISPLAY_LENGTH = 3000; // 3 segundos
+    private static final int SPLASH_DISPLAY_LENGTH = 2000; // 2 segundos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,23 +27,17 @@ public class SplashActivity extends AppCompatActivity {
         logo.startAnimation(scaleAnimation);
         logo.startAnimation(fadeInAnimation);
 
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                // Cargar la animación fade_out
-                Animation fadeOutAnimation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.logo_fade_out);
-                logo.startAnimation(fadeOutAnimation);
+        new Handler().postDelayed(() -> {
+            // Cargar la animación fade_out
+            Animation fadeOutAnimation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.logo_fade_out);
+            logo.startAnimation(fadeOutAnimation);
 
-                // Iniciar la actividad principal después del tiempo de espera y animación fade_out
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
-                        SplashActivity.this.startActivity(mainIntent);
-                        SplashActivity.this.finish();
-                    }
-                }, fadeOutAnimation.getDuration());
-            }
+            // Iniciar la actividad principal después del tiempo de espera y animación fade_out
+            new Handler().postDelayed(() -> {
+                Intent mainIntent = new Intent(SplashActivity.this, MainActivity.class);
+                SplashActivity.this.startActivity(mainIntent);
+                SplashActivity.this.finish();
+            }, fadeOutAnimation.getDuration());
         }, SPLASH_DISPLAY_LENGTH - 1000); // Iniciar fade out un segundo antes del fin de SPLASH_DISPLAY_LENGTH
     }
 }

@@ -13,7 +13,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
-import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -68,7 +67,6 @@ public class ThirdActivity extends AppCompatActivity {
         colors.put(getString(R.string.third_chip_04_02), getColor(R.color.rojo));
 
         LineChart lineChart = this.findViewById(R.id.third_chart_01);
-        //lineChart.setBackgroundColor(getColor(R.color.gris));
         lineChart.getXAxis().setValueFormatter(new TimeStampAxisValueFormatter());
         lineChart.getXAxis().setLabelRotationAngle(315); //315
         lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);

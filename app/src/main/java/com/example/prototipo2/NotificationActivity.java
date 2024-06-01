@@ -9,11 +9,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
-
-import java.util.Arrays;
-import java.util.List;
-
 public class NotificationActivity extends Activity {
 
     @Override
@@ -80,4 +75,5 @@ public class NotificationActivity extends Activity {
         finish();
         return super.onTouchEvent(event);
     }
+
 }
