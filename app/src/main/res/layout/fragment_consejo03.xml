@@ -62,7 +62,8 @@
             android:textAppearance="?attr/textAppearanceBody1"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            tools:ignore="VisualLintLongText" />
 
         <!-- Aquí se podría colocar una recomendación para
              buscar en Maps, lugares cercanos que reparan

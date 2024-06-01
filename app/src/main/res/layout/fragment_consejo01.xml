@@ -60,7 +60,8 @@
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:textColor="@color/black"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic"
+                tools:ignore="VisualLintLongText" />
 
             <ImageView
                 android:layout_width="wrap_content"

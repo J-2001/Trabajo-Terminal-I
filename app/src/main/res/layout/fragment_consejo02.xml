@@ -60,15 +60,17 @@
             android:textAppearance="?attr/textAppearanceBody1"
             android:text="@string/frag_02_tv_02"
             android:textColor="@color/black"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            tools:ignore="VisualLintLongText" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:src="@drawable/frag_02_iv_02"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/frag_02_iv_02"
             android:scaleType="centerInside"
-            android:layout_marginBottom="16dp"/>
+            android:src="@drawable/frag_02_iv_02"
+            tools:ignore="ImageContrastCheck" />
 
     </LinearLayout>
 
