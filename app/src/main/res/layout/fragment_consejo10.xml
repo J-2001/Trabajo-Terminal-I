@@ -10,8 +10,7 @@
     app:cardUseCompatPadding="true"
     android:layout_margin="16dp"
     tools:context=".Consejo09Fragment"
-    android:background="@drawable/gradienteuno"
-    >
+    android:background="@drawable/gradienteuno">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -30,8 +29,7 @@
             android:layout_marginBottom="8dp"
             android:textStyle="bold"
             android:textColor="?attr/colorPrimary"
-            tools:text="@string/consejo"
-            />
+            tools:text="@string/consejo" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -48,10 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="170dp"
             android:layout_marginTop="20dp"
-            android:src="@drawable/ic_logoenergi"
+            android:layout_marginBottom="16dp"
             android:contentDescription="@string/frag_05_iv_01"
             android:scaleType="centerInside"
-            android:layout_marginBottom="16dp"/>
+            android:src="@drawable/ic_logoenergi"
+            tools:ignore="ImageContrastCheck" />
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
@@ -64,17 +63,6 @@
             android:textColor="@color/black"
             android:layout_marginBottom="16dp"/>
 
-        <!--
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Configurar Alarma"
-            android:backgroundTint="#4d82bc"
-            android:textColor="#FCFFFF"
-            android:layout_gravity="center"
-            app:icon="@drawable/ic_alarm"
-            android:layout_marginTop="8dp"/>
-        -->
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
