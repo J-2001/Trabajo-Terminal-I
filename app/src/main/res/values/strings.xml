@@ -21,6 +21,7 @@
     <string name="extra_1_3">DESVEST</string>
     <string name="extra_1_4">PZ</string>
     <string name="broadcast_action_1">IGNORAR (5 MIN)</string>
+    <string name="broadcast_action_2">PRIMERA VEZ</string>
     <string name="notification_tv_01">Se detectó un consumo excesivo de energía a las %s mientras visualizaba la aplicación %s.\n\nPor lo cuál se recomienda disminuir el brillo de la pantalla, cerrar otras aplicaciones o tomar un pequeño descanso.</string>
     <string name="notification_tv_02">Presione para Ver los Detalles Específicos…</string>
     <string name="notification_tv_03">Aplicación de VS: %s\nHora Detectada: %s\nEstado del Dispositivo: %s\nVoltaje detectado: %.2f\nCCpm (Modelo): %.2f\nMedia (Modelo): %.2f\nDesviación Estándar (Modelo): %.2f\nProbabilidad de Consumo Excesivo (Modelo): %.2f</string>
@@ -59,7 +60,6 @@
     <string name="fourth_iv_03">Gas Icon</string>
     <string name="fourth_iv_04">Coal Icon</string>
     <string name="fourth_btn_01_0">Ver Huella de Carbono por Uso de Aplicaciones de Video Streaming</string>
-    <string name="fourth_btn_01_1">Ocultar Huella por Escaneo</string>
     <string name="fourth_tl_tv_01">Inicio</string>
     <string name="fourth_tl_tv_02">Fin</string>
     <string name="fourth_tl_tv_03">Aplicación</string>
@@ -68,17 +68,24 @@
     <string name="fifth_btn_prv">Consejo\nAnterior</string>
     <string name="fifth_btn_nxt">Siguiente\nConsejo</string>
     <string name="sixth_tv_01">Acuerdo de Privacidad</string>
-    <string name="sixth_tv_02">Acuerdo de Privacidad para la Aplicación de Control de Consumo de Batería
-
-Este Acuerdo de Privacidad describe cómo se recopilan, utilizan y comparten tus datos cuando utilizas nuestra aplicación de Control de Consumo de Batería ("la Aplicación").
-
-Información Recopilada
-
-La Aplicación recopila y almacena información sobre el consumo de batería de tu dispositivo móvil. Esto puede incluir datos como el nivel de batería, la duración de la carga y descarga, el consumo de energía de las aplicaciones instaladas y otros datos relacionados con el rendimiento de la batería.
-
-Uso de la Información
-
-Utilizamos la información recopilada para mejorar la eficiencia energética de tu dispositivo móvil y para proporcionarte análisis detallados sobre el consumo de batería de tus aplicaciones. Esta información nos ayuda a identificar y solucionar problemas de consumo de energía, así como a optimizar el rendimiento de la batería.</string>
+    <string name="sixth_tv_02">Si continua utilizando esta aplicación, significa que usted está de acuerdo con el siguiente Acuerdo de Privacidad.</string>
+    <string name="sixth_tv_03">
+        El presente Acuerdo de Privacidad establece los términos en que la aplicación Energy Spent and CO² Manager (ESCO²M) usa y protege la información que es proporcionada por sus usuarios al momento de utilizarla.\nEl equipo responsable por esta aplicación (de aquí en adelente: \"Administradores\") está comprometido con la seguridad de los datos de sus usuarios.\nCuando se recaba la información con la cual el usuario pueda ser identificado, se hace asegurándose que sólo se empleará de acuerdo con los términos de este documento.\nSin embargo este Acuerdo de Privacidad puede cambiar con el tiempo o ser actualizado por lo que se recomienda y enfatiza al usuario revisar continuamente esta sección para asegurarse que está de acuerdo con dichos cambios.
+        \n\nInformación que es recogida
+        \n\nESCO²M podrá recoger información relacionada a lo siguiente:
+        \n\n■ Valores para identificar el dispositivo, por ejemplo: Fabricante, Marca, Modelo, Versión de Android.
+        \n■ Atributos del estado de la batería, por ejemplo: Carga restante en unidades de microamperios-hora, Voltaje presente en el dispositivo, Nivel de energía en porcentaje, Estado del dispositivo.
+        \n■ Características de la aplicación de Video Streaming ejecutada, por ejemplo: Nombre de la aplicación, Fecha y hora en que se comenzo a usar, Fecha y hora en que se termino de visualizar.
+        \n\nUso de la información recogida
+        \n\nESCO²M emplea la información con el fin de analizar el comportamiento de la batería cuando el usuario utiliza una aplicación de Video Streaming, particularmente para detectar cuando el consumo de la batería es excesivo y así notificarlo al usuario para que este tenga un cuidado responsable de su dispositivo.\nA su vez, se utiliza esta información para calcular la huella de carbono resultante de la energía gastada por el dispositivo.\nEs posible que de forma periódica, los datos sean envíados directamente a un servidor privado, de forma que los Administradores realicen un procesamiento sobre estos y así puedan encontrar patrones de comportamiento, así como detalles que consideren relevantes para realizar un trabajo de investigación, que pueda brindarle algún beneficio futuro al usuario.
+        \n\nLos Administradores estan altamente comprometidos para cumplir con el compromiso de mantener la información del usuario segura.\nSe utilizan los sistemas más avanzados proporcionados por la empresa Google LLC, que son actualizados constantemente para asegurarse que no exista ningún acceso no autorizado.
+        \n\nEnlaces a Terceros
+        \n\nESCO²M puede contener enlaces para descargar otras aplicaciones de Video Streaming que pudieran ser de interés para el usuario.\nUna vez que el usuario acceda a estos enlaces y abandone la aplicación, los Administradores ya no tendrán control sobre el sitio al que se es redirigido y por lo tanto no son responsables de los términos o privacidad ni de la protección de los datos del usuario en esos otros sitios terceros.\nDichos sitios están sujetos a sus propias políticas de privacidad por lo cual es recomendable que el usuario los consulte para confirmar que está de acuerdo con estas.
+        \n\nControl de su información personal
+        \n\nEn cualquier momento el usuario puede restringir la recopilación o el uso de la información que es proporcionada a ESCO²M.\nPara esto, el usuario deberá de comunicarse por el medio correspondiente (por ejemplo, correo electrónico) con los Administradores para pedir la cancelación de la recopilación de los datos.
+        \n\nLos Administradores no venderán, cederán ni distribuirán la información que es recopilada sin el consentimiento del usuario, salvo que esta sea requerida por un juez con una orden judicial.
+        \n\nESCO²M se reserva el derecho de cambiar los términos del presente Acuerdo de Privacidad en cualquier momento.
+    </string>
     <string name="consejo">Consejo</string>
     <string name="frag_tv_0">Consejo 0%d</string>
     <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>

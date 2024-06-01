@@ -14,7 +14,10 @@ import androidx.work.WorkManager;
 import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +39,8 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BroadcastReceiver br;
+
     private final ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
@@ -49,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        br = new MyBroadcastReceiver();
+        IntentFilter filter = new IntentFilter(getString(R.string.broadcast_action_2));
+        ContextCompat.registerReceiver(this, br, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
 
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> new Thread(() -> {
             try {
@@ -164,6 +173,20 @@ public class MainActivity extends AppCompatActivity {
                 WorkManager.getInstance(getApplicationContext()).enqueue(new OneTimeWorkRequest.Builder(UploadWorker.class).setInputData(new Data.Builder().putString("TOKEN", task.getResult()).build()).build());
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(br);
+    }
+
+    private class MyBroadcastReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Intent acuerdoPrivacidad = new Intent(MainActivity.this, SixthActivity.class);
+            startActivity(acuerdoPrivacidad);
+        }
     }
 
     private void createNotificationChannel() {

@@ -2,8 +2,10 @@ package com.example.prototipo2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -27,16 +31,25 @@ import java.util.TreeMap;
 
 public class FourthActivity extends AppCompatActivity {
 
-    private boolean btn01_status = false;
-    private static final int textSize = 11;
-    private static final int horizontalMargin1 = 1;
-    private static final int horizontalMargin2 = 1;
-    private static final int verticalMargin = 1;
+    private static final int verticalMargin = 7;
+    private static final int horizontalMargin1 = 30;
+    private static final int horizontalMargin2 = 15;
+    private static final float textSize = 13.5F;
+    private final Map<String, Integer> colors = new HashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fourth);
+
+        colors.put(getString(R.string.netflix), getColor(R.color.netflix));
+        colors.put(getString(R.string.disneyplus), getColor(R.color.disneyplus));
+        colors.put(getString(R.string.starplus), getColor(R.color.starplus));
+        colors.put(getString(R.string.primevideo), getColor(R.color.primevideo));
+        colors.put(getString(R.string.max), getColor(R.color.max));
+        colors.put(getString(R.string.crunchyroll), getColor(R.color.crunchyroll));
+        colors.put(getString(R.string.vix), getColor(R.color.vix));
 
         Huella huella = new Huella(getApplicationContext());
         float huellaCarbono = huella.getTotalHuellaCarbono();
@@ -100,19 +113,22 @@ public class FourthActivity extends AppCompatActivity {
 
             if (first) {
                 tabLay01_Rows_TextViews.get(i).get(0).setText(getString(R.string.fourth_tl_tv_01));
-                tabLay01_Rows_TextViews.get(i).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(i).get(0).setTextSize(textSize+1);
+                TableRow.LayoutParams trlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+                trlp.setMargins(dpToPx(horizontalMargin1), 0, dpToPx(horizontalMargin1), 0);
+                tabLay01_Rows_TextViews.get(i).get(0).setLayoutParams(trlp);
+                tabLay01_Rows_TextViews.get(i).get(0).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(i).get(0).setTypeface(tabLay01_Rows_TextViews.get(i).get(0).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(0).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(0).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(0));
 
                 tabLay01_Rows_TextViews.get(i).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(i).get(1).setText(getString(R.string.fourth_tl_tv_02));
-                TableRow.LayoutParams trlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
-                trlp.setMargins(dpToPx(horizontalMargin1), 0, 0, 0);
+                tabLay01_Rows_TextViews.get(i).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(1).setLayoutParams(trlp);
-                tabLay01_Rows_TextViews.get(i).get(1).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(1).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(i).get(1).setTypeface(tabLay01_Rows_TextViews.get(i).get(1).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(1).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(1).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(1));
 
@@ -121,16 +137,18 @@ public class FourthActivity extends AppCompatActivity {
                 TableRow.LayoutParams trlp1 = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
                 trlp1.setMargins(dpToPx(horizontalMargin2), 0, dpToPx(horizontalMargin2), 0);
                 tabLay01_Rows_TextViews.get(i).get(2).setLayoutParams(trlp1);
-                tabLay01_Rows_TextViews.get(i).get(2).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(2).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(i).get(2).setTypeface(tabLay01_Rows_TextViews.get(i).get(2).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(2).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(2).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(2));
 
                 tabLay01_Rows_TextViews.get(i).add(new TextView(this));
                 tabLay01_Rows_TextViews.get(i).get(3).setText(getString(R.string.fourth_tl_tv_04));
                 tabLay01_Rows_TextViews.get(i).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
-                tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize+1);
+                tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize);
                 tabLay01_Rows_TextViews.get(i).get(3).setTypeface(tabLay01_Rows_TextViews.get(i).get(3).getTypeface(), Typeface.BOLD);
+                tabLay01_Rows_TextViews.get(i).get(3).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(3).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(3));
                 first = false;
@@ -152,6 +170,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(i).get(0).setText(dh.timeStampToFormattedString(timeStamps[0]));
                 tabLay01_Rows_TextViews.get(i).get(0).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(0).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(0).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(0).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(0));
 
@@ -159,6 +178,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(i).get(1).setText(dh.timeStampToFormattedString(timeStamps[1]));
                 tabLay01_Rows_TextViews.get(i).get(1).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(1).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(1).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(1).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(1));
 
@@ -166,6 +186,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(i).get(2).setText(videoStreaming);
                 tabLay01_Rows_TextViews.get(i).get(2).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(2).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(2).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(2).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(2));
 
@@ -173,6 +194,7 @@ public class FourthActivity extends AppCompatActivity {
                 tabLay01_Rows_TextViews.get(i).get(3).setText(r[1]);
                 tabLay01_Rows_TextViews.get(i).get(3).setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
                 tabLay01_Rows_TextViews.get(i).get(3).setTextSize(textSize);
+                tabLay01_Rows_TextViews.get(i).get(3).setTextColor(getColor(R.color.black));
                 tabLay01_Rows_TextViews.get(i).get(3).setGravity(Gravity.CENTER);
                 tabLay01_Rows.get(i).addView(tabLay01_Rows_TextViews.get(i).get(3));
             }
@@ -187,18 +209,22 @@ public class FourthActivity extends AppCompatActivity {
         }
 
         btn01.setOnClickListener(v -> {
-            if (btn01_status) {
-                tabLay01.setVisibility(View.GONE);
-                btn01.setText(getString(R.string.fourth_btn_01_0));
-                btn01_status = false;
-            } else {
-                tabLay01.setVisibility(View.VISIBLE);
-                btn01.setText(getString(R.string.fourth_btn_01_1));
-                btn01_status = true;
-            }
+            tabLay01.setVisibility(View.VISIBLE);
+            btn01.setVisibility(View.GONE);
         });
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+
         PieChart chart = this.findViewById(R.id.fourth_chart_01);
+        chart.setCenterText("Huella de Carbono Total Generada por Cada Aplicación de Video Streaming");
+        chart.setCenterTextSize(17.5F);
+        chart.setCenterTextTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        chart.setHoleRadius(56);
+        chart.setTransparentCircleRadius(0);
+        chart.setEntryLabelTextSize(15);
+        chart.setEntryLabelTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        chart.getLegend().setEnabled(false);
         chart.getDescription().setEnabled(false);
 
         Map<Float, String> treeMap = new TreeMap<>(Collections.reverseOrder());
@@ -211,15 +237,22 @@ public class FourthActivity extends AppCompatActivity {
             }
         }
 
-        ArrayList<PieEntry> entries = new ArrayList<>();
+        List<PieEntry> entries = new ArrayList<>();
+        List<Integer> colores = new ArrayList<>();
         for (float f : treeMap.keySet()) {
             entries.add(new PieEntry(f, treeMap.get(f)));
+            colores.add(colors.get(treeMap.get(f)));
         }
 
-        PieDataSet dataSet = new PieDataSet(entries, "MyLabel");
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(colores);
+
         PieData data = new PieData(dataSet);
+        data.setValueTextColor(getColor(R.color.white));
+        data.setValueTextSize(12);
+
         chart.setData(data);
-        chart.invalidate();
+        chart.animateY(3000);
     }
 
     private float[] getEquivalencias(float gco2e) {

@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipDrawable;
 import com.google.android.material.chip.ChipGroup;
@@ -92,6 +93,7 @@ public class ThirdActivity extends AppCompatActivity {
         lineDataSet.setHighlightEnabled(false);
 
         LineData lineData = new LineData(lineDataSet);
+        lineData.setValueFormatter(new LargeValueFormatter());
 
         lineChart.setData(lineData);
         lineChart.animateX(duration);
@@ -133,6 +135,7 @@ public class ThirdActivity extends AppCompatActivity {
                 if (nLineData.getDataSetCount() == 0) {
                     lineChart.setData(lineData);
                 } else {
+                    nLineData.setValueFormatter(new LargeValueFormatter());
                     lineChart.setData(nLineData);
                 }
                 lineChart.animateX(duration);
@@ -176,6 +179,7 @@ public class ThirdActivity extends AppCompatActivity {
                 if (nLineData.getDataSetCount() == 0) {
                     lineChart.setData(lineData);
                 } else {
+                    nLineData.setValueFormatter(new LargeValueFormatter());
                     lineChart.setData(nLineData);
                 }
                 lineChart.animateX(duration);
@@ -223,6 +227,7 @@ public class ThirdActivity extends AppCompatActivity {
                 if (nLineData.getDataSetCount() == 0) {
                     lineChart.setData(lineData);
                 } else {
+                    nLineData.setValueFormatter(new LargeValueFormatter());
                     lineChart.setData(nLineData);
                 }
                 lineChart.animateX(duration);
@@ -270,6 +275,7 @@ public class ThirdActivity extends AppCompatActivity {
                 if (nLineData.getDataSetCount() == 0) {
                     lineChart.setData(lineData);
                 } else {
+                    nLineData.setValueFormatter(new LargeValueFormatter());
                     lineChart.setData(nLineData);
                 }
                 lineChart.animateX(duration);

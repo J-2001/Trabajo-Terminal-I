@@ -1,5 +1,6 @@
 package com.example.prototipo2;
 
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
@@ -27,6 +28,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             try {
                 Log.d("MyFirebaseMessagingService", "Registrando el token en el servidor");
                 sendRegistrationToServer(token);
+                Intent intent = new Intent();
+                intent.setAction(getString(R.string.broadcast_action_2));
+                sendBroadcast(intent);
             } catch (Exception e) {
                 Log.e("Error al registrar el token en el servidor: ", e.toString());
             }

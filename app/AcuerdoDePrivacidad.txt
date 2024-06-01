@@ -1,0 +1,35 @@
+El presente Acuerdo de Privacidad establece los términos en que la aplicación Energy Spent and CO² Manager (ESCO²M) usa y protege la información que es proporcionada por sus usuarios al momento de utilizarla.
+El equipo responsable por esta aplicación (de aquí en adelente: "Administradores") está comprometido con la seguridad de los datos de sus usuarios.
+Cuando se recaba la información con la cual el usuario pueda ser identificado, se hace asegurándose que sólo se empleará de acuerdo con los términos de este documento.
+Sin embargo este Acuerdo de Privacidad puede cambiar con el tiempo o ser actualizado por lo que se recomienda y enfatiza al usuario revisar continuamente esta sección para asegurarse que está de acuerdo con dichos cambios.
+
+Información que es recogida
+
+ESCO²M podrá recoger información relacionada a lo siguiente:
+    ■ Valores para identificar el dispositivo, por ejemplo: Fabricante, Marca, Modelo, Versión de Android.
+    ■ Atributos del estado de la batería, por ejemplo: Carga restante en unidades de microamperios-hora, Voltaje presente en el dispositivo, Nivel de energía en porcentaje, Estado del dispositivo.
+    ■ Características de la aplicación de Video Streaming ejecutada, por ejemplo: Nombre de la aplicación, Fecha y hora en que se comenzo a usar, Fecha y hora en que se termino de visualizar.
+
+Uso de la información recogida
+
+ESCO²M emplea la información con el fin de analizar el comportamiento de la batería cuando el usuario utiliza una aplicación de Video Streaming, particularmente para detectar cuando el consumo de la batería es excesivo y así notificarlo al usuario para que este tenga un cuidado responsable de su dispositivo.
+A su vez, se utiliza esta información para calcular la huella de carbono resultante de la energía gastada por el dispositivo.
+Es posible que de forma periódica, los datos sean envíados directamente a un servidor privado, de forma que los Administradores realicen un procesamiento sobre estos y así puedan encontrar patrones de comportamiento, así como detalles que consideren relevantes para realizar un trabajo de investigación, que pueda brindarle algún beneficio futuro al usuario.
+
+Los Administradores estan altamente comprometidos para cumplir con el compromiso de mantener la información del usuario segura.
+Se utilizan los sistemas más avanzados proporcionados por la empresa Google LLC, que son actualizados constantemente para asegurarse que no exista ningún acceso no autorizado.
+
+Enlaces a Terceros
+
+ESCO²M puede contener enlaces para descargar otras aplicaciones de Video Streaming que pudieran ser de interés para el usuario.
+Una vez que el usuario acceda a estos enlaces y abandone la aplicación, los Administradores ya no tendrán control sobre el sitio al que se es redirigido y por lo tanto no son responsables de los términos o privacidad ni de la protección de los datos del usuario en esos otros sitios terceros.
+Dichos sitios están sujetos a sus propias políticas de privacidad por lo cual es recomendable que el usuario los consulte para confirmar que está de acuerdo con estas.
+
+Control de su información personal
+
+En cualquier momento el usuario puede restringir la recopilación o el uso de la información que es proporcionada a ESCO²M.
+Para esto, el usuario deberá de comunicarse por el medio correspondiente (por ejemplo, correo electrónico) con los Administradores para pedir la cancelación de la recopilación de los datos.
+
+Los Administradores no venderán, cederán ni distribuirán la información que es recopilada sin el consentimiento del usuario, salvo que esta sea requerida por un juez con una orden judicial.
+
+ESCO²M se reserva el derecho de cambiar los términos del presente Acuerdo de Privacidad en cualquier momento.
