@@ -31,7 +31,6 @@
             android:textColor="?attr/colorPrimary"
             tools:text="@string/consejo" />
 
-
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,17 +62,6 @@
             android:layout_marginBottom="16dp"
             tools:ignore="VisualLintLongText" />
 
-        <!--
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="#4d82bc"
-            android:text="Configurar Alarma"
-            android:textColor="#FCFFFF"
-            app:icon="@drawable/ic_alarm" />
-        -->
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
