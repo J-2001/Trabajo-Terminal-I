@@ -46,6 +46,16 @@
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="36dp"/>
+
+            <Button
+                android:id="@+id/sixth_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sixth_btn"
+                android:textSize="20sp"
+                android:padding="15dp"
+                android:layout_marginHorizontal="50dp"
                 android:layout_marginBottom="30dp"/>
 
         </LinearLayout>

@@ -86,6 +86,7 @@
         \n\nLos Administradores no venderán, cederán ni distribuirán la información que es recopilada sin el consentimiento del usuario, salvo que esta sea requerida por un juez con una orden judicial.
         \n\nESCO²M se reserva el derecho de cambiar los términos del presente Acuerdo de Privacidad en cualquier momento.
     </string>
+    <string name="sixth_btn">Regresar al Menú Principal</string>
     <string name="consejo">Consejo</string>
     <string name="frag_tv_0">Consejo 0%d</string>
     <string name="frag_01_tv_01">Protege tu dispositivo móvil de caídas</string>

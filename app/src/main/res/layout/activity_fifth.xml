@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FifthActivity"
-    android:background="@drawable/gradienteuno"
-    >
+    android:background="@drawable/gradienteuno">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -52,18 +51,20 @@
                     android:text="@string/fifth_btn_prv"
                     android:textSize="18sp"
                     android:enabled="false"
-                    android:layout_marginEnd="12.5dp"/>
+                    android:layout_marginEnd="12.5dp"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
                 <Button
                     android:id="@+id/fifth_btn_nxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#4d82bc"
-                    android:textColor="#FCFFFF"
+                    android:backgroundTint="@color/background_tint_01"
+                    android:textColor="@color/text_color_01"
                     android:layout_weight="1"
                     android:text="@string/fifth_btn_nxt"
                     android:textSize="18sp"
-                    android:layout_marginStart="12.5dp"/>
+                    android:layout_marginStart="12.5dp"
+                    tools:ignore="ButtonStyle,VisualLintButtonSize" />
 
             </LinearLayout>
 
