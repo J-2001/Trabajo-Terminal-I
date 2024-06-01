@@ -116,6 +116,7 @@ Desactiva las notificaciones push de aplicaciones no esenciales.</string>
     <string name="frag_09_tv_01">Usa el Modo de Ahorro de Energía</string>
     <string name="frag_09_tv_02">Activa el modo de ahorro de energía de tu dispositivo cuando la batería esté baja.\n\n
 Algunos teléfonos también ofrecen modos de ahorro de energía ultra, que limitan las funciones a las esenciales.</string>
+    <string name="frag_tv_1">Consejo %d</string>
     <string name="frag_10_tv_01">Actualiza el Software</string>
     <string name="frag_10_tv_02">Mantén el sistema operativo y las aplicaciones actualizadas para aprovechar las mejoras de eficiencia energética.</string>
     <string name="frag_11_tv_01">Gestiona la Carga de la Batería</string>

@@ -22,10 +22,6 @@ public class Consejo13Fragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public Consejo13Fragment() {
         // Required empty public constructor
     }
@@ -51,10 +47,7 @@ public class Consejo13Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        // TODO: Rename and change types of parameters
     }
 
     @Override
@@ -68,6 +61,6 @@ public class Consejo13Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView tv = view.findViewById(R.id.frag_13_tv);
-        tv.setText(getString(R.string.frag_tv_0, 13));
+        tv.setText(getString(R.string.frag_tv_1, 13));
     }
 }
