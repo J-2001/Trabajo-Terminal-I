@@ -40,7 +40,6 @@ public class Bateria {
     public int updateValues() {
         this.chargeCounter = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CHARGE_COUNTER);
         this.capacity = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
-        Log.i("Pruebas(03): ", "capacity: " + this.capacity);
         this.status = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_STATUS);
         Log.i("Pruebas(04): ", "status: " + this.status);
         Intent intent = applicationContext.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));

@@ -151,6 +151,9 @@ public class FourthActivity extends AppCompatActivity {
                 first = false;
             } else {
                 String[] r = rows.get(i-1).split(",");
+                if (r[0].equals("-1")) {
+                    continue;
+                }
                 Escaneo escaneo = new Escaneo(getApplicationContext());
                 long[] timeStamps = escaneo.getScanTimeStamps(r[0]);
                 DateHandler dh = new DateHandler();

@@ -164,8 +164,8 @@ public class SecondActivity extends AppCompatActivity {
                     ibtnCrunchyroll.setClickable(false);
                     ibtnVix.setClickable(false);
                     status = true;
-                    startForegroundService(analizador);
                     analizador.putExtra("videostreaming", getString(R.string.max));
+                    startForegroundService(analizador);
                     startActivity(max);
                 } else {
                     Snackbar snackbar = Snackbar.make(coordinatorLayout, "No se pudo abrir Max!", Snackbar.LENGTH_SHORT);

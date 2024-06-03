@@ -156,7 +156,7 @@ public class Analizador extends Service {
                     pz = dne.getP(Float.parseFloat(z));
                     Log.i("Pruebas(35): ", "pz:\nP(Z>x): " + pz);
 
-                    if (pz != -1 && pz < 1F) {
+                    if (pz != -1 && pz < 0.5F) {
                         excessive = 1;
                         if (tiempoIgnorar > 0) {
                             Log.i("Pruebas(36): ", "tiempoIgnorar: " + tiempoIgnorar);
